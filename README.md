@@ -50,7 +50,7 @@ in, it just takes the first 10 and ignores the rest. In those cases, you'll see 
 
 Please be aware there is a [rate limit][rate limit] to be mindful of.
 
-As of June 10th, 2021: _API and website: 10 requests per second_.
+As of June 10th, 2021: `API and website: 10 requests per second`.
 
 [typhoeus]: https://github.com/typhoeus/typhoeus/
 [rate limit]: https://guides.rubygems.org/rubygems-org-rate-limits/
