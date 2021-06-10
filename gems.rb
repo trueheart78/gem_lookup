@@ -56,22 +56,23 @@ class RubyGems
   end
 
   def display_json(json)
-    date = convert_date json[:version_created_at]
     [].tap do |output|
       output.push "=> 💎 #{json[:name]} is at #{json[:version]}".green
-      output.push "==> 📅 #{date}"
+      output.push "==> 📅 #{convert_date(json[:version_created_at])}"
       output.push "==> 🏠 #{json[:homepage_uri]}"
       output.push "==> ℹ️ #{json[:source_code_uri]}" if json[:source_code_uri]
-      output << if json[:changelog_uri]
-                  "==> 📑 #{json[:changelog_uri]}".blue
-                else
-                  '==> 🚫 No changelog'.red
-                end
+      output.push changelog(changelog_uri: json[:changelog_uri])
     end.join "\n"
   end
 
+  def changelog(changelog_uri:)
+    return "==> 📑 #{changelog_uri}".blue if changelog_uri
+
+    '==> 🚫 No changelog'.red
+  end
+
   def not_found(gem_name)
-    "=> #{gem_name} not found 😢"
+    "=> 😢 #{gem_name} not found".red
   end
 
   # Returns date times as date, aka "November 13, 2014"
@@ -83,7 +84,7 @@ class RubyGems
     @gem_list.size > 10
   end
 
-  # takes the first ten arguments
+  # limits the gem list to the first ten passed in
   def cull_list
     puts '=> ⚠️ Limited to the first 10 gems due to rate limiting'
     @gem_list = @gem_list[(0...10)]
