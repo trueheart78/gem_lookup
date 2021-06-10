@@ -18,7 +18,8 @@ Since it sends requests in parallel, the order you pass gems in may not be the o
 you see the results. 
 
 ```sh
-$ ./gems.rb pry rspec sentry-ruby => 🕵️ Looking up: pry, rspec, sentry-ruby
+$ ./gems.rb pry rspec sentry-ruby
+=> 🕵️ Looking up: pry, rspec, sentry-ruby
 => 💎 sentry-ruby is at 4.5.1
 ==> 📅 June 4, 2021
 ==> 🏠 https://github.com/getsentry/sentry-ruby
