@@ -12,6 +12,19 @@ First, make sure the `gems.rb` file is executable.
 chmod +ux gems.rb
 ```
 
+### Design
+
+The idea behind `gems.rb` is that you'll symlink it into a directory in your `$PATH`, and call
+it when you are doing maintenance and project upgrades. It should be able to answer questions
+the [RubyGems website][rubygems site] can.
+
+```sh
+ln -s /path/to/gems.rb ~/bin/gems
+```
+
+Then it can be used instead anywhere by calling `gems` instead of having to directly
+reference `gems.rb`.
+
 ### Pass It Some Gems
 
 Since it sends requests in parallel, the order you pass gems in may not be the order in which
@@ -53,4 +66,5 @@ Please be aware there is a [rate limit][rate limit] to be mindful of.
 As of June 10th, 2021: `API and website: 10 requests per second`.
 
 [typhoeus]: https://github.com/typhoeus/typhoeus/
+[rubygems site]: https://rubygems.org/
 [rate limit]: https://guides.rubygems.org/rubygems-org-rate-limits/
