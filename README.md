@@ -25,6 +25,14 @@ ln -s /path/to/gems.rb ~/bin/gems
 Then it can be used instead anywhere by calling `gems` instead of having to directly
 reference `gems.rb`.
 
+### Help
+
+Pass `-h` or `--help` to get help.
+
+```sh
+$ ./gems.rb --help            
+```
+
 ### Pass It Some Gems
 
 Since it sends requests in parallel, the order you pass gems in may not be the order in which
@@ -35,9 +43,14 @@ you see the results.
 The list of gems are lowercased, and then de-duped. So don't worry if you pass in any
 capitalization or duplicate gems; It's got you covered. :sparkling_heart:
 
+#### Output
+
+You're going to get lots of emojis to identify info, and a small variety of colors depending
+on whether certain criteria are met for the line.
+
 #### Standard Mode
 
-Since there is a [rate limit](#rate-limit), passing less than that will cause it to run in
+Since there is a [rate limit](#rate-limit), passing less gems than that will cause it to run in
 `Standard` mode:
 
 ```sh
@@ -69,8 +82,8 @@ $ ./gems.rb pry rspec sentry-ruby rails
 
 #### Batch Mode
 
-When more gems are passed in than the [rate limit](#rate-limit), the script will enter `Batch`
-mode. In this mode, the output is slightly different, and there is a **one second** pause
+When more gems are passed in than the [rate limit](#rate-limit) supports, the script will enter
+`Batch` mode. In this mode, the output is slightly different, and there is a **one second** pause
 between batches, so as to respect the rate limit.
 
 ```sh
@@ -200,15 +213,16 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 
 #### Non-Existent Gems
 
-If a gem isn't found, the output will be a little bit different. The most important thing
-to know is, not finding a gem doesn't block other gems from being looked up.
+If a gem isn't found, the output will be a little bit different: that particular line will be
+red. It's also important to know that not finding a gem doesn't block other gems from being looked
+up.
 
 ```sh
 $ ./gems.rb non-existent rails
 => #️⃣ Gems: 2
 => ⚙️ Mode: Standard
 => 🕵️ Looking up: non-existent, rails
-=> 😢 non-existent not found
+=> 💎 non-existent not found
 => 💎 rails is at 6.1.3.2
 ==> 📅 May 5, 2021
 ==> 🏠 https://rubyonrails.org
