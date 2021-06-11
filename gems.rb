@@ -14,6 +14,7 @@ end
 require 'date'
 require 'json'
 
+# rubocop:disable Metrics/ClassLength
 class RubyGems
   MAX_REQUESTS_PER_SECOND = 10
 
@@ -30,6 +31,26 @@ class RubyGems
     puts "=> ⚙️ Mode: #{mode.capitalize}"
 
     process_batches
+  end
+
+  def self.help
+    file_name = __FILE__.start_with?('./') ? __FILE__ : __FILE__.split('/').last
+
+    puts <<~HELP
+      This application's purpose is to make working with with RubyGems.org easier. 💖
+      It uses the RubyGems public API to perform lookups, and parses the JSON response
+      body to provide details about the most recent version, as well as links to
+      the home page, source code, and changelog.
+
+      Usage: #{file_name} gem-name gem-name-two
+
+      Example: #{file_name} rails rspec
+
+      Feel free to pass in as many gems that you like, as it makes requests in
+      parallel. There is a rate limit, #{MAX_REQUESTS_PER_SECOND}/sec. If it detects the amount of gems it
+      has been passed is more than the rate limit, the application will run in Batch
+      mode, and introduce a one second delay between batch lookups.
+    HELP
   end
 
   private
@@ -125,9 +146,14 @@ class RubyGems
   end
 
   def exit_early
-    puts 'Please enter some gems 💎'
+    puts '=> Please enter some gems 💎 or ask for --help'.red
     exit 1
   end
 end
 
-RubyGems.new(gems: ARGV).lookup
+if ARGV.any? && (ARGV.first == '-h' || ARGV.first == '--help')
+  RubyGems.help
+else
+  RubyGems.new(gems: ARGV).lookup
+end
+# rubocop:enable Metrics/ClassLength
