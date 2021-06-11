@@ -20,23 +20,47 @@ class RubyGems
 
   def initialize(gems)
     @gem_list = gems
-
-    exit_early unless @gem_list.any?
-    format_list
-    cull_list if limit_list?
+    @batches = []
+    @mode = :standard
   end
 
   def lookup
-    puts "=> 🕵️ Looking up: #{@gem_list.join(', ')}"
-    @hydra = Typhoeus::Hydra.hydra
-    populate_requests
-    @hydra.run
+    exit_early unless @gem_list.any?
+    prepare
+
+    puts "=> #️⃣ Gems: #{@gem_list.size}"
+    puts "=> ⚙️ Mode: #{@mode}"
+
+    process_batches
   end
 
   private
 
-  def populate_requests
-    @gem_list.each do |gem_name|
+  def prepare
+    format_list
+    batch_gems
+    set_mode
+  end
+
+  def process_batches
+    @batches.each_with_index do |batch, index|
+      puts "=> Batch \##{index+1}" if batch_mode?
+      puts "=> 🕵️ Looking up: #{batch.join(', ')}"
+
+      request_batch batch
+
+      sleep 1 if batch_mode?
+    end
+  end
+
+  def request_batch(batch)
+    @hydra = Typhoeus::Hydra.hydra
+    populate_requests batch
+    @hydra.run
+  end
+
+  def populate_requests(batch)
+    batch.each do |gem_name|
       @hydra.queue build_request gem_name
     end
   end
@@ -87,14 +111,18 @@ class RubyGems
     @gem_list.map!(&:downcase).uniq!
   end
 
-  def limit_list?
-    @gem_list.size > MAX_REQUESTS_PER_SECOND
+  def batch_gems
+    gems = @gem_list.dup
+
+    @batches.push gems.shift(MAX_REQUESTS_PER_SECOND) while gems.any?
   end
 
-  # limits the gem list to the first ten passed in
-  def cull_list
-    puts '=> ⚠️ Limited to the first 10 gems due to rate limiting'
-    @gem_list = @gem_list[0...MAX_REQUESTS_PER_SECOND]
+  def batch_mode?
+    @mode == :batch
+  end
+
+  def set_mode
+    @mode = @batches.size > 1 ? :batch : :standard
   end
 
   def exit_early
