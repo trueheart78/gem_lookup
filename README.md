@@ -52,8 +52,9 @@ $ ./gems.rb pry rspec sentry-ruby
 
 ### Passing In More Than 10 Gems
 
-Due to rate limits (see below), it only handles 10 gems at a time. If you pass more than 10 gems
-in, it just takes the first 10 and ignores the rest. In those cases, you'll see the following:
+Due to rate limits (see below), it can handle more than 10 gems at a time, but will perform the
+lookup in batches with a pause of a second between them.
+
 
 ```sh
 => ⚠️ Limited to the first 10 gems due to rate limiting
