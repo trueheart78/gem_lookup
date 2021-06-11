@@ -106,7 +106,8 @@ class RubyGems
   # rubocop:disable Metrics/AbcSize
   def display_json(json:)
     [].tap do |output|
-      output.push "=> 💎 #{json[:name]} is at #{json[:version]}".green
+      output.push "=> 💎 #{json[:name]}".green
+      output.push "==> ➡️ #{json[:version]}".blue
       output.push "==> 📅 #{convert_date(date: json[:version_created_at])}"
       output.push "==> 🏠 #{json[:homepage_uri]}"
       output.push "==> ℹ️ #{json[:source_code_uri]}" if json[:source_code_uri]
