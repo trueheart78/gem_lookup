@@ -16,6 +16,8 @@ require 'date'
 require 'json'
 
 class RubyGems
+  MAX_REQUESTS_PER_SECOND = 10
+
   def initialize(gems)
     @gem_list = gems
 
@@ -81,13 +83,13 @@ class RubyGems
   end
 
   def limit_list?
-    @gem_list.size > 10
+    @gem_list.size > MAX_REQUESTS_PER_SECOND
   end
 
   # limits the gem list to the first ten passed in
   def cull_list
     puts '=> ⚠️ Limited to the first 10 gems due to rate limiting'
-    @gem_list = @gem_list[(0...10)]
+    @gem_list = @gem_list[0...MAX_REQUESTS_PER_SECOND]
   end
 
   def exit_early
