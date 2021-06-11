@@ -30,34 +30,190 @@ reference `gems.rb`.
 Since it sends requests in parallel, the order you pass gems in may not be the order in which
 you see the results. 
 
+#### Formatting
+
+The list of gems are lowercased, and then de-duped. So don't worry if you pass in any
+capitalization or duplicate gems; It's got you covered. :sparkling_heart:
+
+#### Standard Mode
+
+Since there is a [rate limit](#rate-limit), passing less than that will cause it to run in
+`Standard` mode:
+
 ```sh
-$ ./gems.rb pry rspec sentry-ruby
-=> 🕵️ Looking up: pry, rspec, sentry-ruby
-=> 💎 sentry-ruby is at 4.5.1
-==> 📅 June 4, 2021
-==> 🏠 https://github.com/getsentry/sentry-ruby
-==> ℹ️ https://github.com/getsentry/sentry-ruby
-==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+$ ./gems.rb pry rspec sentry-ruby rails
+=> #️⃣ Gems: 4
+=> ⚙️ Mode: Standard
+=> 🕵️ Looking up: pry, rspec, sentry-ruby, rails
 => 💎 rspec is at 3.10.0
 ==> 📅 October 30, 2020
 ==> 🏠 http://github.com/rspec
 ==> ℹ️ https://github.com/rspec/rspec
 ==> 🚫 No changelog
+=> 💎 sentry-ruby is at 4.5.1
+==> 📅 June 4, 2021
+==> 🏠 https://github.com/getsentry/sentry-ruby
+==> ℹ️ https://github.com/getsentry/sentry-ruby
+==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
 => 💎 pry is at 0.14.1
 ==> 📅 April 12, 2021
 ==> 🏠 http://pry.github.io
 ==> ℹ️ https://github.com/pry/pry
 ==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
+=> 💎 rails is at 6.1.3.2
+==> 📅 May 5, 2021
+==> 🏠 https://rubyonrails.org
+==> ℹ️ https://github.com/rails/rails/tree/v6.1.3.2
+==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
 ```
 
-### Passing In More Than 10 Gems
+#### Batch Mode
 
-Due to rate limits (see below), it can handle more than 10 gems at a time, but will perform the
-lookup in batches with a pause of a second between them.
-
+When more gems are passed in than the [rate limit](#rate-limit), the script will enter `Batch`
+mode. In this mode, the output is slightly different, and there is a **one second** pause
+between batches, so as to respect the rate limit.
 
 ```sh
-=> ⚠️ Limited to the first 10 gems due to rate limiting
+$ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-ruby sentry-rails pry byebug typhoeus faraday Faraday rails pagy clowne discard aasm logidze GLOBALIZE lockbox factory_BOT faker site_prism nokogiri simplecov
+=> #️⃣ Gems: 24
+=> ⚙️ Mode: Batch
+=> 🧺 Batch: 1 of 3
+=> 🕵️ Looking up: byebug, pinglish, rspec, rubocop, rubocop-rspec, rubocop-rails, sentry-ruby, sentry-rails, pry, typhoeus
+=> 💎 pinglish is at 0.2.1
+==> 📅 November 13, 2014
+==> 🏠 https://github.com/jbarnette/pinglish
+==> 🚫 No changelog
+=> 💎 sentry-rails is at 4.5.1
+==> 📅 June 4, 2021
+==> 🏠 https://github.com/getsentry/sentry-ruby
+==> ℹ️ https://github.com/getsentry/sentry-ruby
+==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+=> 💎 sentry-ruby is at 4.5.1
+==> 📅 June 4, 2021
+==> 🏠 https://github.com/getsentry/sentry-ruby
+==> ℹ️ https://github.com/getsentry/sentry-ruby
+==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+=> 💎 rubocop-rails is at 2.10.1
+==> 📅 May 5, 2021
+==> 🏠 https://docs.rubocop.org/rubocop-rails/
+==> ℹ️ https://github.com/rubocop/rubocop-rails/
+==> 📑 https://github.com/rubocop/rubocop-rails/blob/master/CHANGELOG.md
+=> 💎 rspec is at 3.10.0
+==> 📅 October 30, 2020
+==> 🏠 http://github.com/rspec
+==> ℹ️ https://github.com/rspec/rspec
+==> 🚫 No changelog
+=> 💎 rubocop is at 1.16.1
+==> 📅 June 9, 2021
+==> 🏠 https://rubocop.org/
+==> ℹ️ https://github.com/rubocop/rubocop/
+==> 📑 https://github.com/rubocop/rubocop/blob/master/CHANGELOG.md
+=> 💎 rubocop-rspec is at 2.4.0
+==> 📅 June 9, 2021
+==> 🏠 https://github.com/rubocop/rubocop-rspec
+==> 📑 https://github.com/rubocop/rubocop-rspec/blob/master/CHANGELOG.md
+=> 💎 pry is at 0.14.1
+==> 📅 April 12, 2021
+==> 🏠 http://pry.github.io
+==> ℹ️ https://github.com/pry/pry
+==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
+=> 💎 typhoeus is at 1.4.0
+==> 📅 May 8, 2020
+==> 🏠 https://github.com/typhoeus/typhoeus
+==> ℹ️ https://github.com/typhoeus/typhoeus
+==> 🚫 No changelog
+=> 💎 byebug is at 11.1.3
+==> 📅 April 23, 2020
+==> 🏠 https://github.com/deivid-rodriguez/byebug
+==> ℹ️ https://github.com/deivid-rodriguez/byebug
+==> 🚫 No changelog
+=> 🧺 Batch: 2 of 3
+=> 🕵️ Looking up: faraday, rails, pagy, clowne, discard, aasm, logidze, globalize, lockbox, factory_bot
+=> 💎 faraday is at 1.4.2
+==> 📅 May 22, 2021
+==> 🏠 https://lostisland.github.io/faraday
+==> ℹ️ https://github.com/lostisland/faraday
+==> 📑 https://github.com/lostisland/faraday/releases/tag/v1.4.2
+=> 💎 logidze is at 1.2.0
+==> 📅 June 11, 2021
+==> 🏠 http://github.com/palkan/logidze
+==> ℹ️ http://github.com/palkan/logidze
+==> 📑 https://github.com/palkan/logidze/blob/master/CHANGELOG.md
+=> 💎 clowne is at 1.3.0
+==> 📅 May 12, 2021
+==> 🏠 https://clowne.evilmartians.io/
+==> ℹ️ http://github.com/clowne-rb/clowne
+==> 📑 https://github.com/clowne-rb/clowne/blob/master/CHANGELOG.md
+=> 💎 discard is at 1.2.0
+==> 📅 February 17, 2020
+==> 🏠 https://github.com/jhawthorn/discard
+==> 🚫 No changelog
+=> 💎 pagy is at 4.8.0
+==> 📅 June 8, 2021
+==> 🏠 https://github.com/ddnexus/pagy
+==> 🚫 No changelog
+=> 💎 globalize is at 6.0.0
+==> 📅 January 11, 2021
+==> 🏠 http://github.com/globalize/globalize
+==> 🚫 No changelog
+=> 💎 factory_bot is at 6.2.0
+==> 📅 May 7, 2021
+==> 🏠 https://github.com/thoughtbot/factory_bot
+==> 🚫 No changelog
+=> 💎 rails is at 6.1.3.2
+==> 📅 May 5, 2021
+==> 🏠 https://rubyonrails.org
+==> ℹ️ https://github.com/rails/rails/tree/v6.1.3.2
+==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
+=> 💎 lockbox is at 0.6.4
+==> 📅 April 6, 2021
+==> 🏠 https://github.com/ankane/lockbox
+==> 🚫 No changelog
+=> 💎 aasm is at 5.2.0
+==> 📅 May 1, 2021
+==> 🏠 https://github.com/aasm/aasm
+==> ℹ️ https://github.com/aasm/aasm
+==> 🚫 No changelog
+=> 🧺 Batch: 3 of 3
+=> 🕵️ Looking up: faker, site_prism, nokogiri, simplecov
+=> 💎 faker is at 2.18.0
+==> 📅 May 15, 2021
+==> 🏠 https://github.com/faker-ruby/faker
+==> ℹ️ https://github.com/faker-ruby/faker
+==> 📑 https://github.com/faker-ruby/faker/blob/master/CHANGELOG.md
+=> 💎 site_prism is at 3.7.1
+==> 📅 February 19, 2021
+==> 🏠 https://github.com/site-prism/site_prism
+==> ℹ️ https://github.com/site-prism/site_prism
+==> 📑 https://github.com/site-prism/site_prism/blob/main/CHANGELOG.md
+=> 💎 nokogiri is at 1.11.7
+==> 📅 June 3, 2021
+==> 🏠 https://nokogiri.org
+==> ℹ️ https://github.com/sparklemotion/nokogiri
+==> 📑 https://nokogiri.org/CHANGELOG.html
+=> 💎 simplecov is at 0.21.2
+==> 📅 January 9, 2021
+==> 🏠 https://github.com/simplecov-ruby/simplecov
+==> ℹ️ https://github.com/simplecov-ruby/simplecov/tree/v0.21.2
+==> 📑 https://github.com/simplecov-ruby/simplecov/blob/main/CHANGELOG.md
+```
+
+#### Non-Existent Gems
+
+If a gem isn't found, the output will be a little bit different. The most important thing
+to know is, not finding a gem doesn't block other gems from being looked up.
+
+```sh
+$ ./gems.rb non-existent rails
+=> #️⃣ Gems: 2
+=> ⚙️ Mode: Standard
+=> 🕵️ Looking up: non-existent, rails
+=> 😢 non-existent not found
+=> 💎 rails is at 6.1.3.2
+==> 📅 May 5, 2021
+==> 🏠 https://rubyonrails.org
+==> ℹ️ https://github.com/rails/rails/tree/v6.1.3.2
+==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
 ```
 
 ## Rate Limit
