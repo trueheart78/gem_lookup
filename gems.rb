@@ -8,7 +8,6 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'colorize'
-  gem 'pry'
   gem 'typhoeus'
 end
 
@@ -18,10 +17,9 @@ require 'json'
 class RubyGems
   MAX_REQUESTS_PER_SECOND = 10
 
-  def initialize(gems)
+  def initialize(gems:)
     @gem_list = gems
     @batches = []
-    @mode = :standard
   end
 
   def lookup
@@ -29,7 +27,7 @@ class RubyGems
     prepare
 
     puts "=> #️⃣ Gems: #{@gem_list.size}"
-    puts "=> ⚙️ Mode: #{@mode}"
+    puts "=> ⚙️ Mode: #{mode.capitalize}"
 
     process_batches
   end
@@ -39,58 +37,59 @@ class RubyGems
   def prepare
     format_list
     batch_gems
-    set_mode
   end
 
   def process_batches
     @batches.each_with_index do |batch, index|
-      puts "=> Batch \##{index+1}" if batch_mode?
+      puts "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
       puts "=> 🕵️ Looking up: #{batch.join(', ')}"
 
-      request_batch batch
+      make_requests batch: batch
 
       sleep 1 if batch_mode?
     end
   end
 
-  def request_batch(batch)
+  def make_requests(batch:)
     @hydra = Typhoeus::Hydra.hydra
-    populate_requests batch
+    populate_requests batch: batch
     @hydra.run
   end
 
-  def populate_requests(batch)
+  def populate_requests(batch:)
     batch.each do |gem_name|
-      @hydra.queue build_request gem_name
+      @hydra.queue build_request gem_name: gem_name
     end
   end
 
-  def build_request(gem_name)
-    url = api_url gem_name
+  def build_request(gem_name:)
+    url = api_url gem_name: gem_name
     Typhoeus::Request.new(url).tap do |request|
       request.on_complete do |response|
         if response.code == 200
-          puts display_json JSON.parse(response.body, symbolize_names: true)
+          puts display_json(json: JSON.parse(response.body, symbolize_names: true))
         else
-          puts not_found(gem_name)
+          puts not_found(gem_name: gem_name)
         end
       end
     end
   end
 
-  def api_url(gem_name)
+  def api_url(gem_name:)
     "https://rubygems.org/api/v1/gems/#{gem_name}.json"
   end
 
-  def display_json(json)
+  # rubocop:disable Metrics/AbcSize
+  def display_json(json:)
     [].tap do |output|
       output.push "=> 💎 #{json[:name]} is at #{json[:version]}".green
-      output.push "==> 📅 #{convert_date(json[:version_created_at])}"
+      output.push "==> 📅 #{convert_date(date: json[:version_created_at])}"
       output.push "==> 🏠 #{json[:homepage_uri]}"
       output.push "==> ℹ️ #{json[:source_code_uri]}" if json[:source_code_uri]
       output.push changelog(changelog_uri: json[:changelog_uri])
     end.join "\n"
   end
+  # rubocop:enable Metrics/AbcSize
 
   def changelog(changelog_uri:)
     return "==> 📑 #{changelog_uri}".blue if changelog_uri
@@ -98,13 +97,13 @@ class RubyGems
     '==> 🚫 No changelog'.red
   end
 
-  def not_found(gem_name)
-    "=> 😢 #{gem_name} not found".red
+  def not_found(gem_name:)
+    "=> 💎 #{gem_name} not found".red
   end
 
   # Returns date times as date, aka "November 13, 2014"
-  def convert_date(date_and_time)
-    Date.parse(date_and_time).strftime '%B %-d, %Y'
+  def convert_date(date:)
+    Date.parse(date).strftime '%B %-d, %Y'
   end
 
   def format_list
@@ -118,11 +117,11 @@ class RubyGems
   end
 
   def batch_mode?
-    @mode == :batch
+    mode == :batch
   end
 
-  def set_mode
-    @mode = @batches.size > 1 ? :batch : :standard
+  def mode
+    @mode ||= @batches.size > 1 ? :batch : :standard
   end
 
   def exit_early
@@ -131,4 +130,4 @@ class RubyGems
   end
 end
 
-RubyGems.new(ARGV).lookup
+RubyGems.new(gems: ARGV).lookup
