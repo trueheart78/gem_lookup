@@ -26,7 +26,7 @@ class RubyGems
 
   def lookup
     exit_early unless @gem_list.any?
-    prepare
+    prepare_list
 
     puts "=> #️⃣ Gems: #{@gem_list.size}"
     puts "=> ⚙️ Mode: #{mode.capitalize}"
@@ -58,7 +58,7 @@ class RubyGems
 
   private
 
-  def prepare
+  def prepare_list
     format_list
     batch_gems
   end
