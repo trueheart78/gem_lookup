@@ -16,8 +16,8 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  # https://guides.rubygems.org/rubygems-org-rate-limits/
   MAX_REQUESTS_PER_SECOND = 10
+  RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
   def initialize(gems:)
     @gem_list = gems
@@ -51,6 +51,8 @@ class RubyGems
       parallel. There is a rate limit, #{MAX_REQUESTS_PER_SECOND}/sec. If it detects the amount of gems it
       has been passed is more than the rate limit, the application will run in Batch
       mode, and introduce a one second delay between batch lookups.
+
+      Rate limit documentation: #{RATE_LIMIT_DOCUMENTATION_URL}
     HELP
   end
 
