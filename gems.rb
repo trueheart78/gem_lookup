@@ -22,6 +22,7 @@ class RubyGems
     @gem_list = gems
 
     exit_early unless @gem_list.any?
+    format_list
     cull_list if limit_list?
   end
 
@@ -80,6 +81,10 @@ class RubyGems
   # Returns date times as date, aka "November 13, 2014"
   def convert_date(date_and_time)
     Date.parse(date_and_time).strftime '%B %-d, %Y'
+  end
+
+  def format_list
+    @gem_list.map!(&:downcase).uniq!
   end
 
   def limit_list?
