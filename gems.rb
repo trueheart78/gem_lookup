@@ -28,8 +28,7 @@ class RubyGems
     exit_early unless @gem_list.any?
     prepare_list
 
-    puts "=> #️⃣ Gems: #{@gem_list.size}"
-    puts "=> ⚙️ Mode: #{mode.capitalize}"
+    puts "=> ✨ Gems: #{@gem_list.size}"
 
     process_batches
   end
@@ -66,7 +65,7 @@ class RubyGems
   def process_batches
     @batches.each_with_index do |batch, index|
       puts "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
-      puts "=> 🕵️ Looking up: #{batch.join(', ')}"
+      puts "=> 🔎 Looking up: #{batch.join(', ')}"
 
       make_requests batch: batch
 

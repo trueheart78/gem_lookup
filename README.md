@@ -55,9 +55,8 @@ Since there is a [rate limit](#rate-limit), passing less gems than that will cau
 
 ```sh
 $ ./gems.rb pry rspec sentry-ruby rails
-=> #️⃣ Gems: 4
-=> ⚙️ Mode: Standard
-=> 🕵️ Looking up: pry, rspec, sentry-ruby, rails
+=> ✨ Gems: 4
+=> 🔎 Looking up: pry, rspec, sentry-ruby, rails
 => 💎 rspec is at 3.10.0
 ==> 📅 October 30, 2020
 ==> 🏠 http://github.com/rspec
@@ -88,10 +87,9 @@ between batches, so as to respect the rate limit.
 
 ```sh
 $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-ruby sentry-rails pry byebug typhoeus faraday Faraday rails pagy clowne discard aasm logidze GLOBALIZE lockbox factory_BOT faker site_prism nokogiri simplecov
-=> #️⃣ Gems: 24
-=> ⚙️ Mode: Batch
+=> ✨ Gems: 24
 => 🧺 Batch: 1 of 3
-=> 🕵️ Looking up: byebug, pinglish, rspec, rubocop, rubocop-rspec, rubocop-rails, sentry-ruby, sentry-rails, pry, typhoeus
+=> 🔎 Looking up: byebug, pinglish, rspec, rubocop, rubocop-rspec, rubocop-rails, sentry-ruby, sentry-rails, pry, typhoeus
 => 💎 pinglish is at 0.2.1
 ==> 📅 November 13, 2014
 ==> 🏠 https://github.com/jbarnette/pinglish
@@ -141,7 +139,7 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 ==> 🔗 https://github.com/deivid-rodriguez/byebug
 ==> 🚫 No changelog
 => 🧺 Batch: 2 of 3
-=> 🕵️ Looking up: faraday, rails, pagy, clowne, discard, aasm, logidze, globalize, lockbox, factory_bot
+=> 🔎 Looking up: faraday, rails, pagy, clowne, discard, aasm, logidze, globalize, lockbox, factory_bot
 => 💎 faraday is at 1.4.2
 ==> 📅 May 22, 2021
 ==> 🏠 https://lostisland.github.io/faraday
@@ -188,7 +186,7 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 ==> 🔗 https://github.com/aasm/aasm
 ==> 🚫 No changelog
 => 🧺 Batch: 3 of 3
-=> 🕵️ Looking up: faker, site_prism, nokogiri, simplecov
+=> 🔎 Looking up: faker, site_prism, nokogiri, simplecov
 => 💎 faker is at 2.18.0
 ==> 📅 May 15, 2021
 ==> 🏠 https://github.com/faker-ruby/faker
@@ -219,9 +217,8 @@ up.
 
 ```sh
 $ ./gems.rb non-existent rails
-=> #️⃣ Gems: 2
-=> ⚙️ Mode: Standard
-=> 🕵️ Looking up: non-existent, rails
+=> ✨ Gems: 2
+=> 🔎 Looking up: non-existent, rails
 => 💎 non-existent not found
 => 💎 rails is at 6.1.3.2
 ==> 📅 May 5, 2021
