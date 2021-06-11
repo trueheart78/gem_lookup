@@ -110,14 +110,14 @@ class RubyGems
       output.push "==> ➡️ #{json[:version]}".blue
       output.push "==> 📅 #{convert_date(date: json[:version_created_at])}"
       output.push "==> 🏠 #{json[:homepage_uri]}"
-      output.push "==> ℹ️ #{json[:source_code_uri]}" if json[:source_code_uri]
+      output.push "==> ℹ️  #{json[:source_code_uri]}" if json[:source_code_uri]
       output.push changelog(changelog_uri: json[:changelog_uri])
     end.join "\n"
   end
   # rubocop:enable Metrics/AbcSize
 
   def changelog(changelog_uri:)
-    return "==> 📑 #{changelog_uri}".blue if changelog_uri
+    return "==> 📑 #{changelog_uri}".light_blue if changelog_uri
 
     '==> 🚫 No changelog'.red
   end
