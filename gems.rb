@@ -109,7 +109,7 @@ class RubyGems
       output.push "=> 💎 #{json[:name]} is at #{json[:version]}".green
       output.push "==> 📅 #{convert_date(date: json[:version_created_at])}"
       output.push "==> 🏠 #{json[:homepage_uri]}"
-      output.push "==> ℹ️  #{json[:source_code_uri]}" if json[:source_code_uri]
+      output.push "==> 🔗 #{json[:source_code_uri]}" if json[:source_code_uri]
       output.push changelog(changelog_uri: json[:changelog_uri])
     end.join "\n"
   end
