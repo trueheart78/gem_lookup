@@ -16,6 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
+  # https://guides.rubygems.org/rubygems-org-rate-limits/
   MAX_REQUESTS_PER_SECOND = 10
 
   def initialize(gems:)
