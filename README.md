@@ -46,7 +46,8 @@ capitalization or duplicate gems; It's got you covered. :sparkling_heart:
 #### Output
 
 You're going to get lots of emojis to identify info, and a small variety of colors depending
-on whether certain criteria are met for the line.
+on whether certain criteria are met for the line. It also looks even better with font ligatures
+enabled, so if your font and/or terminal support them, it is recommended to enable them.
 
 #### Standard Mode
 
