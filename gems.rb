@@ -27,11 +27,9 @@ class RubyGems
   end
 
   def lookup
-    exit_early unless @gem_list.any?
+    exit_early if @gem_list.empty?
+    
     prepare_list
-
-    puts "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
-
     process_batches
   end
 
@@ -65,6 +63,8 @@ class RubyGems
   end
 
   def process_batches
+    puts "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
+    
     @batches.each_with_index do |batch, index|
       puts "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
       puts "=> 🔎 Looking up: #{batch.join(', ')}"
