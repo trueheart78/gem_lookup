@@ -49,6 +49,20 @@ You're going to get lots of emojis to identify info, and a small variety of colo
 on whether certain criteria are met for the line. It also looks even better with font ligatures
 enabled, so if your font and/or terminal support them, it is recommended to enable them.
 
+#### The Basics
+
+Just pass it a gem name.
+
+```sh
+$ ./gems.rb pry
+=> 🔎 Looking up: pry
+=> 💎 pry is at 0.14.1
+==> 📅 April 12, 2021
+==> 🏠 http://pry.github.io
+==> 🔗 https://github.com/pry/pry
+==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
+```
+
 #### Standard Mode
 
 Since there is a [rate limit](#rate-limit), passing less gems than that will cause it to run in
