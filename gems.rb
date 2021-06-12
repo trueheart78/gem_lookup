@@ -28,7 +28,7 @@ class RubyGems
 
   def lookup
     exit_early if @gem_list.empty?
-    
+
     prepare_list
     process_batches
   end
@@ -64,7 +64,7 @@ class RubyGems
 
   def process_batches
     puts "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
-    
+
     @batches.each_with_index do |batch, index|
       puts "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
       puts "=> 🔎 Looking up: #{batch.join(', ')}"
@@ -76,14 +76,14 @@ class RubyGems
   end
 
   def make_requests(batch:)
-    @hydra = Typhoeus::Hydra.hydra
-    populate_requests batch: batch
-    @hydra.run
+    Typhoeus::Hydra.hydra.tap do |hydra|
+      populate_requests hydra: hydra, batch: batch
+    end.run
   end
 
-  def populate_requests(batch:)
+  def populate_requests(hydra:, batch:)
     batch.each do |gem_name|
-      @hydra.queue build_request gem_name: gem_name
+      hydra.queue build_request gem_name: gem_name
     end
   end
 
