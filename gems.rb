@@ -28,7 +28,7 @@ class RubyGems
     exit_early unless @gem_list.any?
     prepare_list
 
-    puts "=> ✨ Gems: #{@gem_list.size}"
+    puts "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
 
     process_batches
   end
