@@ -9,6 +9,8 @@ gemfile do
   source 'https://rubygems.org'
   gem 'colorize'
   gem 'typhoeus'
+  # webrick is not included in Ruby 3.0+ but is an unlisted dependency of typhoeus
+  gem 'webrick' if RUBY_VERSION.start_with? '3'
 end
 
 require 'date'
