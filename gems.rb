@@ -140,11 +140,7 @@ class RubyGems
   end
 
   def batch_mode?
-    mode == :batch
-  end
-
-  def mode
-    @mode ||= @batches.size > 1 ? :batch : :standard
+    @batches.size > 1
   end
 
   def exit_early
