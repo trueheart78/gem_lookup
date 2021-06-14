@@ -76,7 +76,7 @@ $ ./gems.rb pry rspec sentry-ruby rails
 ==> 📅 October 30, 2020
 ==> 🏠 http://github.com/rspec
 ==> 🔗 https://github.com/rspec/rspec
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 sentry-ruby is at 4.5.1
 ==> 📅 June 4, 2021
 ==> 🏠 https://github.com/getsentry/sentry-ruby
@@ -108,7 +108,7 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 => 💎 pinglish is at 0.2.1
 ==> 📅 November 13, 2014
 ==> 🏠 https://github.com/jbarnette/pinglish
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 sentry-rails is at 4.5.1
 ==> 📅 June 4, 2021
 ==> 🏠 https://github.com/getsentry/sentry-ruby
@@ -128,7 +128,7 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 ==> 📅 October 30, 2020
 ==> 🏠 http://github.com/rspec
 ==> 🔗 https://github.com/rspec/rspec
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 rubocop is at 1.16.1
 ==> 📅 June 9, 2021
 ==> 🏠 https://rubocop.org/
@@ -147,12 +147,12 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 ==> 📅 May 8, 2020
 ==> 🏠 https://github.com/typhoeus/typhoeus
 ==> 🔗 https://github.com/typhoeus/typhoeus
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 byebug is at 11.1.3
 ==> 📅 April 23, 2020
 ==> 🏠 https://github.com/deivid-rodriguez/byebug
 ==> 🔗 https://github.com/deivid-rodriguez/byebug
-==> 🚫 No changelog
+==> 📑 No changelog
 => 🧺 Batch: 2 of 3
 => 🔎 Looking up: faraday, rails, pagy, clowne, discard, aasm, logidze, globalize, lockbox, factory_bot
 => 💎 faraday is at 1.4.2
@@ -173,19 +173,19 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 => 💎 discard is at 1.2.0
 ==> 📅 February 17, 2020
 ==> 🏠 https://github.com/jhawthorn/discard
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 pagy is at 4.8.0
 ==> 📅 June 8, 2021
 ==> 🏠 https://github.com/ddnexus/pagy
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 globalize is at 6.0.0
 ==> 📅 January 11, 2021
 ==> 🏠 http://github.com/globalize/globalize
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 factory_bot is at 6.2.0
 ==> 📅 May 7, 2021
 ==> 🏠 https://github.com/thoughtbot/factory_bot
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 rails is at 6.1.3.2
 ==> 📅 May 5, 2021
 ==> 🏠 https://rubyonrails.org
@@ -194,12 +194,12 @@ $ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-rub
 => 💎 lockbox is at 0.6.4
 ==> 📅 April 6, 2021
 ==> 🏠 https://github.com/ankane/lockbox
-==> 🚫 No changelog
+==> 📑 No changelog
 => 💎 aasm is at 5.2.0
 ==> 📅 May 1, 2021
 ==> 🏠 https://github.com/aasm/aasm
 ==> 🔗 https://github.com/aasm/aasm
-==> 🚫 No changelog
+==> 📑 No changelog
 => 🧺 Batch: 3 of 3
 => 🔎 Looking up: faker, site_prism, nokogiri, simplecov
 => 💎 faker is at 2.18.0
