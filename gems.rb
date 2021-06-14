@@ -16,7 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.0'
+  VERSION = '0.6.1'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
@@ -37,17 +37,13 @@ class RubyGems
   end
 
   def self.help
-    file_name = __FILE__.start_with?('./') ? __FILE__ : __FILE__.split('/').last
-
     puts <<~HELP
       This application's purpose is to make working with with RubyGems.org easier. 💖
       It uses the RubyGems public API to perform lookups, and parses the JSON response
       body to provide details about the most recent version, as well as links to
       the home page, source code, and changelog.
 
-      Usage: #{file_name} gem-name gem-name-two
-
-      Example: #{file_name} rails rspec
+      #{usage}
 
       Feel free to pass in as many gems that you like, as it makes requests in
       parallel. There is a rate limit, #{MAX_REQUESTS_PER_SECOND}/sec. If it detects the amount of gems it
@@ -60,12 +56,22 @@ class RubyGems
     HELP
   end
 
+  def self.usage
+    file_name = __FILE__.start_with?('./') ? __FILE__ : __FILE__.split('/').last
+
+    <<~USAGE.chomp
+      Usage: #{file_name} [GEM_NAME]
+
+      Example: #{file_name} rails rspec
+    USAGE
+  end
+
   def self.options
-    <<~FLAGS
+    <<~OPTIONS
       Output Options:
         -h --help            Display the help screen.
         -v --version         Display version information.
-    FLAGS
+    OPTIONS
   end
 
   private
@@ -159,9 +165,7 @@ class RubyGems
   end
 
   def exit_early
-    puts 'Please enter some gems 💎 or ask for --help'.red
-    puts ''
-    puts self.class.options
+    puts ['', self.class.usage, '', self.class.options].join "\n"
     exit 1
   end
 end
