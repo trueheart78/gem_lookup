@@ -16,6 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
+  VERSION = '0.6.0'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
@@ -29,6 +30,10 @@ class RubyGems
 
     prepare_list
     process_batches
+  end
+
+  def self.version
+    puts "version #{VERSION}"
   end
 
   def self.help
@@ -50,7 +55,17 @@ class RubyGems
       mode, and introduce a one second delay between batch lookups.
 
       Rate limit documentation: #{RATE_LIMIT_DOCUMENTATION_URL}
+
+      #{options}
     HELP
+  end
+
+  def self.options
+    <<~FLAGS
+      Output Options:
+        -h --help            Display the help screen.
+        -v --version         Display version information.
+    FLAGS
   end
 
   private
@@ -144,13 +159,17 @@ class RubyGems
   end
 
   def exit_early
-    puts '=> Please enter some gems 💎 or ask for --help'.red
+    puts 'Please enter some gems 💎 or ask for --help'.red
+    puts ''
+    puts self.class.options
     exit 1
   end
 end
 
 if ARGV.any? && (ARGV.first == '-h' || ARGV.first == '--help')
   RubyGems.help
+elsif ARGV.any? && (ARGV.first == '-v' || ARGV.first == '--version')
+  RubyGems.version
 else
   RubyGems.new(gems: ARGV).lookup
 end
