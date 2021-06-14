@@ -16,7 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.1'
+  VERSION = '0.6.2'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
@@ -138,7 +138,7 @@ class RubyGems
   def changelog(changelog_uri:)
     return "==> 📑 #{changelog_uri}".light_blue if changelog_uri
 
-    '==> 🚫 No changelog'.red
+    '==> 📑 No changelog'.red
   end
 
   def not_found(gem_name:)
