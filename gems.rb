@@ -16,7 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.2'
+  VERSION = '0.6.3'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
@@ -32,46 +32,51 @@ class RubyGems
     process_batches
   end
 
-  def self.version
-    puts "version #{VERSION}"
-  end
+  class << self
+    def version
+      puts "version #{VERSION}"
+    end
 
-  def self.help
-    puts <<~HELP
-      This application's purpose is to make working with with RubyGems.org easier. 💖
-      It uses the RubyGems public API to perform lookups, and parses the JSON response
-      body to provide details about the most recent version, as well as links to
-      the home page, source code, and changelog.
+    def help
+      puts <<~HELP
 
-      #{usage}
+        #{usage}
 
-      Feel free to pass in as many gems that you like, as it makes requests in
-      parallel. There is a rate limit, #{MAX_REQUESTS_PER_SECOND}/sec. If it detects the amount of gems it
-      has been passed is more than the rate limit, the application will run in Batch
-      mode, and introduce a one second delay between batch lookups.
+        This application's purpose is to make working with with RubyGems.org easier. 💖
+        It uses the RubyGems public API to perform lookups, and parses the JSON response
+        body to provide details about the most recent version, as well as links to
+        the home page, source code, and changelog.
 
-      Rate limit documentation: #{RATE_LIMIT_DOCUMENTATION_URL}
+        Feel free to pass in as many gems that you like, as it makes requests in
+        parallel. There is a rate limit, #{MAX_REQUESTS_PER_SECOND}/sec. If it detects the amount of gems it
+        has been passed is more than the rate limit, the application will run in Batch
+        mode, and introduce a one second delay between batch lookups.
 
-      #{options}
-    HELP
-  end
+        #{options}
 
-  def self.usage
-    file_name = __FILE__.start_with?('./') ? __FILE__ : __FILE__.split('/').last
+        Rate limit documentation: #{RATE_LIMIT_DOCUMENTATION_URL}
+      HELP
+    end
 
-    <<~USAGE.chomp
-      Usage: #{file_name} [GEM_NAME]
+    def usage
+      file_name = __FILE__.start_with?('./') ? __FILE__ : __FILE__.split('/').last
 
-      Example: #{file_name} rails rspec
-    USAGE
-  end
+      <<~USAGE.chomp
+        Usage: #{file_name} GEMS
 
-  def self.options
-    <<~OPTIONS
-      Output Options:
-        -h --help            Display the help screen.
-        -v --version         Display version information.
-    OPTIONS
+          Retrieves gem-related information from https://rubygems.org
+
+        Example: #{file_name} rails rspec
+      USAGE
+    end
+
+    def options
+      <<~OPTIONS.chomp
+        Output Options:
+          -h --help            Display the help screen.
+          -v --version         Display version information.
+      OPTIONS
+    end
   end
 
   private
@@ -165,7 +170,7 @@ class RubyGems
   end
 
   def exit_early
-    puts ['', self.class.usage, '', self.class.options].join "\n"
+    self.class.help
     exit 1
   end
 end
