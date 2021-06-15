@@ -16,7 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.3'
+  VERSION = '0.6.4'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
@@ -68,6 +68,14 @@ class RubyGems
 
         Example: #{file_name} rails rspec
       USAGE
+    end
+
+    def help_flag?(flag)
+      %w[-h --help].include? flag
+    end
+
+    def version_flag?(flag)
+      %w[-v --version].include? flag
     end
 
     def options
@@ -175,11 +183,18 @@ class RubyGems
   end
 end
 
-if ARGV.any? && (ARGV.first == '-h' || ARGV.first == '--help')
-  RubyGems.help
-elsif ARGV.any? && (ARGV.first == '-v' || ARGV.first == '--version')
-  RubyGems.version
-else
-  RubyGems.new(gems: ARGV).lookup
+if ARGV.any?
+  if RubyGems.help_flag? ARGV.first
+    RubyGems.help
+    exit 0
+  elsif RubyGems.version_flag? ARGV.first
+    RubyGems.version
+    exit 0
+  elsif ARGV.first[0] == '-'
+    puts "=> Error: Unsupported flag [#{ARGV.first}]".red
+    exit 1
+  end
 end
+
+RubyGems.new(gems: ARGV).lookup
 # rubocop:enable Metrics/ClassLength
