@@ -16,12 +16,13 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.4'
+  VERSION = '0.6.5'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
 
-  def initialize(gems:)
+  def initialize(gems)
     @gem_list = gems
+    @flags = []
     @batches = []
   end
 
@@ -33,11 +34,12 @@ class RubyGems
   end
 
   class << self
-    def version
+    def version(exit_application: false)
       puts "version #{VERSION}"
+      exit 0 if exit_application
     end
 
-    def help
+    def help(exit_application: false)
       puts <<~HELP
 
         #{usage}
@@ -56,7 +58,17 @@ class RubyGems
 
         Rate limit documentation: #{RATE_LIMIT_DOCUMENTATION_URL}
       HELP
+      exit 0 if exit_application
     end
+
+    def flags
+      {
+        help:    { matches: %w[-h --help], desc: 'Display the help screen.' },
+        version: { matches: %w[-v --version], desc: 'Display version information.' }
+      }
+    end
+
+    private
 
     def usage
       file_name = __FILE__.start_with?('./') ? __FILE__ : __FILE__.split('/').last
@@ -68,14 +80,6 @@ class RubyGems
 
         Example: #{file_name} rails rspec
       USAGE
-    end
-
-    def help_flag?(flag)
-      %w[-h --help].include? flag
-    end
-
-    def version_flag?(flag)
-      %w[-v --version].include? flag
     end
 
     def options
@@ -91,7 +95,48 @@ class RubyGems
 
   def prepare_list
     format_list
+    detect_flags
+    handle_flags
     batch_gems
+  end
+
+  def detect_flags
+    @flags = @gem_list.select {|g| g[0] == '-' }
+    @gem_list -= @flags if @flags.any?
+  end
+
+  def handle_flags
+    return unless @flags.any?
+
+    if help_flag?
+      self.class.help exit_application: true
+    elsif version_flag?
+      self.class.version exit_application: true
+    else
+      unsupported_flags
+    end
+  end
+
+  def help_flag?
+    self.class.flags[:help][:matches].each do |flag|
+      return true if @flags.include? flag
+    end
+
+    false
+  end
+
+  def version_flag?
+    self.class.flags[:version][:matches].each do |flag|
+      return true if @flags.include? flag
+    end
+
+    false
+  end
+
+  def unsupported_flags
+    flag_word = @flags.size > 1 ? 'flags' : 'flag'
+    puts "=> Error: Unsupported #{flag_word} [#{@flags.join(', ')}]".red
+    exit 1
   end
 
   def process_batches
@@ -183,18 +228,6 @@ class RubyGems
   end
 end
 
-if ARGV.any?
-  if RubyGems.help_flag? ARGV.first
-    RubyGems.help
-    exit 0
-  elsif RubyGems.version_flag? ARGV.first
-    RubyGems.version
-    exit 0
-  elsif ARGV.first[0] == '-'
-    puts "=> Error: Unsupported flag [#{ARGV.first}]".red
-    exit 1
-  end
-end
-
-RubyGems.new(gems: ARGV).lookup
+rg = RubyGems.new ARGV
+rg.lookup
 # rubocop:enable Metrics/ClassLength
