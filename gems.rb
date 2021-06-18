@@ -8,6 +8,7 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'colorize'
+  gem 'pry'
   gem 'typhoeus'
 end
 
@@ -19,6 +20,7 @@ class RubyGems
   VERSION = '0.6.5'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
+  OUTPUT_OPTION_SPACING = 21
 
   def initialize(gems)
     @gem_list = gems
@@ -88,11 +90,21 @@ class RubyGems
     def options
       <<~OPTIONS.chomp
         Output Options:
-          -h --help            Display the help screen.
-          -j --json            Display the raw JSON.
-          -v --version         Display version information.
+        #{flag_output}
       OPTIONS
     end
+
+    # rubocop:disable Metrics/AbcSize
+    def flag_output
+      [].tap do |output|
+        flags.keys.sort.each do |key|
+          matches = flags[key][:matches].join ' '
+          spaces = ' ' * (OUTPUT_OPTION_SPACING - matches.length)
+          output.push "  #{matches}#{spaces}#{flags[key][:desc]}"
+        end
+      end.join "\n"
+    end
+    # rubocop:enable Metrics/AbcSize
   end
 
   private
