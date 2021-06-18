@@ -16,14 +16,17 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.5'
+  VERSION = '0.7.0'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
+  OUTPUT_OPTION_SPACING = 21
 
   def initialize(gems)
     @gem_list = gems
     @flags = []
     @batches = []
+    @display_mode = :standard
+    @json = { gems: [] }
   end
 
   def lookup
@@ -64,7 +67,8 @@ class RubyGems
     def flags
       {
         help:    { matches: %w[-h --help], desc: 'Display the help screen.' },
-        version: { matches: %w[-v --version], desc: 'Display version information.' }
+        version: { matches: %w[-v --version], desc: 'Display version information.' },
+        json:    { matches: %w[-j --json], desc: 'Display the raw JSON.' }
       }
     end
 
@@ -85,10 +89,21 @@ class RubyGems
     def options
       <<~OPTIONS.chomp
         Output Options:
-          -h --help            Display the help screen.
-          -v --version         Display version information.
+        #{flag_output}
       OPTIONS
     end
+
+    # rubocop:disable Metrics/AbcSize
+    def flag_output
+      [].tap do |output|
+        flags.keys.sort.each do |key|
+          matches = flags[key][:matches].join ' '
+          spaces = ' ' * (OUTPUT_OPTION_SPACING - matches.length)
+          output.push "  #{matches}#{spaces}#{flags[key][:desc]}"
+        end
+      end.join "\n"
+    end
+    # rubocop:enable Metrics/AbcSize
   end
 
   private
@@ -108,29 +123,32 @@ class RubyGems
   def handle_flags
     return unless @flags.any?
 
-    if help_flag?
+    if flag? :help
       self.class.help exit_application: true
-    elsif version_flag?
+    elsif flag? :version
       self.class.version exit_application: true
+    elsif flag? :json
+      @display_mode = :json
     else
       unsupported_flags
     end
   end
 
-  def help_flag?
-    self.class.flags[:help][:matches].each do |flag|
+  def flag?(type)
+    return false if type.nil?
+
+    type = type.to_sym
+    return false unless self.class.flags.key? type
+
+    self.class.flags[type][:matches].each do |flag|
       return true if @flags.include? flag
     end
 
     false
   end
 
-  def version_flag?
-    self.class.flags[:version][:matches].each do |flag|
-      return true if @flags.include? flag
-    end
-
-    false
+  def json?
+    @display_mode == :json
   end
 
   def unsupported_flags
@@ -140,16 +158,20 @@ class RubyGems
   end
 
   def process_batches
-    puts "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
+    say "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
 
-    @batches.each_with_index do |batch, index|
-      puts "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
-      puts "=> 🔎 Looking up: #{batch.join(', ')}"
+    @batches.each_with_index {|batch, index| process_batch batch: batch, index: index }
 
-      make_requests batch: batch
+    puts JSON.pretty_generate(@json) if json?
+  end
 
-      sleep 1 if batch_mode?
-    end
+  def process_batch(batch:, index:)
+    say "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
+    say "=> 🔎 Looking up: #{batch.join(', ')}"
+
+    make_requests batch: batch
+
+    sleep 1 if batch_mode?
   end
 
   def make_requests(batch:)
@@ -169,11 +191,29 @@ class RubyGems
     Typhoeus::Request.new(url).tap do |request|
       request.on_complete do |response|
         if response.code == 200
-          puts display_json(json: JSON.parse(response.body, symbolize_names: true))
+          handle_successful_response json: JSON.parse(response.body, symbolize_names: true)
         else
-          puts not_found(gem_name: gem_name)
+          handle_failed_response gem_name: gem_name
         end
       end
+    end
+  end
+
+  def handle_successful_response(json:)
+    if json?
+      json[:exists] = true
+      @json[:gems].push json
+    else
+      say display_json(json: json)
+    end
+  end
+
+  def handle_failed_response(gem_name:)
+    if json?
+      json = { name: gem_name, exists: false }
+      @json[:gems].push json
+    else
+      say not_found(gem_name: gem_name)
     end
   end
 
@@ -222,12 +262,17 @@ class RubyGems
     @batches.size > 1
   end
 
+  def say(string)
+    return if json?
+
+    puts string
+  end
+
   def exit_early
     self.class.help
     exit 1
   end
 end
 
-rg = RubyGems.new ARGV
-rg.lookup
+RubyGems.new(ARGV).lookup
 # rubocop:enable Metrics/ClassLength
