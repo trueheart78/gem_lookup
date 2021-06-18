@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2021-06-18
+
+### Added
+
+* New `--json` / `-j` flags return a JSON data structure that includes the entire response from
+  [RubyGems.org][gems api].
+  * Gems that are found successfully have an `"exists" : true` added to their JSON.
+  * Gems that are not found have a simple structure: `{ "name" : "gem_name", "exists" : false }`
+
 ## [0.6.5] - 2021-06-17
 
 ### Changed
@@ -46,3 +55,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Basic version support.
 
 [ag]: https://github.com/ggreer/the_silver_searcher
+[gems api]: https://guides.rubygems.org/rubygems-org-api/#gem-methods

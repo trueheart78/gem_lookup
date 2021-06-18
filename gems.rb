@@ -8,7 +8,6 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'colorize'
-  gem 'pry'
   gem 'typhoeus'
 end
 
@@ -17,7 +16,7 @@ require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class RubyGems
-  VERSION = '0.6.5'
+  VERSION = '0.7.0'
   MAX_REQUESTS_PER_SECOND = 10
   RATE_LIMIT_DOCUMENTATION_URL = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
   OUTPUT_OPTION_SPACING = 21
