@@ -149,16 +149,18 @@ class RubyGems
   def process_batches
     say "=> ✨ Gems: #{@gem_list.size}" if @gem_list.size > 1
 
-    @batches.each_with_index do |batch, index|
-      say "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
-      say "=> 🔎 Looking up: #{batch.join(', ')}"
-
-      make_requests batch: batch
-
-      sleep 1 if batch_mode?
-    end
+    @batches.each_with_index {|batch, index| process_batch batch: batch, index: index }
 
     puts JSON.pretty_generate(@json) if json?
+  end
+
+  def process_batch(batch:, index:)
+    say "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
+    say "=> 🔎 Looking up: #{batch.join(', ')}"
+
+    make_requests batch: batch
+
+    sleep 1 if batch_mode?
   end
 
   def make_requests(batch:)
