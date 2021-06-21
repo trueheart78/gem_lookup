@@ -153,7 +153,7 @@ class RubyGems
 
   def unsupported_flags
     flag_word = @flags.size > 1 ? 'flags' : 'flag'
-    puts "=> Error: Unsupported #{flag_word} [#{@flags.join(', ')}]".red
+    puts "=> Error: Unsupported #{flag_word} [#{@flags.join(", ")}]".red
     exit 1
   end
 
@@ -167,7 +167,7 @@ class RubyGems
 
   def process_batch(batch:, index:)
     say "=> 🧺 Batch: #{index + 1} of #{@batches.size}".magenta if batch_mode?
-    say "=> 🔎 Looking up: #{batch.join(', ')}"
+    say "=> 🔎 Looking up: #{batch.join(", ")}"
 
     make_requests batch: batch
 

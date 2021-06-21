@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lookup/version"
+require_relative 'lookup/version'
 
 module Gem
   module Lookup
