@@ -60,7 +60,7 @@ RSpec.describe GemLookup::Flags do
     let(:type)  { :help }
     let(:flags) { [] }
 
-    context 'when the type is :help' do
+    context 'when passed a type that is supported' do
       let(:type)  { :help }
 
       context 'with a short flag that is supported' do
@@ -75,6 +75,23 @@ RSpec.describe GemLookup::Flags do
         it { is_expected.to be true }
       end
 
+      context 'with mixed flags where one is supported' do
+        let(:flags) { ['--version', '-h', 'gem_name'] }
+
+        it { is_expected.to be true }
+      end
+
+      context 'with mixed flags where none are supported' do
+        let(:flags) { ['-v', '--json', 'gem_name'] }
+
+        it { is_expected.to be false }
+      end
+
+      context 'with a flag that is not supported' do
+        let(:flags) { ['--not-supported'] }
+
+        it { is_expected.to be false }
+      end
     end
 
     context 'when passed a type that is not supported' do
@@ -84,8 +101,8 @@ RSpec.describe GemLookup::Flags do
         it { is_expected.to eq false }
       end
 
-      context 'when the type is unsupported' do
-        let(:type) { :unsupported }
+      context 'when the type is not supported' do
+        let(:type) { :not_supported }
 
         it { is_expected.to eq false }
       end
