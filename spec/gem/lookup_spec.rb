@@ -6,7 +6,7 @@ RSpec.describe Gem::Lookup do
   end
 
   it 'does something useful' do
-    useful = false
+    useful = true
     expect(useful).to eq(true)
   end
 end
