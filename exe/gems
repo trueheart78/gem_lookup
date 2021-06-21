@@ -5,4 +5,4 @@
 ENV['APP_ENV'] = 'production'
 require_relative '../booster_pack'
 
-puts "gem_lookup #{GemLookup::VERSION}"
+GemLookup::RubyGems.new(ARGV).find_all

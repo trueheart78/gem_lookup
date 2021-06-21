@@ -6,6 +6,7 @@ require_relative '../booster_pack'
 RSpec.configure do |config|
   # Load all support helpers
   include Support::Coverage
+  include Support::Output
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
