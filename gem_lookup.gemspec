@@ -28,14 +28,11 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{\Aexe/}) {|f| File.basename(f) }
-  spec.require_paths = ['lib']
+  spec.require_paths = ['.']
 
-  spec.add_dependency 'colorize', '~> 0.8.1'
-  spec.add_dependency 'typhoeus', '~> 1.4'
-  spec.add_dependency 'zeitwerk', '~> 2.4.2'
+  spec.add_runtime_dependency 'colorize', '~> 0.8.1'
+  spec.add_runtime_dependency 'typhoeus', '~> 1.4'
+  spec.add_runtime_dependency 'zeitwerk', '~> 2.4.2'
 
-  spec.add_development_dependency 'pry', '~> 0.14'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.7'
+  # Development dependencies are defined in the Gemfile due to ENV['APP_ENV'] usage.
 end
