@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+ENV['APP_ENV'] = 'test'
 
-require 'gem_lookup'
-require_relative 'support/coverage'
+require_relative '../booster_pack'
 
 RSpec.configure do |config|
   # Load all support helpers
