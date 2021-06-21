@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 
 ## [0.8.0] - Unreleased
 
+### Added
+
+* CI support for multiple Ruby versions: 2.4, 2.5, 2.6, 2.7, 3.0, and head.
+* [Zeitwerk][zeitwerk] autoloader gem.
+* Support for the `ENV['APP_ENV']` variable.
+  * Defaults to `development`.
+  * `exe/gems` explicitly sets it to `production`.
+  * `spec/spec_helper.rb` explicitly sets it to `test`.
+
 ### Changed
 
 * Converted to a real gem! :gem:
@@ -22,7 +31,6 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
   [RubyGems.org][gems api].
   * Gems that are found successfully have an `"exists" : true` added to their JSON.
   * Gems that are not found have a simple structure: `{ "name" : "gem_name", "exists" : false }`
-* CI support for multiple Ruby versions: 2.4, 2.5, 2.6, 2.7, 3.0, and head.
 
 ### Removed
 
@@ -73,3 +81,4 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 [semver]: https://semver.org/spec/v2.0.0.html
 [ag]: https://github.com/ggreer/the_silver_searcher
 [gems api]: https://guides.rubygems.org/rubygems-org-api/#gem-methods
+[zeitwerk]: https://github.com/fxn/zeitwerk
