@@ -2,6 +2,6 @@
 
 RSpec.describe GemLookup do
   it 'has a version number' do
-    expect(GemLookup::VERSION).not_to be nil
+    expect(described_class::VERSION).not_to be nil
   end
 end
