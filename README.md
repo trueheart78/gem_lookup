@@ -1,4 +1,4 @@
-# Gem Lookup :detective:
+# GemLookup :detective:
 
 Uses inline Bundler and the [`typhoeus` :gem:][typhoeus] to make parallel requests to the public
 RubyGems API.
@@ -268,7 +268,7 @@ The gem is available as open source under the terms of the [MIT License][mit].
 
 ## Code of Conduct
 
-Everyone interacting in the Gem::Lookup project's codebases, issue trackers, chat rooms and
+Everyone interacting in the GemLookup project's codebases, issue trackers, chat rooms and
 mailing lists is expected to follow the [code of conduct][coc].
 
 [typhoeus]: https://github.com/typhoeus/typhoeus/

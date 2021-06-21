@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/gem/lookup/version'
+require_relative 'lib/gem_lookup/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'gem-lookup'
-  spec.version       = Gem::Lookup::VERSION
+  spec.version       = GemLookup::VERSION
   spec.authors       = ['Josh Mills']
   spec.email         = ['josh@trueheart78.com']
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'gem/lookup'
+require 'gem_lookup'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
