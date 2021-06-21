@@ -6,12 +6,12 @@ RubyGems API.
 ## Installation
 
 ```sh
-$ gem install gem-lookup
+$ gem install gem_lookup
 ```
 
 ### Design
 
-The idea behind `gem-lookup` is that you'll call the it using the `gems` executable coommand. It
+The idea behind `gem_lookup` is that you'll call the it using the `gems` executable coommand. It
 should be used when you are doing maintenance and project upgrades. It will be able to answer
 questions the [RubyGems website][rubygems site] can.
 
@@ -274,6 +274,6 @@ mailing lists is expected to follow the [code of conduct][coc].
 [typhoeus]: https://github.com/typhoeus/typhoeus/
 [rubygems site]: https://rubygems.org/
 [rate limit]: https://guides.rubygems.org/rubygems-org-rate-limits/
-[git]: https://github.com/trueheart78/gem-lookup/
-[coc]: https://github.com/trueheart78/gem-lookup/blob/master/CODE_OF_CONDUCT.md
+[git]: https://github.com/trueheart78/gem_lookup/
+[coc]: https://github.com/trueheart78/gem_lookup/blob/master/CODE_OF_CONDUCT.md
 [mit]: https://opensource.org/licenses/MIT

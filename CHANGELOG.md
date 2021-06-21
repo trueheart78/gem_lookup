@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Converted to a real gem! :gem:
-  * `gem install gem-lookup`
+  * `gem install gem_lookup`
 * Includes an executable, `gems`.
   * You should delete any previous symlinked `gems` script.
 

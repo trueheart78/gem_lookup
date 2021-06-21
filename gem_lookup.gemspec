@@ -3,7 +3,7 @@
 require_relative 'lib/gem_lookup/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'gem-lookup'
+  spec.name          = 'gem_lookup'
   spec.version       = GemLookup::VERSION
   spec.authors       = ['Josh Mills']
   spec.email         = ['josh@trueheart78.com']
@@ -13,13 +13,13 @@ Gem::Specification.new do |spec|
     Simple but effective command line interface that looks up gems using RubyGems.org's public API
     and displays results in an emoji-filled fashion.
   DESC
-  spec.homepage      = 'https://github.com/trueheart78/gem-lookup'
+  spec.homepage      = 'https://github.com/trueheart78/gem_lookup'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/trueheart78/gem-lookup'
-  spec.metadata['changelog_uri'] = 'https://github.com/trueheart78/gem-lookup/blob/main/CHANGELOG.md'
+  spec.metadata['source_code_uri'] = 'https://github.com/trueheart78/gem_lookup'
+  spec.metadata['changelog_uri'] = 'https://github.com/trueheart78/gem_lookup/blob/main/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
