@@ -1,25 +1,22 @@
 # Gem Lookup :detective:
 
-Uses inline Bundler and the [`typhoeus` :gem:][typhoeus] to make parallel requests to the public RubyGems API.
+Uses inline Bundler and the [`typhoeus` :gem:][typhoeus] to make parallel requests to the public
+RubyGems API.
 
-## Usage
-
-### Make It Executable
-
-First, make sure the `gems.rb` file is executable.
+## Installation
 
 ```sh
-chmod +ux gems.rb
+$ gem install gem-lookup
 ```
 
 ### Design
 
-The idea behind `gems.rb` is that you'll symlink it into a directory in your `$PATH`, and call
-it when you are doing maintenance and project upgrades. It should be able to answer questions
-the [RubyGems website][rubygems site] can.
+The idea behind `gem-lookup` is that you'll call the it using the `gems` executable coommand. It
+should be used when you are doing maintenance and project upgrades. It will be able to answer
+questions the [RubyGems website][rubygems site] can.
 
 ```sh
-ln -s /path/to/gems.rb ~/bin/gems
+gems
 ```
 
 Then it can be used instead anywhere by calling `gems` instead of having to directly
@@ -30,7 +27,7 @@ reference `gems.rb`.
 Pass `-h` or `--help` to get help.
 
 ```sh
-$ ./gems.rb --help            
+$ gems --help            
 ```
 
 ### Pass It Some Gems
@@ -248,6 +245,35 @@ Please be aware there is a [rate limit][rate limit] to be mindful of.
 
 As of June 10th, 2021: `API and website: 10 requests per second`.
 
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run
+the tests. You can also run `bin/console` for an interactive prompt that will allow you to
+experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new
+version, update the version number in `version.rb`, and then run `bundle exec rake release`, which
+will create a git tag for the version, push git commits and the created tag, and push the `.gem`
+file to [rubygems.org][rubygems site].
+
+## Contributing
+
+Bug reports and pull requests are welcome [on GitHub][git] This project is intended to be a safe,
+welcoming space for collaboration, and contributors are expected to adhere to the
+[code of conduct][coc].
+
+## License
+
+The gem is available as open source under the terms of the [MIT License][mit].
+
+## Code of Conduct
+
+Everyone interacting in the Gem::Lookup project's codebases, issue trackers, chat rooms and
+mailing lists is expected to follow the [code of conduct][coc].
+
 [typhoeus]: https://github.com/typhoeus/typhoeus/
 [rubygems site]: https://rubygems.org/
 [rate limit]: https://guides.rubygems.org/rubygems-org-rate-limits/
+[git]: https://github.com/trueheart78/gem-lookup/
+[coc]: https://github.com/trueheart78/gem-lookup/blob/master/CODE_OF_CONDUCT.md
+[mit]: https://opensource.org/licenses/MIT
