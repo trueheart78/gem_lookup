@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 require 'gem_lookup'
+require_relative 'support/coverage'
 
 RSpec.configure do |config|
+  # Load all support helpers
+  include Support::Coverage
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
