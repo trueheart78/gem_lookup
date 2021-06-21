@@ -1,8 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog][changelog], and this project adheres to 
+[Semantic Versioning][semver].
 
 ## [0.8.0] - Unreleased
 
@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `gem install gem_lookup`
 * Includes an executable, `gems`.
   * You should delete any previous symlinked `gems` script.
+* Renamed repository from `gem-lookup` to `gem_lookup`.
 
 ## [0.7.0] - 2021-06-18
 
@@ -21,6 +22,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [RubyGems.org][gems api].
   * Gems that are found successfully have an `"exists" : true` added to their JSON.
   * Gems that are not found have a simple structure: `{ "name" : "gem_name", "exists" : false }`
+* CI support for multiple Ruby versions: 2.4, 2.5, 2.6, 2.7, 3.0, and head.
+
+### Removed
+
+* Dropped support for Ruby 2.3 and earlier.
 
 ## [0.6.5] - 2021-06-17
 
@@ -63,5 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Basic version support.
 
+[changelog]: https://keepachangelog.com/en/1.0.0/
+[semver]: https://semver.org/spec/v2.0.0.html
 [ag]: https://github.com/ggreer/the_silver_searcher
 [gems api]: https://guides.rubygems.org/rubygems-org-api/#gem-methods
