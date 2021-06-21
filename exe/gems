@@ -2,4 +2,7 @@
 
 # frozen_string_literal: true
 
-require 'gem_lookup'
+ENV['APP_ENV'] = 'production'
+require_relative '../booster_pack'
+
+puts "gem_lookup #{GemLookup::VERSION}"
