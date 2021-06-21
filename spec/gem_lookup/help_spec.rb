@@ -9,8 +9,15 @@ RSpec.describe GemLookup::Help do
     context 'with no exit code' do
       it 'calls the .content method' do
         expect(described_class).to receive(:content)
-        suppress_output { described_class.display }
+        suppress_output { described_class.display exit_code: nil }
       end
+    end
+  end
+
+  describe '.version' do
+    it 'outputs the version' do
+      content = capture_output { described_class.version exit_code: nil }.chomp
+      expect(content.end_with?(GemLookup::VERSION)).to eq true
     end
   end
 

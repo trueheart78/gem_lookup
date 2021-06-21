@@ -37,6 +37,12 @@ module GemLookup
         exit exit_code unless exit_code.nil?
       end
 
+      def version(exit_code: nil)
+        puts "gem_lookup #{VERSION}"
+
+        exit exit_code unless exit_code.nil?
+      end
+
       private
 
       def rate_limit_num
