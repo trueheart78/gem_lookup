@@ -1,6 +1,6 @@
 # GemLookup :detective:
 
-Uses inline Bundler and the [`typhoeus` :gem:][typhoeus] to make parallel requests to the public
+Uses the [`typhoeus` :gem:][typhoeus] to make parallel requests to the public
 RubyGems API.
 
 ## Installation
@@ -11,7 +11,7 @@ $ gem install gem_lookup
 
 ### Design
 
-The idea behind `gem_lookup` is that you'll call the it using the `gems` executable coommand. It
+The idea behind `gem_lookup` is that you'll call the it using the `gems` executable command. It
 should be used when you are doing maintenance and project upgrades. It will be able to answer
 questions the [RubyGems website][rubygems site] can.
 
@@ -19,8 +19,7 @@ questions the [RubyGems website][rubygems site] can.
 gems
 ```
 
-Then it can be used instead anywhere by calling `gems` instead of having to directly
-reference `gems.rb`.
+This will be made available when the gem is installed.
 
 ### Help
 
@@ -51,7 +50,7 @@ enabled, so if your font and/or terminal support them, it is recommended to enab
 Just pass it a gem name.
 
 ```sh
-$ ./gems.rb pry
+$ gems pry
 => 🔎 Looking up: pry
 => 💎 pry is at 0.14.1
 ==> 📅 April 12, 2021
@@ -66,7 +65,7 @@ Since there is a [rate limit](#rate-limit), passing less gems than that will cau
 `Standard` mode:
 
 ```sh
-$ ./gems.rb pry rspec sentry-ruby rails
+$ gems pry rspec sentry-ruby rails
 => ✨ Gems: 4
 => 🔎 Looking up: pry, rspec, sentry-ruby, rails
 => 💎 rspec is at 3.10.0
@@ -98,7 +97,7 @@ When more gems are passed in than the [rate limit](#rate-limit) supports, the sc
 between batches, so as to respect the rate limit.
 
 ```sh
-$ ./gems.rb byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-ruby sentry-rails pry byebug typhoeus faraday Faraday rails pagy clowne discard aasm logidze GLOBALIZE lockbox factory_BOT faker site_prism nokogiri simplecov
+$ gems byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-ruby sentry-rails pry byebug typhoeus faraday Faraday rails pagy clowne discard aasm logidze GLOBALIZE lockbox factory_BOT faker site_prism nokogiri simplecov
 => ✨ Gems: 24
 => 🧺 Batch: 1 of 3
 => 🔎 Looking up: byebug, pinglish, rspec, rubocop, rubocop-rspec, rubocop-rails, sentry-ruby, sentry-rails, pry, typhoeus
@@ -228,7 +227,7 @@ red. It's also important to know that not finding a gem doesn't block other gems
 up.
 
 ```sh
-$ ./gems.rb non-existent rails
+$ gems non-existent rails
 => ✨ Gems: 2
 => 🔎 Looking up: non-existent, rails
 => 💎 non-existent not found
