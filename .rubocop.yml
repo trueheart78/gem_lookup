@@ -4,6 +4,7 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - 'spec/**/*'
+    - 'vendor/**/*'
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
