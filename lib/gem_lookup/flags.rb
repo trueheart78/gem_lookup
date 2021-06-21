@@ -24,7 +24,7 @@ module GemLookup
         type = type.to_sym
         return false unless supported.key? type
 
-        self.class.flags[type][:matches].each do |flag|
+        supported[type][:matches].each do |flag|
           return true if flags.include? flag
         end
 
