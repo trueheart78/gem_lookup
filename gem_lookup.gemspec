@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'colorize', '~> 0.8.1'
   spec.add_dependency 'typhoeus', '~> 1.4'
+  spec.add_dependency 'zeitwerk', '~> 2.4.2'
 
   spec.add_development_dependency 'pry', '~> 0.14'
   spec.add_development_dependency 'rake', '~> 13.0'
