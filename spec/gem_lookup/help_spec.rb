@@ -15,9 +15,62 @@ RSpec.describe GemLookup::Help do
   end
 
   describe '.version' do
-    it 'outputs the version' do
-      content = capture_output { described_class.version exit_code: nil }.chomp
-      expect(content.end_with?(GemLookup::VERSION)).to eq true
+    before do
+      allow(described_class).to receive(:exit).with(1) { print 'exit(1)' }
+      allow(described_class).to receive(:exit).with(0) { print 'exit(0)' }
+    end
+
+    let(:content) do
+      capture_output { described_class.version exit_code: exit_code }.chomp
+    end
+
+    context 'with an exit code of nil' do
+      let(:exit_code) { nil }
+
+      it 'outputs the gem name' do
+        expect(content).to start_with GemLookup::NAME
+      end
+
+      it 'outputs the version' do
+        expect(content).to include GemLookup::VERSION
+      end
+
+      it 'does not exit' do
+        expect(content).to_not end_with 'exit(0)'
+        expect(content).to_not end_with 'exit(1)'
+      end
+    end
+
+    context 'with an exit code of 0' do
+      let(:exit_code) { 0 }
+
+      it 'outputs the gem name' do
+        expect(content).to start_with GemLookup::NAME
+      end
+
+      it 'outputs the version' do
+        expect(content).to include GemLookup::VERSION
+      end
+
+      it 'exits with an exit code of 0' do
+        expect(content).to end_with 'exit(0)'
+      end
+    end
+
+    context 'with an exit code of 1' do
+      let(:exit_code) { 1 }
+
+      it 'outputs the gem name' do
+        expect(content).to start_with GemLookup::NAME
+      end
+
+      it 'outputs the version' do
+        expect(content).to include GemLookup::VERSION
+      end
+
+      it 'exits with an exit code of 1' do
+        expect(content).to end_with 'exit(1)'
+      end
     end
   end
 
