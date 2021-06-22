@@ -139,13 +139,13 @@ RSpec.describe GemLookup::Flags do
       it 'outputs the single flag' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.start_with?(expected_output)).to eq true
+        expect(output).to start_with expected_output
       end
 
       it 'exits with an exit code of 1' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.end_with?('exit(1)')).to eq true
+        expect(output).to end_with 'exit(1)'
       end
     end
 
@@ -158,13 +158,13 @@ RSpec.describe GemLookup::Flags do
       it 'outputs the flags' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.start_with?(expected_output)).to eq true
+        expect(output).to start_with expected_output
       end
 
       it 'exits with an exit code of 1' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.end_with?('exit(1)')).to eq true
+        expect(output).to end_with 'exit(1)'
       end
     end
 
@@ -177,13 +177,13 @@ RSpec.describe GemLookup::Flags do
       it 'outputs the non-empty flags' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.start_with?(expected_output)).to eq true
+        expect(output).to start_with expected_output
       end
 
       it 'exits with an exit code of 1' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.end_with?('exit(1)')).to eq true
+        expect(output).to end_with 'exit(1)'
       end
     end
 
@@ -197,7 +197,7 @@ RSpec.describe GemLookup::Flags do
       it 'does not exit' do
         output = capture_output { unsupported }.chomp
 
-        expect(output.end_with?('exit(1)')).to eq false
+        expect(output).to_not end_with 'exit(1)'
       end
     end
   end
