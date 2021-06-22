@@ -5,7 +5,7 @@ require_relative 'lib/gem_lookup/version'
 Gem::Specification.new do |spec|
   spec.name          = 'gem_lookup'
   spec.version       = GemLookup::VERSION
-  spec.augem_lookups       = ['Josh Mills']
+  spec.authors       = ['Josh Mills']
   spec.email         = ['josh@trueheart78.com']
 
   spec.summary       = 'Retrieves gem-related information from https://rubygems.org'
@@ -39,5 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'typhoeus', '~> 1.4'
   spec.add_runtime_dependency 'zeitwerk', '~> 2.4.2'
 
-  # Development dependencies are defined in the Gemfile due to ENV['APP_ENV'] usage.
+  # Development and test dependencies are defined in the Gemfile due to ENV['APP_ENV'] usage.
 end
