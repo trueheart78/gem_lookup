@@ -39,29 +39,17 @@ module GemLookup
           the home page, source code, and changelog.
 
           Feel free to pass in as many gems that you like, as it makes requests in
-          parallel. There is a rate limit, #{rate_limit_num}/sec. If it detects the amount of gems it
+          parallel. There is a rate limit, #{RateLimit.number}/sec. If it detects the amount of gems it
           has been passed is more than the rate limit, the application will run in Batch
           mode, and introduce a one second delay between batch lookups.
 
           #{options}
 
-          Rate limit documentation: #{rate_limit_url}
+          Rate limit documentation: #{RateLimit.documentation_url}
         HELP
       end
 
       private
-
-      # Calls the RateLimit module and gets the MAX_REQUESTS_PER_SECOND.
-      # @return [Numeric] the max requests that can be made per second.
-      def rate_limit_num
-        RateLimit::MAX_REQUESTS_PER_SECOND
-      end
-
-      # Calls the RateLimit module and gets the RATE_LIMIT_DOCUMENTATION_URL.
-      # @return [String] the url that documents the rate limit.
-      def rate_limit_url
-        RateLimit::RATE_LIMIT_DOCUMENTATION_URL
-      end
 
       # Generates an Output Options string that includes the supported flag details.
       # @return [String] the supported output options.
