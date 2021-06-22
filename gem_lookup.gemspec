@@ -32,7 +32,6 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{\Aexe/}) {|f| File.basename(f) }
-  spec.require_paths = ['.']
 
   # These gems need to be explicitly required to be utilized.
   spec.add_runtime_dependency 'colorize', '~> 0.8.1'
