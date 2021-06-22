@@ -5,7 +5,7 @@ require_relative 'lib/gem_lookup/version'
 Gem::Specification.new do |spec|
   spec.name          = 'gem_lookup'
   spec.version       = GemLookup::VERSION
-  spec.authors       = ['Josh Mills']
+  spec.augem_lookups       = ['Josh Mills']
   spec.email         = ['josh@trueheart78.com']
 
   spec.summary       = 'Retrieves gem-related information from https://rubygems.org'
@@ -17,9 +17,13 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
-  spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/trueheart78/gem_lookup'
-  spec.metadata['changelog_uri'] = 'https://github.com/trueheart78/gem_lookup/blob/main/CHANGELOG.md'
+  spec.metadata = {
+    'bug_tracker_uri'   => 'https://github.com/trueheart78/gem_lookup/issues',
+    'changelog_uri'     => 'https://github.com/trueheart78/gem_lookup/blob/main/CHANGELOG.md',
+    'documentation_uri' => spec.homepage,
+    'homepage_uri'      => spec.homepage,
+    'source_code_uri'   => "https://github.com/trueheart78/gem_lookup/tree/v#{GemLookup::VERSION}"
+  }
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
