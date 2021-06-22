@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) {|f| File.basename(f) }
   spec.require_paths = ['.']
 
+  # These gems need to be explicitly required to be utilized.
   spec.add_runtime_dependency 'colorize', '~> 0.8.1'
   spec.add_runtime_dependency 'typhoeus', '~> 1.4'
   spec.add_runtime_dependency 'zeitwerk', '~> 2.4.2'
