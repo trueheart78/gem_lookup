@@ -5,16 +5,14 @@ module GemLookup
     def initialize(gems)
       @gem_list = gems
       @flags = []
-      @batches = []
       @display_mode = :standard
-      @json = { gems: [] }
     end
 
     def find_all
       exit_early if @gem_list.empty?
 
       prepare_list
-      # process_batches
+      process_gems
     end
 
     private
@@ -23,7 +21,6 @@ module GemLookup
       format_list
       detect_flags
       handle_flags
-      batch_gems
     end
 
     def detect_flags
@@ -35,20 +32,8 @@ module GemLookup
       @gem_list.map!(&:downcase).uniq!
     end
 
-    def batch_gems
-      gems = @gem_list.dup
-
-      @batches.push gems.shift(MAX_REQUESTS_PER_SECOND) while gems.any?
-    end
-
-    def batch_mode?
-      @batches.size > 1
-    end
-
-    def say(string)
-      return if json?
-
-      puts string
+    def process_gems
+      Gems.new(@gem_list, display_mode: @display_mode).process
     end
 
     def handle_flags
