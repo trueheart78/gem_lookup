@@ -7,8 +7,8 @@ RSpec.describe GemLookup::Help do
 
   describe '.display' do
     context 'with no exit code' do
-      it 'calls the .content method' do
-        expect(described_class).to receive(:content)
+      it 'calls the .documentation method' do
+        expect(described_class).to receive(:documentation)
         suppress_output { described_class.display exit_code: nil }
       end
     end
@@ -74,11 +74,11 @@ RSpec.describe GemLookup::Help do
     end
   end
 
-  describe '.content' do
-    subject(:content) { described_class.content }
+  describe '.documentation' do
+    subject(:documentation) { described_class.documentation }
 
-    let(:expected_content) do
-      <<~CONTENT
+    let(:expected_documentation) do
+      <<~DOCUMENTATION
 
        Usage: gems GEMS
 
@@ -102,11 +102,11 @@ RSpec.describe GemLookup::Help do
          -v --version         Display version information.
 
        Rate limit documentation: https://guides.rubygems.org/rubygems-org-rate-limits/
-      CONTENT
+      DOCUMENTATION
     end
 
-    it 'is expected to be extensive' do
-      expect(content).to eq expected_content
+    it 'is the expected documentation' do
+      expect(documentation).to eq expected_documentation
     end
   end
 end

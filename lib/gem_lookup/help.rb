@@ -6,7 +6,25 @@ module GemLookup
     OUTPUT_OPTION_SPACING = 21
 
     class << self
-      def content
+      # Outputs the generated content.
+      # @param exit_code [Numeric, nil] the exit code (if any) to exit with.
+      def display(exit_code: nil)
+        puts documentation
+
+        exit exit_code unless exit_code.nil?
+      end
+
+      # Outputs the gem name and current gem version.
+      # @param exit_code [Numeric, nil] the exit code (if any) to exit with.
+      def version(exit_code: nil)
+        puts "#{NAME} #{VERSION}"
+
+        exit exit_code unless exit_code.nil?
+      end
+
+      # Generates the help documentation.
+      # @return [String] the help documentation.
+      def documentation
         <<~HELP
 
           Usage: gems GEMS
@@ -31,28 +49,22 @@ module GemLookup
         HELP
       end
 
-      def display(exit_code: nil)
-        puts content
-
-        exit exit_code unless exit_code.nil?
-      end
-
-      def version(exit_code: nil)
-        puts "gem_lookup #{VERSION}"
-
-        exit exit_code unless exit_code.nil?
-      end
-
       private
 
+      # Calls the RateLimit module and gets the MAX_REQUESTS_PER_SECOND.
+      # @return [Numeric] the max requests that can be made per second.
       def rate_limit_num
         RateLimit::MAX_REQUESTS_PER_SECOND
       end
 
+      # Calls the RateLimit module and gets the RATE_LIMIT_DOCUMENTATION_URL.
+      # @return [String] the url that documents the rate limit.
       def rate_limit_url
         RateLimit::RATE_LIMIT_DOCUMENTATION_URL
       end
 
+      # Generates an Output Options string that includes the supported flag details.
+      # @return [String] the supported output options.
       def options
         <<~OPTIONS.chomp
           Output Options:
@@ -61,6 +73,8 @@ module GemLookup
       end
 
       # rubocop:disable Metrics/AbcSize
+      # Generates a formatted string that displays the supported flag details.
+      # @return [String] the supported flags and their details.
       def flag_output
         [].tap do |output|
           Flags.supported.keys.sort.each do |key|
