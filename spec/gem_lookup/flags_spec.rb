@@ -120,4 +120,85 @@ RSpec.describe GemLookup::Flags do
       it { is_expected.to eq false }
     end
   end
+
+  describe '.unsupported' do
+    subject(:unsupported) { described_class.unsupported flags: flags }
+
+    let(:flags) { [] }
+
+    before do
+      allow(described_class).to receive(:exit).with(1) { print 'exit(1)' }
+    end
+
+    context 'with a single flag' do
+      let(:flags) { ['-x'] }
+      let(:expected_output) do
+        '=> Error: Unsupported flag [-x]'.red
+      end
+
+      it 'outputs the single flag' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.start_with?(expected_output)).to eq true
+      end
+
+      it 'exits with an exit code of 1' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.end_with?('exit(1)')).to eq true
+      end
+    end
+
+    context 'with multiple flags' do
+      let(:flags) { ['-x', '--yes', '-b'] }
+      let(:expected_output) do
+        '=> Error: Unsupported flags [-x, --yes, -b]'.red
+      end
+
+      it 'outputs the flags' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.start_with?(expected_output)).to eq true
+      end
+
+      it 'exits with an exit code of 1' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.end_with?('exit(1)')).to eq true
+      end
+    end
+
+    context 'with multiple flags, some empty' do
+      let(:flags) { ['-x', '', '--yes', nil,  '-b'] }
+      let(:expected_output) do
+        '=> Error: Unsupported flags [-x, --yes, -b]'.red
+      end
+
+      it 'outputs the non-empty flags' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.start_with?(expected_output)).to eq true
+      end
+
+      it 'exits with an exit code of 1' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.end_with?('exit(1)')).to eq true
+      end
+    end
+
+    context 'without any flags' do
+      let(:flags) { [] }
+
+      it 'returns false' do
+        expect(unsupported).to eq false
+      end
+
+      it 'does not exit' do
+        output = capture_output { unsupported }.chomp
+
+        expect(output.end_with?('exit(1)')).to eq false
+      end
+    end
+  end
 end

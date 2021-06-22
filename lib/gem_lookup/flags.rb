@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'colorize'
+
 module GemLookup
   class Flags
     class << self
@@ -34,7 +36,8 @@ module GemLookup
       # Outputs the unsupported flags and exits with a code of 1.
       # @param flags [Array] the list of unsupported flags.
       def unsupported(flags:)
-        return unless flags.any?
+        flags = flags.compact.reject(&:empty?)
+        return false if flags.empty?
 
         flag_word = flags.size > 1 ? 'flags' : 'flag'
         puts "=> Error: Unsupported #{flag_word} [#{flags.join(", ")}]".red
