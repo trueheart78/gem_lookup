@@ -80,11 +80,11 @@ RSpec.describe GemLookup::Help do
     let(:expected_documentation) do
       <<~DOCUMENTATION
 
-       Usage: gems GEMS
+       Usage: gems [OPTIONS] GEMS
 
          Retrieves gem-related information from https://rubygems.org
 
-       Example: gems rails rspec
+       Example: gems -j rails rspec
 
        This application's purpose is to make working with with RubyGems.org easier. 💖
        It uses the RubyGems public API to perform lookups, and parses the JSON response
@@ -97,8 +97,9 @@ RSpec.describe GemLookup::Help do
        mode, and introduce a one second delay between batch lookups.
 
        Output Options:
+         -c --classic         Stream the output using only words.
          -h --help            Display the help screen.
-         -j --json            Display the raw JSON.
+         -j --json            Bulk the output results as raw JSON.
          -v --version         Display version information.
 
        Rate limit documentation: https://guides.rubygems.org/rubygems-org-rate-limits/

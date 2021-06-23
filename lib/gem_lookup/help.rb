@@ -27,11 +27,11 @@ module GemLookup
       def documentation
         <<~HELP
 
-          Usage: gems GEMS
+          Usage: gems [OPTIONS] GEMS
 
             Retrieves gem-related information from https://rubygems.org
 
-          Example: gems rails rspec
+          Example: gems -j rails rspec
 
           This application's purpose is to make working with with RubyGems.org easier. 💖
           It uses the RubyGems public API to perform lookups, and parses the JSON response
