@@ -5,7 +5,7 @@ RSpec.describe GemLookup::Flags do
     subject(:sorted_keys) { described_class.supported.keys.sort }
 
     it 'contains the expected keys' do
-      expect(sorted_keys).to eq %i[help json version]
+      expect(sorted_keys).to eq %i[classic help json version]
     end
 
     describe 'help' do
@@ -27,7 +27,22 @@ RSpec.describe GemLookup::Flags do
       subject(:hash) { described_class.supported[:json] }
 
       let(:matches) { %w[-j --json] }
-      let(:desc)    { 'Display the raw JSON.' }
+      let(:desc)    { 'Bulk the output results as raw JSON.' }
+
+      it 'has the expected matches' do
+        expect(hash[:matches]).to eq matches
+      end
+
+      it 'has the expected description' do
+        expect(hash[:desc]).to eq desc
+      end
+    end
+
+    describe 'classic' do
+      subject(:hash) { described_class.supported[:classic] }
+
+      let(:matches) { %w[-c --classic] }
+      let(:desc)    { 'Stream the output using only words.' }
 
       it 'has the expected matches' do
         expect(hash[:matches]).to eq matches

@@ -11,7 +11,8 @@ module GemLookup
         {
           help:    { matches: %w[-h --help], desc: 'Display the help screen.' },
           version: { matches: %w[-v --version], desc: 'Display version information.' },
-          json:    { matches: %w[-j --json], desc: 'Display the raw JSON.' }
+          json:    { matches: %w[-j --json], desc: 'Bulk the output results as raw JSON.' },
+          classic: { matches: %w[-c --classic], desc: 'Stream the output using only words.' }
         }
       end
 
