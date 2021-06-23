@@ -229,9 +229,16 @@ class RubyGems
       output.push "==> 🏠 #{json[:homepage_uri]}"
       output.push "==> 🔗 #{json[:source_code_uri]}" if json[:source_code_uri]
       output.push changelog(changelog_uri: json[:changelog_uri])
+      output.push mailing_list(mailing_list_uri: json[:mailing_list_uri])
     end.join "\n"
   end
   # rubocop:enable Metrics/AbcSize
+
+  def mailing_list(mailing_list_uri:)
+    return "==> 💌 #{mailing_list_uri}".light_blue if mailing_list_uri && !mailing_list_uri.empty?
+
+    '==> 💌 No mailing list'.red
+  end
 
   def changelog(changelog_uri:)
     return "==> 📑 #{changelog_uri}".light_blue if changelog_uri
