@@ -14,6 +14,9 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
   * Defaults to `development`.
   * `exe/gems` explicitly sets it to `production`.
   * `spec/spec_helper.rb` explicitly sets it to `test`.
+* New **Classic** output mode.
+  * No emojis, only words :frowning_face:
+  * Enabled by passing `--classic` or `-c` to the executable.
 
 ### Changed
 
