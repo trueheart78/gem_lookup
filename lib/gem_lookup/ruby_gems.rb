@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
+require 'colorize'
+
 module GemLookup
   class RubyGems
     def initialize(gems)
       @gem_list = gems
       @flags = []
-      @display_mode = :standard
+      @display_mode = :emoji
     end
 
     def find_all
-      exit_early if @gem_list.empty?
-
+      validate_gem_list!
       prepare_list
+
+      validate_gem_list!
       process_gems
     end
 
@@ -34,6 +37,9 @@ module GemLookup
 
     def process_gems
       Gems.new(@gem_list, display_mode: @display_mode).process
+    rescue GemLookup::Errors::InvalidDisplayMode => e
+      puts "=> Error: Invalid display mode [#{e.message}]".red
+      exit 1
     end
 
     def handle_flags
@@ -43,11 +49,17 @@ module GemLookup
         Help.display exit_code: 0
       elsif Flags.supported?(:version, flags: @flags)
         Help.version exit_code: 0
+      elsif Flags.supported?(:classic, flags: @flags)
+        @display_mode = :classic
       elsif Flags.supported?(:json, flags: @flags)
         @display_mode = :json
       else
         Flags.unsupported flags: @flags
       end
+    end
+
+    def validate_gem_list!
+      exit_early if @gem_list.empty?
     end
 
     def exit_early
