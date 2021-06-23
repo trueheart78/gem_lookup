@@ -2,7 +2,11 @@
 
 RSpec.describe GemLookup::RateLimit do
   it 'has a rate limit' do
-    expect(described_class::MAX_REQUESTS_PER_SECOND).to eq 10
+    expect(described_class::MAX_REQUESTS_PER_INTERVAL).to eq 10
+  end
+
+  it 'has a frequency interval, in seconds' do
+    expect(described_class::FREQUENCY_INTERVAL_IN_SECONDS).to eq 1
   end
 
   it 'has a documentation url' do
@@ -14,7 +18,15 @@ RSpec.describe GemLookup::RateLimit do
     subject(:number) { described_class.number }
 
     it 'returns the rate limit' do
-      expect(number).to eq described_class::MAX_REQUESTS_PER_SECOND
+      expect(number).to eq described_class::MAX_REQUESTS_PER_INTERVAL
+    end
+  end
+
+  describe '.interval' do
+    subject(:interval) { described_class.interval }
+
+    it 'returns the frequency interval, in seconds' do
+      expect(interval).to eq described_class::FREQUENCY_INTERVAL_IN_SECONDS
     end
   end
 
