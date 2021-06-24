@@ -19,7 +19,7 @@ module Support
     end
 
     def request_json
-      JSON.parse request_content, symbolize_keys: true
+      JSON.parse request_content, symbolize_names: true
     end
 
     def serializer_content(file)
@@ -29,7 +29,7 @@ module Support
     end
 
     def serializer_json(file)
-      JSON.parse serializer_content(file), symbolize_keys: true
+      JSON.parse serializer_content(file), symbolize_names: true
     end
 
     private
@@ -46,6 +46,7 @@ module Support
     end
 
     def serializer_path(file)
+      file = file.to_s
       file = "#{file}.json" unless File.extname(file) == '.json'
       File.join(fixture_dir, 'serializers', file).tap do |path|
         raise "File does not exist [#{path}]" unless File.exist? path
