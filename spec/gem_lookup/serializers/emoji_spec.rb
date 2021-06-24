@@ -20,7 +20,9 @@ RSpec.describe GemLookup::Serializers::Emoji do
     let(:num)    { junk :int, min: 1, max: 1_000 }
     let(:output) { "=> 🤔 #{num} gems".light_cyan }
 
-    it { is_expected.to eq output }
+    it 'outputs a thinking emoji with the number of gems (light cyan)' do
+      expect(gem_count).to eq output
+    end
   end
 
   describe '.batch_iterator' do
@@ -32,7 +34,9 @@ RSpec.describe GemLookup::Serializers::Emoji do
     let(:total)  { junk :int, min: 500, max: 1_000 }
     let(:output) { "=> 🧺 #{num} of #{total}".yellow }
 
-    it { is_expected.to eq output }
+    it 'outputs a basket emoji with the current number of total batches (yellow)' do
+      expect(batch_iterator).to eq output
+    end
   end
 
   describe '.querying' do
@@ -43,7 +47,9 @@ RSpec.describe GemLookup::Serializers::Emoji do
     let(:batch)  { [ junk, junk, junk, junk ] }
     let(:output) { "=> 🔎 #{batch.join(', ')}".light_yellow }
 
-    it { is_expected.to eq output }
+    it 'outputs a magnifying glass emoji with the gems in the current batch (light yellow)' do
+      expect(querying).to eq output
+    end
   end
 
   describe '.streaming?' do

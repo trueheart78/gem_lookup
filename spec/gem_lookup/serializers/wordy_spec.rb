@@ -20,7 +20,9 @@ RSpec.describe GemLookup::Serializers::Wordy do
     let(:num)    { junk :int, min: 1, max: 1_000 }
     let(:output) { "=> Query: #{num} gems".light_cyan }
 
-    it { is_expected.to eq output }
+    it 'outputs the Query with the number of gems (light cyan)' do
+      expect(gem_count).to eq output
+    end
   end
 
   describe '.batch_iterator' do
@@ -32,7 +34,9 @@ RSpec.describe GemLookup::Serializers::Wordy do
     let(:total)  { junk :int, min: 500, max: 1_000 }
     let(:output) { "=> Batch: #{num} of #{total}".yellow }
 
-    it { is_expected.to eq output }
+    it 'outputs the Batch with the current number of total batches (yellow)' do
+      expect(batch_iterator).to eq output
+    end
   end
 
   describe '.querying' do
@@ -43,7 +47,9 @@ RSpec.describe GemLookup::Serializers::Wordy do
     let(:batch)  { [ junk, junk, junk, junk ] }
     let(:output) { "=> Looking up: #{batch.join(', ')}".light_yellow }
 
-    it { is_expected.to eq output }
+    it 'outputs Looking Up with the gems in the current batch (light yellow)' do
+      expect(querying).to eq output
+    end
   end
 
   describe '.streaming?' do
