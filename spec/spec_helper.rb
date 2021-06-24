@@ -6,6 +6,7 @@ require_relative '../booster_pack'
 RSpec.configure do |config|
   # Load all support helpers
   include Support::Coverage
+  include Support::Files
   include Support::Output
 
   config.expect_with :rspec do |expectations|
