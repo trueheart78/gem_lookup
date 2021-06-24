@@ -97,10 +97,10 @@ RSpec.describe GemLookup::Help do
        mode, and introduce a one second delay between batch lookups.
 
        Output Options:
-         -c --classic         Stream the output using only words.
          -h --help            Display the help screen.
          -j --json            Bulk the output results as raw JSON.
          -v --version         Display version information.
+         -w --wordy           Stream the output using only words.
 
        Rate limit documentation: https://guides.rubygems.org/rubygems-org-rate-limits/
       DOCUMENTATION

@@ -4,7 +4,7 @@ require 'colorize'
 require 'date'
 
 module GemLookup
-  module Serializers::Classic
+  module Serializers::Wordy
     class << self
       # Outputs the emoji-based format for the gem
       # @param json [Hash] the json hash, with symbolized keys.

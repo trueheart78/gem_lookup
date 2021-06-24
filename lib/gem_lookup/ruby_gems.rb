@@ -49,8 +49,8 @@ module GemLookup
         Help.display exit_code: 0
       elsif Flags.supported?(:version, flags: @flags)
         Help.version exit_code: 0
-      elsif Flags.supported?(:classic, flags: @flags)
-        @display_mode = :classic
+      elsif Flags.supported?(:wordy, flags: @flags)
+        @display_mode = :wordy
       elsif Flags.supported?(:json, flags: @flags)
         @display_mode = :json
       else

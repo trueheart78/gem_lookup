@@ -66,8 +66,8 @@ module GemLookup
 
     def detect_serializer
       @serializer = case @display_mode
-                    when :classic
-                      Serializers::Classic
+                    when :wordy
+                      Serializers::Wordy
                     when :json
                       Serializers::Json
                     when :emoji
