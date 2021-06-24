@@ -6,7 +6,23 @@ RSpec.describe GemLookup::Serializers::Wordy do
       capture_output { described_class.display json: json }.chomp
     end
 
-    context 'with everything present'
+    context 'with everything present' do
+      let(:json)   { serializer_json(:rails)[:gems].first }
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> Gem: rails is at 6.1.3.2".green}
+          ==> Updated:      May 5, 2021
+          ==> Homepage:     https://rubyonrails.org
+          ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+        OUTPUT
+      end
+
+      it 'outputs the gem details' do
+        expect(display).to eq output
+      end
+    end
     context 'with a missing source_code_uri'
     context 'with an empty source_code_uri'
     context 'with a missing changelog_uri'

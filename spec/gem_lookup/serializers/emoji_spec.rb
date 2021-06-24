@@ -6,7 +6,23 @@ RSpec.describe GemLookup::Serializers::Emoji do
       capture_output { described_class.display json: json }.chomp
     end
 
-    context 'with everything present'
+    context 'with everything present' do
+      let(:json)   { serializer_json(:rails)[:gems].first }
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+        OUTPUT
+      end
+
+      it 'outputs the gem details' do
+        expect(display).to eq output
+      end
+    end
     context 'with a missing source_code_uri'
     context 'with an empty source_code_uri'
     context 'with a missing changelog_uri'
