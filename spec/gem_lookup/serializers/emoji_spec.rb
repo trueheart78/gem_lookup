@@ -23,12 +23,133 @@ RSpec.describe GemLookup::Serializers::Emoji do
         expect(display).to eq output
       end
     end
-    context 'with a missing source_code_uri'
-    context 'with an empty source_code_uri'
-    context 'with a missing changelog_uri'
-    context 'with an empty changelog_ur'
-    context 'with a missing mailing_list_uri'
-    context 'with an empty mailing_list_uri'
+
+    context 'with a missing source_code_uri' do
+      let(:json) do
+        serializer_json(:rails)[:gems].first.tap {|rails| rails.delete :source_code_uri }
+      end
+
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          #{"==> 🔗 Unavailable".light_red}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+        OUTPUT
+      end
+
+      it 'outputs the gem details with 🔗 Unavailable (in light red)' do
+        expect(display).to eq output
+      end
+    end
+
+    context 'with an empty source_code_uri' do
+      let(:json) do
+        serializer_json(:rails)[:gems].first.tap {|rails| rails[:source_code_uri] = '' }
+      end
+
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          #{"==> 🔗 Unavailable".light_red}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+        OUTPUT
+      end
+
+      it 'outputs the gem details with 🔗 Unavailable (in light red)' do
+        expect(display).to eq output
+      end
+    end
+
+    context 'with a missing changelog_uri' do
+      let(:json) do
+        serializer_json(:rails)[:gems].first.tap {|rails| rails.delete :changelog_uri }
+      end
+
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
+          #{"==> 📑 Unavailable".light_red}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+        OUTPUT
+      end
+
+      it 'outputs the gem details with 📑 Unavailable (in light red)' do
+        expect(display).to eq output
+      end
+    end
+
+    context 'with an empty changelog_uri' do
+      let(:json) do
+        serializer_json(:rails)[:gems].first.tap {|rails| rails[:changelog_uri] = '' }
+      end
+
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
+          #{"==> 📑 Unavailable".light_red}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+        OUTPUT
+      end
+
+      it 'outputs the gem details with 📑 Unavailable (in light red)' do
+        expect(display).to eq output
+      end
+    end
+
+    context 'with a missing mailing_list_uri' do
+      let(:json) do
+        serializer_json(:rails)[:gems].first.tap {|rails| rails.delete :mailing_list_uri }
+      end
+
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 Unavailable".light_red}
+        OUTPUT
+      end
+
+      it 'outputs the gem details with 💌 Unavailable (in light red)' do
+        expect(display).to eq output
+      end
+    end
+
+    context 'with an empty mailing_list_uri' do
+      let(:json) do
+        serializer_json(:rails)[:gems].first.tap {|rails| rails[:mailing_list_uri] = '' }
+      end
+
+      let(:output) do
+        <<~OUTPUT.chomp
+          #{"=> 💎 rails is at 6.1.3.2".green}
+          ==> 📅 May 5, 2021
+          ==> 🏠 https://rubyonrails.org
+          ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 Unavailable".light_red}
+        OUTPUT
+      end
+
+      it 'outputs the gem details with 💌 Unavailable (in light red)' do
+        expect(display).to eq output
+      end
+    end
+
     context 'when the gem does not exist' do
       let(:json)   { serializer_json(:not_found)[:gems].first }
       let(:output) { '=> 💎 not_found not found'.red }
