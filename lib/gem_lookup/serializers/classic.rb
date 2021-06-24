@@ -19,20 +19,20 @@ module GemLookup
       # Outputs the number of gems being queried.
       # @param num [Numeric] the number of gems.
       def gem_count(num)
-        puts "=> Gems: #{num}"
+        puts "=> Query: #{num} gems".light_cyan
       end
 
       # Outputs the current batch and total number of batches
       # @param num [Numeric] the current batch number.
       # @param total [Numeric] the total number of batches.
       def batch_iterator(num, total)
-        puts "=> Batch: #{num} of #{total}".magenta
+        puts "=> Batch: #{num} of #{total}".yellow
       end
 
       # Outputs the list of gems being looked up from the batch.
       # @param batch [Array] the array of gems.
       def querying(batch)
-        puts "=> Looking up: #{batch.join(", ")}"
+        puts "=> Looking up: #{batch.join(", ")}".light_yellow
       end
 
       # Returns whether the serializer is meant to be used to stream content.
@@ -49,23 +49,23 @@ module GemLookup
       def gem_details(json:)
         [].tap do |output|
           output.push "=> Gem: #{json[:name]} is at #{json[:version]}".green
-          output.push "==> Updated:    #{convert_date(date: json[:version_created_at])}"
-          output.push "==> Homepage:   #{json[:homepage_uri]}"
-          output.push repository(source_code_uri: json[:source_code_uri])
+          output.push "==> Updated:      #{convert_date(date: json[:version_created_at])}"
+          output.push "==> Homepage:     #{json[:homepage_uri]}"
+          output.push source_code(source_code_uri: json[:source_code_uri])
           output.push changelog(changelog_uri: json[:changelog_uri])
           output.push mailing_list(mailing_list_uri: json[:mailing_list_uri])
         end.join "\n"
       end
       # rubocop:enable Metrics/AbcSize
 
-      # Generates the "repository" string
+      # Generates the "Source Code" string
       # @param source_code_uri [String] the source code uri.
       # @return [String] the repository string.
-      def repository(source_code_uri:)
+      def source_code(source_code_uri:)
         if source_code_uri && !source_code_uri.empty?
-          "==> Repository: #{source_code_uri}"
+          "==> Source Code:  #{source_code_uri}"
         else
-          '==> Repository: No source code uri'
+          '==> Source Code:  Unavailable'.light_red
         end
       end
 
@@ -74,9 +74,9 @@ module GemLookup
       # @return [String] the changelog string.
       def changelog(changelog_uri:)
         if changelog_uri && !changelog_uri.empty?
-          "==> Changelog:  #{changelog_uri}".light_blue
+          "==> Changelog:    #{changelog_uri}".light_blue
         else
-          '==> Changelog:  No changelog'.red
+          '==> Changelog:    Unavailable'.light_red
         end
       end
 
@@ -85,9 +85,9 @@ module GemLookup
       # @return [String] the mailing list string.
       def mailing_list(mailing_list_uri:)
         if mailing_list_uri && !mailing_list_uri.empty?
-          "==> List:       #{mailing_list_uri}".light_blue
+          "==> Mailing List: #{mailing_list_uri}".light_cyan
         else
-          '==> List:       No mailing list'.red
+          '==> Mailing List: Unavailable'.light_red
         end
       end
 
