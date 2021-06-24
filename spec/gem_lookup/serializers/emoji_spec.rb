@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 RSpec.describe GemLookup::Serializers::Emoji do
-  describe '.display'
+  describe '.display' do
+    context 'with everything present'
+    context 'with a missing source_code_uri'
+    context 'with an empty source_code_uri'
+    context 'with a missing changelog_uri'
+    context 'with an empty changelog_ur'
+    context 'with a missing mailing_list_uri'
+    context 'with an empty mailing_list_uri'
+    context 'when the gem does not exist'
+  end
+
   describe '.gem_count' do
     subject(:gem_count) do
       capture_output { described_class.gem_count num }.chomp
