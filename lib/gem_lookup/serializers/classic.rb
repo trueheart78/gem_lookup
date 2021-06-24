@@ -2,7 +2,6 @@
 
 require 'colorize'
 require 'date'
-require 'json'
 
 module GemLookup
   module Serializers::Classic
