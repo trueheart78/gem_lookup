@@ -12,6 +12,7 @@ group :development, :test do
   gem 'pry', '~> 0.14'
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.0'
+  gem 'rspec-junklet', '~> 2.2'
   gem 'rubocop', '~> 1.7', require: false
   # SimpleCov's last version that supports Ruby 2.4
   gem 'simplecov', '0.18.5', require: false
