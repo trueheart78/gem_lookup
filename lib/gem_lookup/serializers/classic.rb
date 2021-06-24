@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'colorize'
+require 'date'
 require 'json'
 
 module GemLookup
@@ -44,20 +45,34 @@ module GemLookup
       private
 
       # rubocop:disable Metrics/AbcSize
-      # Returns the emoji-based format for the gem
+      # Returns the emoji-based format for the gem.
       # @param json [Hash] the json hash, with symbolized keys.
       def gem_details(json:)
         [].tap do |output|
           output.push "=> Gem: #{json[:name]} is at #{json[:version]}".green
           output.push "==> Updated:    #{convert_date(date: json[:version_created_at])}"
           output.push "==> Homepage:   #{json[:homepage_uri]}"
-          output.push "==> Repository: #{json[:source_code_uri]}" if json[:source_code_uri]
+          output.push repository(source_code_uri: json[:source_code_uri])
           output.push changelog(changelog_uri: json[:changelog_uri])
           output.push mailing_list(mailing_list_uri: json[:mailing_list_uri])
         end.join "\n"
       end
       # rubocop:enable Metrics/AbcSize
 
+      # Generates the "repository" string
+      # @param source_code_uri [String] the source code uri.
+      # @return [String] the repository string.
+      def repository(source_code_uri:)
+        if source_code_uri && !source_code_uri.empty?
+          "==> Repository: #{source_code_uri}"
+        else
+          '==> Repository: No source code uri'
+        end
+      end
+
+      # Generates the "changelog" string
+      # @param changelog_uri [String] the changelog uri.
+      # @return [String] the changelog string.
       def changelog(changelog_uri:)
         if changelog_uri && !changelog_uri.empty?
           "==> Changelog:  #{changelog_uri}".light_blue
@@ -66,6 +81,9 @@ module GemLookup
         end
       end
 
+      # Generates the "mailing list" string
+      # @param mailing_list_uri [String] the mailing list uri.
+      # @return [String] the mailing list string.
       def mailing_list(mailing_list_uri:)
         if mailing_list_uri && !mailing_list_uri.empty?
           "==> List:       #{mailing_list_uri}".light_blue
@@ -74,7 +92,7 @@ module GemLookup
         end
       end
 
-      # Generates the "gem not found" string
+      # Generates the "gem not found" string.
       # @param gem_name [String] the name of the gem that was not found.
       # @return [String] the gem not found string.
       def not_found(gem_name:)
