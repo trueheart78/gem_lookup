@@ -4,6 +4,8 @@ require 'colorize'
 
 module GemLookup
   class RubyGems
+    # Creates a new instance of RubyGems.
+    # @param gems [Array] an array of gems and/or flags.
     def initialize(gems)
       @gem_list = gems
       @flags = []
@@ -11,8 +13,10 @@ module GemLookup
       @continue = true
     end
 
+    # Handles the preparation and processing of the gems and/or flags.
     def find_all
-      prepare_list if valid?
+      format_list
+      process_flags if valid?
 
       return unless continue?
 
@@ -22,27 +26,32 @@ module GemLookup
 
     private
 
-    def prepare_list
-      format_list
+    # Processes the detection and handling of flags.
+    def process_flags
       detect_flags
       handle_flags
     end
 
+    # Looks for strings that start with a dash and marks them as flags, and removes them from the
+    # gem list.
     def detect_flags
       @flags = @gem_list.select {|g| g[0] == '-' }
-      @gem_list -= @flags if @flags.any?
+      @gem_list -= @flags
     end
 
+    # Lower-cases the entire gem list, and then removes duplicate entries.
     def format_list
       @gem_list.map!(&:downcase).uniq!
     end
 
+    # Creates a new GemLookup::Gems instance and calls #process.
     def process_gems
       Gems.new(@gem_list, display_mode: @display_mode).process
     rescue GemLookup::Errors::InvalidDisplayMode => e
       error message: "Invalid display mode [#{e.message}]"
     end
 
+    # Calls the #check_flags method if there are any flag entries.
     def handle_flags
       return unless @flags.any?
 
@@ -53,6 +62,8 @@ module GemLookup
       error message: "Unsupported flags [#{e.message}]"
     end
 
+    # Looks through the flags and calls GemLookup::Flags to assist, and either calls GemLookup::Help
+    # or sets the display mode, where appropriate.
     # rubocop:disable Metrics/MethodLength
     def check_flags
       if Flags.supported?(:help, flags: @flags)
@@ -71,18 +82,26 @@ module GemLookup
     end
     # rubocop:enable Metrics/MethodLength
 
+    # If the lookup process should continue.
+    # @return [Boolean] whether to continue the lookup process or not.
     def continue?
       @continue
     end
 
+    # If the gem list is valid.
+    # @return [Boolean] whether there are any entries in the gem list.
     def valid?
       @gem_list.any?
     end
 
+    # Calls the GemLookup::Help.display method and exits with an exit code of 1.
     def display_help!
       Help.display exit_code: 1
     end
 
+    # Outputs the passed in message in a standard error format, in red, and exits with an exit code
+    # of 1.
+    # @param message [String] the error message to present.
     def error(message:)
       puts "=> Error: #{message}".red
       exit 1
