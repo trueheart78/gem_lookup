@@ -89,7 +89,7 @@ RSpec.describe GemLookup::Help do
        This application's purpose is to make working with with RubyGems.org easier. 💖
        It uses the RubyGems public API to perform lookups, and parses the JSON response
        body to provide details about the most recent version, as well as links to
-       the home page, source code, and changelog.
+       the home page, source code, changelog, and mailing list.
 
        Feel free to pass in as many gems that you like, as it makes requests in
        parallel. There is a rate limit, 10/sec. If it detects the amount of gems it
