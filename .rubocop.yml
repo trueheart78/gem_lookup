@@ -1,9 +1,10 @@
+require: rubocop-rspec
+
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.7
   SuggestExtensions: false
   Exclude:
-    - 'spec/**/*'
     - 'vendor/**/*'
 
 Gemspec/RequiredRubyVersion:
@@ -31,3 +32,15 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
+RSpec/DescribeClass:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+RSpec/MultipleExpectations:
+  Max: 3
+RSpec/MultipleMemoizedHelpers:
+  Max: 6
+RSpec/NestedGroups:
+  Max: 4
