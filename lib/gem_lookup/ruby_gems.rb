@@ -11,11 +11,10 @@ module GemLookup
     end
 
     def find_all
-      validate_gem_list!
-      prepare_list
+      prepare_list if valid?
+      process_gems if valid?
 
-      validate_gem_list!
-      process_gems
+      display_help! unless valid?
     end
 
     private
@@ -58,11 +57,11 @@ module GemLookup
       end
     end
 
-    def validate_gem_list!
-      exit_early if @gem_list.empty?
+    def valid?
+      @gem_list.any?
     end
 
-    def exit_early
+    def display_help!
       Help.display exit_code: 1
     end
   end

@@ -57,8 +57,35 @@ RSpec.describe GemLookup::RubyGems do
     end
 
     context 'without any gems' do
-      context 'when no gems are passed in' do
+      let(:gems_instance) { instance_double 'GemLookup::Gems' }
+      let(:display_mode)  { :emoji }
+      let(:passed_gems)   { cli_args }
 
+      before do
+        allow(gems_instance).to receive(:process)
+        allow(GemLookup::Gems).to receive(:new).with(passed_gems, display_mode: display_mode) do
+          gems_instance
+        end
+      end
+
+      context 'when no gems are passed in' do
+        let(:cli_args) { [] }
+
+        before do
+          allow(GemLookup::Help).to receive(:display).with(exit_code: 1) { puts "Help!\nexit(1)" }
+        end
+
+        it 'calls Help.display with an exit code of 1' do
+          output = capture_output { instance.find_all }.chomp
+
+          expect(output).to start_with 'Help!'
+          expect(output).to end_with 'exit(1)'
+        end
+
+        it 'does not call Gems#process' do
+          expect(gems_instance).to_not receive(:process)
+          suppress_output { instance.find_all }
+        end
       end
 
       context 'when only flags are passed in' do
