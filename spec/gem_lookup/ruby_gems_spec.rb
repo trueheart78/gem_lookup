@@ -54,6 +54,28 @@ RSpec.describe GemLookup::RubyGems do
           instance.find_all
         end
       end
+
+      context 'with an unsupported display mode' do
+        let(:cli_args)     { %w(gem) }
+        let(:display_mode) { :unsupported }
+        let(:error_start)  { "=> Error: Invalid display mode [#{display_mode}]".red }
+
+        before do
+          allow(gems_instance).to receive(:process).and_raise(GemLookup::Errors::InvalidDisplayMode, display_mode.to_s)
+          allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
+
+          # private instance variable being changed for test case.
+          instance.instance_variable_set :@display_mode, :unsupported
+        end
+
+        it 'displays an Invalid Display Mode error with an exit code of 1' do
+          expect(gems_instance).to receive(:process).once
+          output = capture_output { instance.find_all }
+
+          expect(output).to start_with error_start
+          expect(output).to end_with 'exit(1)'
+        end
+      end
     end
 
     context 'without any gems' do
@@ -165,7 +187,7 @@ RSpec.describe GemLookup::RubyGems do
       context 'with a json flag and a gem' do
         let(:cli_args)     { flags + passed_gems }
         let(:flags)        { ["--#{display_mode}"] }
-        let(:passed_gems)  { %w(rails) }
+        let(:passed_gems)  { %w(gem) }
         let(:display_mode) { :json }
 
         before do
@@ -184,7 +206,7 @@ RSpec.describe GemLookup::RubyGems do
       context 'with a wordy flag' do
         let(:cli_args)     { flags + passed_gems }
         let(:flags)        { ["--#{display_mode}"] }
-        let(:passed_gems)  { %w(rails) }
+        let(:passed_gems)  { %w(gem) }
         let(:display_mode) { :wordy }
 
         before do
@@ -203,7 +225,7 @@ RSpec.describe GemLookup::RubyGems do
       context 'with an unsupported flag' do
         let(:cli_args)    { flags + passed_gems }
         let(:flags)       { %w(--unsupported_flag) }
-        let(:passed_gems) { %w(rails) }
+        let(:passed_gems) { %w(gem) }
         let(:error_start) { "=> Error: Unsupported flag [#{flags.first}]".red }
 
         before do
@@ -226,7 +248,7 @@ RSpec.describe GemLookup::RubyGems do
       context 'with multiple unsupported flags' do
         let(:cli_args)    { flags + passed_gems }
         let(:flags)       { %w(--unsupported_flag -uf) }
-        let(:passed_gems) { %w(rails) }
+        let(:passed_gems) { %w(gem) }
         let(:error_start) { "=> Error: Unsupported flags [#{flags.join(', ')}]".red }
 
         before do
