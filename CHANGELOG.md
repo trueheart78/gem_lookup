@@ -26,6 +26,10 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
   * You should delete any previous symlinked `gems` script.
 * Renamed repository from `gem-lookup` to `gem_lookup`.
 
+### Removed
+
+* Dropped support for Ruby 2.3 and earlier.
+
 ## [0.7.0] - 2021-06-18
 
 ### Added
@@ -34,10 +38,6 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
   [RubyGems.org][gems api].
   * Gems that are found successfully have an `"exists" : true` added to their JSON.
   * Gems that are not found have a simple structure: `{ "name" : "gem_name", "exists" : false }`
-
-### Removed
-
-* Dropped support for Ruby 2.3 and earlier.
 
 ## [0.6.5] - 2021-06-17
 
