@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::Serializers::Wordy do
   describe '.display' do
     subject(:display) do
@@ -192,8 +193,8 @@ RSpec.describe GemLookup::Serializers::Wordy do
       capture_output { described_class.querying batch }.chomp
     end
 
-    let(:batch)  { [ junk, junk, junk, junk ] }
-    let(:output) { "=> Looking up: #{batch.join(', ')}".light_yellow }
+    let(:batch)  { [junk, junk, junk, junk] }
+    let(:output) { "=> Looking up: #{batch.join(", ")}".light_yellow }
 
     it 'outputs Looking Up with the gems in the current batch (light yellow)' do
       expect(querying).to eq output
@@ -206,3 +207,4 @@ RSpec.describe GemLookup::Serializers::Wordy do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

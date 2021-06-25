@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::Serializers::Emoji do
   describe '.display' do
     subject(:display) do
@@ -192,8 +193,8 @@ RSpec.describe GemLookup::Serializers::Emoji do
       capture_output { described_class.querying batch }.chomp
     end
 
-    let(:batch)  { [ junk, junk, junk, junk ] }
-    let(:output) { "=> 🔎 #{batch.join(', ')}".light_yellow }
+    let(:batch)  { [junk, junk, junk, junk] }
+    let(:output) { "=> 🔎 #{batch.join(", ")}".light_yellow }
 
     it 'outputs a magnifying glass emoji with the gems in the current batch (light yellow)' do
       expect(querying).to eq output
@@ -206,3 +207,4 @@ RSpec.describe GemLookup::Serializers::Emoji do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

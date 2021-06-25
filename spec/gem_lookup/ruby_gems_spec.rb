@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::RubyGems do
   subject(:instance) { described_class.new cli_args }
 
@@ -36,7 +37,7 @@ RSpec.describe GemLookup::RubyGems do
       end
 
       context 'with duplicate gems' do
-        let(:cli_args)    { %w(gem1 gem2 gem3 gem1) }
+        let(:cli_args)    { %w[gem1 gem2 gem3 gem1] }
         let(:passed_gems) { cli_args.uniq }
 
         it 'calls the Gems#process with unique gems' do
@@ -46,7 +47,7 @@ RSpec.describe GemLookup::RubyGems do
       end
 
       context 'with varying-cased gems that include duplicates' do
-        let(:cli_args)    { %w(Gem1 GEM_TWO gem3 gem1) }
+        let(:cli_args)    { %w[Gem1 GEM_TWO gem3 gem1] }
         let(:passed_gems) { cli_args.map(&:downcase).uniq }
 
         it 'calls the Gems#process with lower-cased, unique gems' do
@@ -56,17 +57,21 @@ RSpec.describe GemLookup::RubyGems do
       end
 
       context 'with an unsupported display mode' do
-        let(:cli_args)     { %w(gem) }
+        let(:cli_args)     { %w[gem] }
         let(:display_mode) { :unsupported }
         let(:error_start)  { "=> Error: Invalid display mode [#{display_mode}]".red }
 
+        # rubocop:disable RSpec/SubjectStub
         before do
-          allow(gems_instance).to receive(:process).and_raise(GemLookup::Errors::InvalidDisplayMode, display_mode.to_s)
+          allow(gems_instance).to receive(:process).and_raise(
+            GemLookup::Errors::InvalidDisplayMode, display_mode.to_s
+          )
           allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
 
           # private instance variable being changed for test case.
           instance.instance_variable_set :@display_mode, :unsupported
         end
+        # rubocop:enable RSpec/SubjectStub
 
         it 'displays an Invalid Display Mode error with an exit code of 1' do
           expect(gems_instance).to receive(:process).once
@@ -105,7 +110,7 @@ RSpec.describe GemLookup::RubyGems do
         end
 
         it 'does not call Gems#process' do
-          expect(gems_instance).to_not receive(:process)
+          expect(gems_instance).not_to receive(:process)
           suppress_output { instance.find_all }
         end
       end
@@ -115,7 +120,7 @@ RSpec.describe GemLookup::RubyGems do
 
         before do
           allow(GemLookup::Help).to receive(:display).with(exit_code: 1) { puts "Help!\nexit(1)" }
-          allow(GemLookup::Flags).to receive(:unsupported) { false }
+          allow(GemLookup::Flags).to receive(:unsupported).and_return(false)
         end
 
         it 'calls Help.display with an exit code of 1' do
@@ -126,7 +131,7 @@ RSpec.describe GemLookup::RubyGems do
         end
 
         it 'does not call Gems#process' do
-          expect(gems_instance).to_not receive(:process)
+          expect(gems_instance).not_to receive(:process)
           suppress_output { instance.find_all }
         end
       end
@@ -145,13 +150,15 @@ RSpec.describe GemLookup::RubyGems do
       end
 
       context 'with a help flag' do
-        let(:cli_args) { %w(--help) }
+        let(:cli_args) { %w[--help] }
 
         before do
           %i[json version wordy].each do |type|
-            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: cli_args) { false }
+            allow(GemLookup::Flags).to receive(:supported?).with(type,
+                                                                 flags: cli_args).and_return(false)
           end
-          allow(GemLookup::Flags).to receive(:supported?).with(:help, flags: cli_args)  { true }
+          allow(GemLookup::Flags).to receive(:supported?).with(:help,
+                                                               flags: cli_args).and_return(true)
           allow(GemLookup::Help).to receive(:display).with(exit_code: 0) { puts "Help!\nexit(0)" }
         end
 
@@ -165,14 +172,18 @@ RSpec.describe GemLookup::RubyGems do
       end
 
       context 'with a version flag' do
-        let(:cli_args) { %w(--version) }
+        let(:cli_args) { %w[--version] }
 
         before do
           %i[help json wordy].each do |type|
-            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: cli_args)   { false }
+            allow(GemLookup::Flags).to receive(:supported?).with(type,
+                                                                 flags: cli_args).and_return(false)
           end
-          allow(GemLookup::Flags).to receive(:supported?).with(:version, flags: cli_args) { true }
-          allow(GemLookup::Help).to receive(:version).with(exit_code: 0) { puts "Version!\nexit(0)" }
+          allow(GemLookup::Flags).to receive(:supported?).with(:version,
+                                                               flags: cli_args).and_return(true)
+          allow(GemLookup::Help).to receive(:version).with(exit_code: 0) {
+                                      puts "Version!\nexit(0)"
+                                    }
         end
 
         it 'calls Help.display with an exit code of 1' do
@@ -187,14 +198,15 @@ RSpec.describe GemLookup::RubyGems do
       context 'with a json flag and a gem' do
         let(:cli_args)     { flags + passed_gems }
         let(:flags)        { ["--#{display_mode}"] }
-        let(:passed_gems)  { %w(gem) }
+        let(:passed_gems)  { %w[gem] }
         let(:display_mode) { :json }
 
         before do
           %i[help version wordy].each do |type|
-            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+            allow(GemLookup::Flags).to receive(:supported?).with(type,
+                                                                 flags: flags).and_return(false)
           end
-          allow(GemLookup::Flags).to receive(:supported?).with(:json, flags: flags)    { true }
+          allow(GemLookup::Flags).to receive(:supported?).with(:json, flags: flags).and_return(true)
         end
 
         it 'calls Gems#process with an display mode of :json' do
@@ -206,14 +218,16 @@ RSpec.describe GemLookup::RubyGems do
       context 'with a wordy flag' do
         let(:cli_args)     { flags + passed_gems }
         let(:flags)        { ["--#{display_mode}"] }
-        let(:passed_gems)  { %w(gem) }
+        let(:passed_gems)  { %w[gem] }
         let(:display_mode) { :wordy }
 
         before do
           %i[help json version].each do |type|
-            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+            allow(GemLookup::Flags).to receive(:supported?).with(type,
+                                                                 flags: flags).and_return(false)
           end
-          allow(GemLookup::Flags).to receive(:supported?).with(:wordy, flags: flags)    { true }
+          allow(GemLookup::Flags).to receive(:supported?).with(:wordy,
+                                                               flags: flags).and_return(true)
         end
 
         it 'calls Gems#process with an display mode of :wordy' do
@@ -224,18 +238,21 @@ RSpec.describe GemLookup::RubyGems do
 
       context 'with an unsupported flag' do
         let(:cli_args)    { flags + passed_gems }
-        let(:flags)       { %w(--unsupported_flag) }
-        let(:passed_gems) { %w(gem) }
+        let(:flags)       { %w[--unsupported_flag] }
+        let(:passed_gems) { %w[gem] }
         let(:error_start) { "=> Error: Unsupported flag [#{flags.first}]".red }
 
+        # rubocop:disable Layout/LineLength, RSpec/SubjectStub
         before do
           %i[help json wordy version].each do |type|
-            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+            allow(GemLookup::Flags).to receive(:supported?).with(type,
+                                                                 flags: flags).and_return(false)
           end
           allow(GemLookup::Flags).to receive(:unsupported).with(flags: flags)
-                                     .and_raise(GemLookup::Errors::UnsupportedFlag, flags.first)
+                                                          .and_raise(GemLookup::Errors::UnsupportedFlag, flags.first)
           allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
         end
+        # rubocop:enable Layout/LineLength, RSpec/SubjectStub
 
         it 'displays an Unsupported Flag error with an exit code of 1' do
           output = capture_output { instance.find_all }
@@ -247,18 +264,21 @@ RSpec.describe GemLookup::RubyGems do
 
       context 'with multiple unsupported flags' do
         let(:cli_args)    { flags + passed_gems }
-        let(:flags)       { %w(--unsupported_flag -uf) }
-        let(:passed_gems) { %w(gem) }
-        let(:error_start) { "=> Error: Unsupported flags [#{flags.join(', ')}]".red }
+        let(:flags)       { %w[--unsupported_flag -uf] }
+        let(:passed_gems) { %w[gem] }
+        let(:error_start) { "=> Error: Unsupported flags [#{flags.join(", ")}]".red }
 
+        # rubocop:disable Layout/LineLength, RSpec/SubjectStub
         before do
           %i[help json wordy version].each do |type|
-            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+            allow(GemLookup::Flags).to receive(:supported?).with(type,
+                                                                 flags: flags).and_return(false)
           end
           allow(GemLookup::Flags).to receive(:unsupported).with(flags: flags)
-                                     .and_raise(GemLookup::Errors::UnsupportedFlags, flags.join(', '))
+                                                          .and_raise(GemLookup::Errors::UnsupportedFlags, flags.join(', '))
           allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
         end
+        # rubocop:enable Layout/LineLength, RSpec/SubjectStub
 
         it 'displays an Unsupported Flags error with an exit code of 1' do
           output = capture_output { instance.find_all }
@@ -270,3 +290,4 @@ RSpec.describe GemLookup::RubyGems do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

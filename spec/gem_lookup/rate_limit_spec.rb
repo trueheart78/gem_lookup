@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::RateLimit do
   it 'has a rate limit' do
     expect(described_class::MAX_REQUESTS_PER_INTERVAL).to eq 10
@@ -38,3 +39,4 @@ RSpec.describe GemLookup::RateLimit do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

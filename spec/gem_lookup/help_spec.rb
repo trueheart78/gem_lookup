@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::Help do
   it 'has output spacing' do
     expect(described_class::OUTPUT_OPTION_SPACING).to eq 21
@@ -36,8 +37,8 @@ RSpec.describe GemLookup::Help do
       end
 
       it 'does not exit' do
-        expect(content).to_not end_with 'exit(0)'
-        expect(content).to_not end_with 'exit(1)'
+        expect(content).not_to end_with 'exit(0)'
+        expect(content).not_to end_with 'exit(1)'
       end
     end
 
@@ -80,29 +81,29 @@ RSpec.describe GemLookup::Help do
     let(:expected_documentation) do
       <<~DOCUMENTATION
 
-       Usage: gems [OPTIONS] GEMS
+        Usage: gems [OPTIONS] GEMS
 
-         Retrieves gem-related information from https://rubygems.org
+          Retrieves gem-related information from https://rubygems.org
 
-       Example: gems -j rails rspec
+        Example: gems -j rails rspec
 
-       This application's purpose is to make working with with RubyGems.org easier. 💖
-       It uses the RubyGems public API to perform lookups, and parses the JSON response
-       body to provide details about the most recent version, as well as links to
-       the home page, source code, changelog, and mailing list.
+        This application's purpose is to make working with with RubyGems.org easier. 💖
+        It uses the RubyGems public API to perform lookups, and parses the JSON response
+        body to provide details about the most recent version, as well as links to
+        the home page, source code, changelog, and mailing list.
 
-       Feel free to pass in as many gems that you like, as it makes requests in
-       parallel. There is a rate limit, 10/sec. If it detects the amount of gems it
-       has been passed is more than the rate limit, the application will run in Batch
-       mode, and introduce a one second delay between batch lookups.
+        Feel free to pass in as many gems that you like, as it makes requests in
+        parallel. There is a rate limit, 10/sec. If it detects the amount of gems it
+        has been passed is more than the rate limit, the application will run in Batch
+        mode, and introduce a one second delay between batch lookups.
 
-       Output Options:
-         -h --help            Display the help screen.
-         -j --json            Bulk the output results as raw JSON.
-         -v --version         Display version information.
-         -w --wordy           Stream the output using only words.
+        Output Options:
+          -h --help            Display the help screen.
+          -j --json            Bulk the output results as raw JSON.
+          -v --version         Display version information.
+          -w --wordy           Stream the output using only words.
 
-       Rate limit documentation: https://guides.rubygems.org/rubygems-org-rate-limits/
+        Rate limit documentation: https://guides.rubygems.org/rubygems-org-rate-limits/
       DOCUMENTATION
     end
 
@@ -111,3 +112,4 @@ RSpec.describe GemLookup::Help do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

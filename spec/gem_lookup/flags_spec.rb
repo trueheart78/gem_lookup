@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::Flags do
   describe '.supported' do
     subject(:sorted_keys) { described_class.supported.keys.sort }
@@ -149,7 +150,7 @@ RSpec.describe GemLookup::Flags do
       let(:flags) { ['-x'] }
 
       it 'raises an error' do
-        expect{ unsupported }.to raise_error GemLookup::Errors::UnsupportedFlag
+        expect { unsupported }.to raise_error GemLookup::Errors::UnsupportedFlag
       end
     end
 
@@ -157,7 +158,7 @@ RSpec.describe GemLookup::Flags do
       let(:flags) { ['-x', '--yes', '-b'] }
 
       it 'raises an error' do
-        expect{ unsupported }.to raise_error GemLookup::Errors::UnsupportedFlags
+        expect { unsupported }.to raise_error GemLookup::Errors::UnsupportedFlags
       end
     end
 
@@ -165,7 +166,7 @@ RSpec.describe GemLookup::Flags do
       let(:flags) { ['-x', '', '--yes', nil,  '-b'] }
 
       it 'raises an error' do
-        expect{ unsupported }.to raise_error GemLookup::Errors::UnsupportedFlags
+        expect { unsupported }.to raise_error GemLookup::Errors::UnsupportedFlags
       end
     end
 
@@ -177,8 +178,9 @@ RSpec.describe GemLookup::Flags do
       end
 
       it 'does not raise an error' do
-        expect{ unsupported }.to_not raise_error
+        expect { unsupported }.not_to raise_error
       end
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

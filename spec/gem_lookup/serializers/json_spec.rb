@@ -7,13 +7,13 @@ RSpec.describe GemLookup::Serializers::Json do
     it 'prints out valid JSON' do
       json = capture_output { described_class.display json: junk }
 
-      expect { JSON.parse json }.to_not raise_error
+      expect { JSON.parse json }.not_to raise_error
     end
   end
 
   describe '.streaming?' do
     it 'returns false' do
-      expect(described_class).to_not be_streaming
+      expect(described_class).not_to be_streaming
     end
   end
 end
