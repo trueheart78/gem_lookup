@@ -14,6 +14,8 @@ group :development, :test do
   gem 'rspec', '~> 3.0'
   gem 'rspec-junklet', '~> 2.2'
   gem 'rubocop', '~> 1.7', require: false
+  # RuboCop RSpec's last version that supports Ruby 2.4
+  gem 'rubocop-rspec', '2.2.0', require: false
   # SimpleCov's last version that supports Ruby 2.4
   gem 'simplecov', '0.18.5', require: false
 end
