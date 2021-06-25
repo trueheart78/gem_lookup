@@ -224,6 +224,26 @@ RSpec.describe GemLookup::RubyGems do
       end
 
       context 'with multiple unsupported flags' do
+        let(:cli_args)    { flags + passed_gems }
+        let(:flags)       { %w(--unsupported_flag -uf) }
+        let(:passed_gems) { %w(rails) }
+        let(:error_start) { "=> Error: Unsupported flags [#{flags.join(', ')}]".red }
+
+        before do
+          %i[help json wordy version].each do |type|
+            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+          end
+          allow(GemLookup::Flags).to receive(:unsupported).with(flags: flags)
+                                     .and_raise(GemLookup::Errors::UnsupportedFlags.new, flags.join(', '))
+          allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
+        end
+
+        it 'displays an Unsupported Flags error with an exit code of 1' do
+          output = capture_output { instance.find_all }
+
+          expect(output).to start_with error_start
+          expect(output).to end_with 'exit(1)'
+        end
       end
     end
   end
