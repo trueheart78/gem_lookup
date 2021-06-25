@@ -211,7 +211,7 @@ RSpec.describe GemLookup::RubyGems do
             allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
           end
           allow(GemLookup::Flags).to receive(:unsupported).with(flags: flags)
-                                     .and_raise(GemLookup::Errors::UnsupportedFlag.new, flags.first)
+                                     .and_raise(GemLookup::Errors::UnsupportedFlag, flags.first)
           allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
         end
 
@@ -234,7 +234,7 @@ RSpec.describe GemLookup::RubyGems do
             allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
           end
           allow(GemLookup::Flags).to receive(:unsupported).with(flags: flags)
-                                     .and_raise(GemLookup::Errors::UnsupportedFlags.new, flags.join(', '))
+                                     .and_raise(GemLookup::Errors::UnsupportedFlags, flags.join(', '))
           allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
         end
 
