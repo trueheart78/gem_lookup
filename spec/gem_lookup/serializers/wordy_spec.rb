@@ -14,7 +14,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Updated:      May 5, 2021
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
         OUTPUT
       end
@@ -35,7 +35,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Updated:      May 5, 2021
           ==> Homepage:     https://rubyonrails.org
           #{"==> Source Code:  Unavailable".light_red}
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
         OUTPUT
       end
@@ -56,7 +56,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Updated:      May 5, 2021
           ==> Homepage:     https://rubyonrails.org
           #{"==> Source Code:  Unavailable".light_red}
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
         OUTPUT
       end
@@ -119,7 +119,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Updated:      May 5, 2021
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> Mailing List: Unavailable".light_red}
         OUTPUT
       end
@@ -140,7 +140,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Updated:      May 5, 2021
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> Mailing List: Unavailable".light_red}
         OUTPUT
       end

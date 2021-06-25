@@ -74,7 +74,7 @@ module GemLookup
       # @return [String] the changelog string.
       def changelog(changelog_uri:)
         if changelog_uri && !changelog_uri.empty?
-          "==> 📑 #{changelog_uri}".light_blue
+          "==> 📑 #{changelog_uri}".light_cyan
         else
           '==> 📑 Unavailable'.light_red
         end

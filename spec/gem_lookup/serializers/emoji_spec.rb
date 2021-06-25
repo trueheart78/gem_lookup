@@ -14,7 +14,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 📅 May 5, 2021
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
         OUTPUT
       end
@@ -35,7 +35,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 📅 May 5, 2021
           ==> 🏠 https://rubyonrails.org
           #{"==> 🔗 Unavailable".light_red}
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
         OUTPUT
       end
@@ -56,7 +56,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 📅 May 5, 2021
           ==> 🏠 https://rubyonrails.org
           #{"==> 🔗 Unavailable".light_red}
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
         OUTPUT
       end
@@ -119,7 +119,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 📅 May 5, 2021
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> 💌 Unavailable".light_red}
         OUTPUT
       end
@@ -140,7 +140,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 📅 May 5, 2021
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
           #{"==> 💌 Unavailable".light_red}
         OUTPUT
       end
