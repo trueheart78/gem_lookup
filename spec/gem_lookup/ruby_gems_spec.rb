@@ -6,7 +6,7 @@ RSpec.describe GemLookup::RubyGems do
   let(:cli_args) { [] }
 
   describe '.initialize' do
-    let(:expected_vars) { %i[@gem_list @flags @display_mode] }
+    let(:expected_vars) { %i[@gem_list @flags @display_mode @continue] }
 
     it 'has the defined instance variables' do
       expect(instance.instance_variables).to eq expected_vars
@@ -88,12 +88,12 @@ RSpec.describe GemLookup::RubyGems do
         end
       end
 
-      context 'when only flags are passed in' do
+      context 'when only supported flags are passed in' do
         let(:cli_args) { ["-#{junk}", "-#{junk}", "-#{junk}"] }
 
         before do
           allow(GemLookup::Help).to receive(:display).with(exit_code: 1) { puts "Help!\nexit(1)" }
-          allow(GemLookup::Flags).to receive(:unsupported)
+          allow(GemLookup::Flags).to receive(:unsupported) { false }
         end
 
         it 'calls Help.display with an exit code of 1' do
@@ -111,26 +111,99 @@ RSpec.describe GemLookup::RubyGems do
     end
 
     context 'with flags' do
+      let(:gems_instance) { instance_double 'GemLookup::Gems' }
+      let(:display_mode)  { :emoji }
+      let(:passed_gems)   { cli_args }
+
+      before do
+        allow(gems_instance).to receive(:process)
+        allow(GemLookup::Gems).to receive(:new).with(passed_gems, display_mode: display_mode) do
+          gems_instance
+        end
+      end
+
       context 'with a help flag' do
-        # captures output and verifies the help method was called
+        let(:cli_args) { %w(--help) }
+
+        before do
+          %i[json version wordy].each do |type|
+            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: cli_args) { false }
+          end
+          allow(GemLookup::Flags).to receive(:supported?).with(:help, flags: cli_args)  { true }
+          allow(GemLookup::Help).to receive(:display).with(exit_code: 0) { puts "Help!\nexit(0)" }
+        end
+
+        it 'calls Help.display with an exit code of 1' do
+          expect(GemLookup::Help).to receive(:display).with(exit_code: 0)
+          output = capture_output { instance.find_all }.chomp
+
+          expect(output).to start_with 'Help!'
+          expect(output).to end_with 'exit(0)'
+        end
       end
 
       context 'with a version flag' do
-        # captures output and verifies the help method was called
+        let(:cli_args) { %w(--version) }
+
+        before do
+          %i[help json wordy].each do |type|
+            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: cli_args)   { false }
+          end
+          allow(GemLookup::Flags).to receive(:supported?).with(:version, flags: cli_args) { true }
+          allow(GemLookup::Help).to receive(:version).with(exit_code: 0) { puts "Version!\nexit(0)" }
+        end
+
+        it 'calls Help.display with an exit code of 1' do
+          expect(GemLookup::Help).to receive(:version).with(exit_code: 0)
+          output = capture_output { instance.find_all }.chomp
+
+          expect(output).to start_with 'Version!'
+          expect(output).to end_with 'exit(0)'
+        end
       end
 
-      context 'with a json flag' do
+      context 'with a json flag and a gem' do
+        let(:cli_args)     { flags + passed_gems }
+        let(:flags)        { ["--#{display_mode}"] }
+        let(:passed_gems)  { %w(rails) }
+        let(:display_mode) { :json }
 
+        before do
+          %i[help version wordy].each do |type|
+            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+          end
+          allow(GemLookup::Flags).to receive(:supported?).with(:json, flags: flags)    { true }
+        end
+
+        it 'calls Gems#process with an display mode of :json' do
+          expect(gems_instance).to receive(:process).once
+          instance.find_all
+        end
       end
 
       context 'with a wordy flag' do
+        let(:cli_args)     { flags + passed_gems }
+        let(:flags)        { ["--#{display_mode}"] }
+        let(:passed_gems)  { %w(rails) }
+        let(:display_mode) { :wordy }
 
+        before do
+          %i[help json version].each do |type|
+            allow(GemLookup::Flags).to receive(:supported?).with(type, flags: flags)   { false }
+          end
+          allow(GemLookup::Flags).to receive(:supported?).with(:wordy, flags: flags)    { true }
+        end
+
+        it 'calls Gems#process with an display mode of :wordy' do
+          expect(gems_instance).to receive(:process).once
+          instance.find_all
+        end
       end
 
       context 'with an unsupported flag' do
-        before do
+      end
 
-        end
+      context 'with multiple unsupported flags' do
       end
     end
   end
