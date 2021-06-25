@@ -8,14 +8,20 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 
 ### Added
 
-* CI support for multiple Ruby versions: 2.4, 2.5, 2.6, 2.7, 3.0, and head.
+* CI support for multiple Ruby versions:
+  * MRI Ruby 2.4
+  * MRI Ruby 2.5
+  * MRI Ruby 2.6
+  * MRI Ruby 2.7
+  * MRI Ruby 3.0
+  * MRY Ruby head
 * [Zeitwerk][zeitwerk] autoloader gem.
 * Support for the `ENV['APP_ENV']` variable.
   * Defaults to `development`.
   * `exe/gems` explicitly sets it to `production`.
   * `spec/spec_helper.rb` explicitly sets it to `test`.
 * New **Wordy** output mode.
-  * No emojis, only words :frowning_face:
+  * No emojis, only words. :frowning_face:
   * Enabled by passing `--wordy` or `-w` to the executable.
 
 ### Changed
