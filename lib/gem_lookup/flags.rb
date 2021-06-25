@@ -38,11 +38,11 @@ module GemLookup
       # @param flags [Array] the list of unsupported flags.
       def unsupported(flags:)
         flags = flags.compact.reject(&:empty?)
-        return false if flags.empty?
+        return false unless flags.any?
 
-        flag_word = flags.size > 1 ? 'flags' : 'flag'
-        puts "=> Error: Unsupported #{flag_word} [#{flags.join(", ")}]".red
-        exit 1
+        raise Errors::UnsupportedFlag, flags.first if flags.size == 1
+
+        raise Errors::UnsupportedFlags, flags.join(', ')
       end
     end
   end

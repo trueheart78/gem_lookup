@@ -147,58 +147,25 @@ RSpec.describe GemLookup::Flags do
 
     context 'with a single flag' do
       let(:flags) { ['-x'] }
-      let(:expected_output) do
-        '=> Error: Unsupported flag [-x]'.red
-      end
 
-      it 'outputs the single flag' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to start_with expected_output
-      end
-
-      it 'exits with an exit code of 1' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to end_with 'exit(1)'
+      it 'raises an error' do
+        expect{ unsupported }.to raise_error GemLookup::Errors::UnsupportedFlag
       end
     end
 
     context 'with multiple flags' do
       let(:flags) { ['-x', '--yes', '-b'] }
-      let(:expected_output) do
-        '=> Error: Unsupported flags [-x, --yes, -b]'.red
-      end
 
-      it 'outputs the flags' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to start_with expected_output
-      end
-
-      it 'exits with an exit code of 1' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to end_with 'exit(1)'
+      it 'raises an error' do
+        expect{ unsupported }.to raise_error GemLookup::Errors::UnsupportedFlags
       end
     end
 
     context 'with multiple flags, some empty' do
       let(:flags) { ['-x', '', '--yes', nil,  '-b'] }
-      let(:expected_output) do
-        '=> Error: Unsupported flags [-x, --yes, -b]'.red
-      end
 
-      it 'outputs the non-empty flags' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to start_with expected_output
-      end
-
-      it 'exits with an exit code of 1' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to end_with 'exit(1)'
+      it 'raises an error' do
+        expect{ unsupported }.to raise_error GemLookup::Errors::UnsupportedFlags
       end
     end
 
@@ -209,10 +176,8 @@ RSpec.describe GemLookup::Flags do
         expect(unsupported).to eq false
       end
 
-      it 'does not exit' do
-        output = capture_output { unsupported }.chomp
-
-        expect(output).to_not end_with 'exit(1)'
+      it 'does not raise an error' do
+        expect{ unsupported }.to_not raise_error
       end
     end
   end
