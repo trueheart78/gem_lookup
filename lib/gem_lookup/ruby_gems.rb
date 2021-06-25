@@ -40,15 +40,21 @@ module GemLookup
     def process_gems
       Gems.new(@gem_list, display_mode: @display_mode).process
     rescue GemLookup::Errors::InvalidDisplayMode => e
-      puts "=> Error: Invalid display mode [#{e.message}]".red
-      exit 1
+      error message: "Invalid display mode [#{e.message}]"
     end
 
-    # TODO: refactor this
-    # rubocop:disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize
     def handle_flags
       return unless @flags.any?
 
+      check_flags
+    rescue GemLookup::Errors::UnsupportedFlag => e
+      error message: "Unsupported flag [#{e.message}]"
+    rescue GemLookup::Errors::UnsupportedFlags => e
+      error message: "Unsupported flags [#{e.message}]"
+    end
+
+    # rubocop:disable Metrics/MethodLength
+    def check_flags
       if Flags.supported?(:help, flags: @flags)
         Help.display exit_code: 0
         @continue = false
@@ -62,14 +68,8 @@ module GemLookup
       elsif Flags.unsupported(flags: @flags)
         @continue = false
       end
-    rescue GemLookup::Errors::UnsupportedFlag => e
-      puts "=> Error: Unsupported flag [#{e.message}]".red
-      exit 1
-    rescue GemLookup::Errors::UnsupportedFlags => e
-      puts "=> Error: Unsupported flags [#{e.message}]".red
-      exit 1
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def continue?
       @continue
@@ -81,6 +81,11 @@ module GemLookup
 
     def display_help!
       Help.display exit_code: 1
+    end
+
+    def error(message:)
+      puts "=> Error: #{message}".red
+      exit 1
     end
   end
 end
