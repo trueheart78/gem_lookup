@@ -238,6 +238,16 @@ $ gems non-existent rails
 ==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
 ```
 
+#### Timing Out
+
+If a gem lookup times out, the output will let you know.
+
+```sh
+$ gems rails
+=> 🔎 Looking up: rails
+=> 💎 rails lookup timed out
+```
+
 ## Rate Limit
 
 Please be aware there is a [rate limit][rate limit] to be mindful of.
