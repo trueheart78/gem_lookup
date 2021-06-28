@@ -9,6 +9,9 @@ RSpec.configure do |config|
   include Support::Coverage
   include Support::Files
   include Support::Output
+  include WebMock::API
+
+  WebMock.enable!
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
