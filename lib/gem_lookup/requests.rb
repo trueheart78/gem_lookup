@@ -32,6 +32,8 @@ module GemLookup
         request.on_complete do |response|
           if response.success?
             handle_successful_response json: JSON.parse(response.body, symbolize_names: true)
+          elsif response.timed_out?
+            handle_timed_out_response gem_name: gem_name
           else
             handle_failed_response gem_name: gem_name
           end
@@ -41,11 +43,17 @@ module GemLookup
 
     def handle_successful_response(json:)
       json[:exists] = true
+      json[:timeout] = false
+      @json[:gems].push json
+    end
+
+    def handle_timed_out_response(gem_name:)
+      json = { name: gem_name, exists: false, timeout: true }
       @json[:gems].push json
     end
 
     def handle_failed_response(gem_name:)
-      json = { name: gem_name, exists: false }
+      json = { name: gem_name, exists: false, timeout: false }
       @json[:gems].push json
     end
 

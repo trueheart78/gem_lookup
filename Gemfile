@@ -18,4 +18,6 @@ group :development, :test do
   gem 'rubocop-rspec', '2.2.0', require: false
   # SimpleCov's last version that supports Ruby 2.4
   gem 'simplecov', '0.18.5', require: false
+  # WebMock's last version that supports Ruby 2.4
+  gem 'webmock', '3.8.3'
 end
