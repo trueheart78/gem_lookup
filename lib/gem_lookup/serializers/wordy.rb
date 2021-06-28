@@ -9,7 +9,9 @@ module GemLookup
       # Outputs the emoji-based format for the gem
       # @param json [Hash] the json hash, with symbolized keys.
       def display(json:)
-        if json[:exists]
+        if json[:timeout]
+          puts timed_out(gem_name: json[:name])
+        elsif json[:exists]
           puts gem_details(json: json)
         else
           puts not_found(gem_name: json[:name])
@@ -89,6 +91,13 @@ module GemLookup
         else
           '==> Mailing List: Unavailable'.light_red
         end
+      end
+
+      # Generates the "gem lookup timed out" string
+      # @param gem_name [String] the name of the gem that the lookup timed out on.
+      # @return [String] the gem lookup timed out string.
+      def timed_out(gem_name:)
+        "=> Gem: #{gem_name} lookup timed out".red
       end
 
       # Generates the "gem not found" string.

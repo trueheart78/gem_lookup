@@ -151,6 +151,18 @@ RSpec.describe GemLookup::Serializers::Wordy do
       end
     end
 
+    context 'when the gem lookup timed out' do
+      let(:json) do
+        serializer_json(:not_found)[:gems].first.tap {|g| g[:timeout] = true }
+      end
+
+      let(:output) { '=> Gem: not_found lookup timed out'.red }
+
+      it 'outputs the gem lookup timed out (red)' do
+        expect(display).to eq output
+      end
+    end
+
     context 'when the gem does not exist' do
       let(:json)   { serializer_json(:not_found)[:gems].first }
       let(:output) { '=> Gem: not_found not found'.red }
