@@ -30,7 +30,7 @@ module GemLookup
       url = api_url gem_name: gem_name
       Typhoeus::Request.new(url).tap do |request|
         request.on_complete do |response|
-          if response.code == 200
+          if response.success?
             handle_successful_response json: JSON.parse(response.body, symbolize_names: true)
           else
             handle_failed_response gem_name: gem_name
