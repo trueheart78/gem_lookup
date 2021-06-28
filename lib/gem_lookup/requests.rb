@@ -7,7 +7,7 @@ module GemLookup
   class Requests
     def initialize(batch:, json:)
       @batch = batch
-      @json = json
+      @json = json || { gems: [] }
     end
 
     def process
