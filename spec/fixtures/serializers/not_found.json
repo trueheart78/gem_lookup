@@ -2,7 +2,8 @@
   "gems": [
     {
       "name": "not_found",
-      "exists": false
+      "exists": false,
+      "timeout": false
     }
   ]
 }
