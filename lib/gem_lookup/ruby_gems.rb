@@ -76,8 +76,8 @@ module GemLookup
         @display_mode = :wordy
       elsif Flags.supported?(:json, flags: @flags)
         @display_mode = :json
-      elsif Flags.unsupported(flags: @flags)
-        @continue = false
+      else
+        Flags.unsupported(flags: @flags)
       end
     end
     # rubocop:enable Metrics/MethodLength
