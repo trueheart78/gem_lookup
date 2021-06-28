@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
   * Enabled by passing `--wordy` or `-w` to the executable.
 * Support for request timeouts.
   * JSON responses now have an extra `"timeout"` boolean key.
-* Requests now have an "Accept Encoding" => "gzip" on header.
+* Requests now have an `"Accept Encoding" => "gzip"` header.
 * Requests now limit timeouts to 10 seconds.
 
 ### Changed
