@@ -2,17 +2,19 @@
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe GemLookup::RateLimit do
-  it 'has a rate limit' do
-    expect(described_class::MAX_REQUESTS_PER_INTERVAL).to eq 10
-  end
+  describe 'constants' do
+    it 'has a rate limit' do
+      expect(described_class::MAX_REQUESTS_PER_INTERVAL).to eq 10
+    end
 
-  it 'has a frequency interval, in seconds' do
-    expect(described_class::FREQUENCY_INTERVAL_IN_SECONDS).to eq 1
-  end
+    it 'has a frequency interval, in seconds' do
+      expect(described_class::FREQUENCY_INTERVAL_IN_SECONDS).to eq 1
+    end
 
-  it 'has a documentation url' do
-    url = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
-    expect(described_class::RATE_LIMIT_DOCUMENTATION_URL).to eq url
+    it 'has a documentation url' do
+      url = 'https://guides.rubygems.org/rubygems-org-rate-limits/'
+      expect(described_class::RATE_LIMIT_DOCUMENTATION_URL).to eq url
+    end
   end
 
   describe '.number' do
