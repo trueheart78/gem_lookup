@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][changelog], and this project adheres to 
@@ -23,6 +24,10 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 * New **Wordy** output mode.
   * No emojis, only words. :frowning_face:
   * Enabled by passing `--wordy` or `-w` to the executable.
+* Support for request timeouts.
+  * JSON responses now have an extra `"timeout"` boolean key.
+* Requests now have an "Accept Encoding" => "gzip" on header.
+* Requests now limit timeouts to 10 seconds.
 
 ### Changed
 
@@ -31,6 +36,7 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 * Includes an executable, `gems`.
   * You should delete any previous symlinked `gems` script.
 * Renamed repository from `gem-lookup` to `gem_lookup`.
+  * Gems that are found successfully have an `"exists" : true` added to their JSON.
 
 ### Removed
 
