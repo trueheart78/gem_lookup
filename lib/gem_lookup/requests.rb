@@ -5,7 +5,10 @@ require 'json'
 
 module GemLookup
   class Requests
-    def initialize(batch:, json:)
+    # @return [Numeric] the seconds to wait before a response is considered timed out.
+    TIMEOUT_THRESHOLD = 10
+
+    def initialize(batch:, json: nil)
       @batch = batch
       @json = json || { gems: [] }
     end
@@ -26,9 +29,10 @@ module GemLookup
       end
     end
 
+    # rubocop:disable Layout/LineLength
     def build_request(gem_name:)
       url = api_url gem_name: gem_name
-      Typhoeus::Request.new(url).tap do |request|
+      Typhoeus::Request.new(url, accept_encoding: 'gzip', timeout: TIMEOUT_THRESHOLD).tap do |request|
         request.on_complete do |response|
           if response.success?
             handle_successful_response json: JSON.parse(response.body, symbolize_names: true)
@@ -40,6 +44,7 @@ module GemLookup
         end
       end
     end
+    # rubocop:enable Layout/LineLength
 
     def handle_successful_response(json:)
       json[:exists] = true
