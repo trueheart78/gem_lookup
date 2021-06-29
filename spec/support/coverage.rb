@@ -5,7 +5,7 @@ module Support
     def self.included(_klass)
       require 'simplecov'
 
-      SimpleCov.minimum_coverage 80
+      SimpleCov.minimum_coverage 90
 
       SimpleCov.start do
         add_filter '/spec/'
