@@ -108,7 +108,15 @@ RSpec.describe GemLookup::Gems do
       context 'with a bulk serializer' do
         let(:streamable) { false }
 
-        xit 'processes as bulk'
+        it 'does call serializer.display once' do
+          expect(serializer).to receive(:display).once
+          instance.process
+        end
+
+        it 'does not call serializer.querying' do
+          expect(serializer).not_to receive(:querying)
+          instance.process
+        end
       end
     end
 
