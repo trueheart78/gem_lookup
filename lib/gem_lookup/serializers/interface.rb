@@ -43,7 +43,7 @@ module GemLookup
         def not_implemented(method, params: [])
           required = params.any? ? " with params (#{params.join(", ")})" : ''
           raise GemLookup::Errors::UndefinedInterfaceMethod,
-                "Method #{method}#{required} must be implemented by sub-class"
+                "Class method .#{method}#{required} must be implemented by sub-class"
         end
       end
     end
