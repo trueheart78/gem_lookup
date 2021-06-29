@@ -82,6 +82,7 @@ module GemLookup
     end
     # rubocop:enable Metrics/MethodLength
 
+    # Utilizes the display mode to identify which serializer to utilize.
     def detect_serializer
       @serializer = case @display_mode
                     when :wordy
@@ -95,6 +96,7 @@ module GemLookup
       invalid_display_mode! if @serializer.nil?
     end
 
+    # Raises the Invalid display mode error.
     def invalid_display_mode!
       @continue = false
       raise GemLookup::Errors::InvalidDisplayMode, @display_mode
