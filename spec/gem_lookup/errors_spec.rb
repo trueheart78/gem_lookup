@@ -9,6 +9,14 @@ RSpec.describe GemLookup::Errors do
     end
   end
 
+  describe 'UndefinedInterfaceMethod' do
+    subject(:definition) { defined? described_class::UndefinedInterfaceMethod }
+
+    it 'is defined as a constant' do
+      expect(definition).to eq 'constant'
+    end
+  end
+
   describe 'UnsupportedFlag' do
     subject(:definition) { defined? described_class::UnsupportedFlag }
 
