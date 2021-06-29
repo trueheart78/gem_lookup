@@ -9,7 +9,6 @@ RSpec.describe GemLookup::Gems do
     allow(GemLookup::RateLimit).to receive(:interval).and_return(0)
   end
 
-  let(:batch)      { gem_list }
   let(:streamable) { true }
   let(:gem_list)   { [] }
   let(:rate_limit) { 10 }
@@ -18,11 +17,11 @@ RSpec.describe GemLookup::Gems do
   end
   let(:serializer) do
     class_double('GemLookup::Serializers::Interface').tap do |s|
-      allow(s).to receive(:display) # .with(json: json)
+      allow(s).to receive(:display)
       allow(s).to receive(:gem_count).with(num: gem_list.size)
       allow(s).to receive(:batch_iterator).with(num: 1, total: 2)
       allow(s).to receive(:batch_iterator).with(num: 2, total: 2)
-      allow(s).to receive(:querying).with(batch: batch)
+      allow(s).to receive(:querying)
       allow(s).to receive(:streaming?).and_return(streamable)
     end
   end
@@ -39,7 +38,7 @@ RSpec.describe GemLookup::Gems do
     before do
       processed_json[:gems] += gem_json
       allow(requests_instance).to receive(:process).and_return(processed_json)
-      allow(GemLookup::Requests).to receive(:new).with(batch: batch, json: json) do
+      allow(GemLookup::Requests).to receive(:new) do
         requests_instance
       end
     end
@@ -82,9 +81,9 @@ RSpec.describe GemLookup::Gems do
       end
     end
 
-    context 'with a number of gems less than the rate limit' do
-      let(:gem_list) { random_gem_list num: rate_limit - 1 }
-      let(:gem_json) { random_json_array num: rate_limit - 1 }
+    context 'with a number of gems less than or equal to the rate limit' do
+      let(:gem_list) { random_gem_list num: rate_limit }
+      let(:gem_json) { random_json_array num: rate_limit }
 
       context 'with a streamable serializer' do
         let(:streamable) { true }
@@ -121,16 +120,45 @@ RSpec.describe GemLookup::Gems do
     end
 
     context 'with a number of gems greater than the rate limit' do
+      let(:gem_list) { random_gem_list num: rate_limit + 1 }
+      let(:gem_json) { random_json_array num: rate_limit + 1 }
+
       context 'with a streamable serializer' do
         let(:streamable) { true }
 
-        xit 'processes as a stream'
+        it 'does call serializer.display multiple times' do
+          expect(serializer).to receive(:display).exactly(gem_list.size).times
+          instance.process
+        end
+
+        it 'does call serializer.gem_count' do
+          expect(serializer).to receive(:gem_count).once
+          instance.process
+        end
+
+        it 'does call serializer.batch_iterator twice' do
+          expect(serializer).to receive(:batch_iterator).twice
+          instance.process
+        end
       end
 
       context 'with a bulk serializer' do
         let(:streamable) { false }
 
-        xit 'processes as bulk'
+        it 'does call serializer.display once' do
+          expect(serializer).to receive(:display).once
+          instance.process
+        end
+
+        it 'does not call serializer.querying' do
+          expect(serializer).not_to receive(:querying)
+          instance.process
+        end
+
+        it 'does not call serializer.batch_iterator' do
+          expect(serializer).not_to receive(:batch_iterator)
+          instance.process
+        end
       end
     end
   end
