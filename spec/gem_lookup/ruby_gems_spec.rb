@@ -7,7 +7,7 @@ RSpec.describe GemLookup::RubyGems do
   let(:cli_args) { [] }
 
   describe '.initialize' do
-    let(:expected_vars) { %i[@gem_list @flags @display_mode @continue] }
+    let(:expected_vars) { %i[@gem_list @flags @display_mode @serializer @continue] }
 
     it 'has the defined instance variables' do
       expect(instance.instance_variables).to eq expected_vars
@@ -17,12 +17,12 @@ RSpec.describe GemLookup::RubyGems do
   describe '#find_all' do
     context 'with only gems' do
       let(:gems_instance) { instance_double 'GemLookup::Gems' }
-      let(:display_mode)  { :emoji }
+      let(:serializer)    { GemLookup::Serializers::Emoji }
       let(:passed_gems)   { cli_args }
 
       before do
         allow(gems_instance).to receive(:process)
-        allow(GemLookup::Gems).to receive(:new).with(passed_gems, display_mode: display_mode) do
+        allow(GemLookup::Gems).to receive(:new).with(passed_gems, serializer: serializer) do
           gems_instance
         end
       end
@@ -63,18 +63,14 @@ RSpec.describe GemLookup::RubyGems do
 
         # rubocop:disable RSpec/SubjectStub
         before do
-          allow(gems_instance).to receive(:process).and_raise(
-            GemLookup::Errors::InvalidDisplayMode, display_mode.to_s
-          )
           allow(instance).to receive(:exit).with(1) { print 'exit(1)' }
 
           # private instance variable being changed for test case.
-          instance.instance_variable_set :@display_mode, :unsupported
+          instance.instance_variable_set :@display_mode, display_mode
         end
         # rubocop:enable RSpec/SubjectStub
 
         it 'displays an Invalid Display Mode error with an exit code of 1' do
-          expect(gems_instance).to receive(:process).once
           output = capture_output { instance.find_all }
 
           expect(output).to start_with error_start
@@ -86,11 +82,12 @@ RSpec.describe GemLookup::RubyGems do
     context 'without any gems' do
       let(:gems_instance) { instance_double 'GemLookup::Gems' }
       let(:display_mode)  { :emoji }
+      let(:serializer)    { GemLookup::Serializers::Emoji }
       let(:passed_gems)   { cli_args }
 
       before do
         allow(gems_instance).to receive(:process)
-        allow(GemLookup::Gems).to receive(:new).with(passed_gems, display_mode: display_mode) do
+        allow(GemLookup::Gems).to receive(:new).with(passed_gems, serializer: serializer) do
           gems_instance
         end
       end
@@ -140,11 +137,12 @@ RSpec.describe GemLookup::RubyGems do
     context 'with flags' do
       let(:gems_instance) { instance_double 'GemLookup::Gems' }
       let(:display_mode)  { :emoji }
+      let(:serializer)    { GemLookup::Serializers::Emoji }
       let(:passed_gems)   { cli_args }
 
       before do
         allow(gems_instance).to receive(:process)
-        allow(GemLookup::Gems).to receive(:new).with(passed_gems, display_mode: display_mode) do
+        allow(GemLookup::Gems).to receive(:new).with(passed_gems, serializer: serializer) do
           gems_instance
         end
       end
@@ -200,6 +198,7 @@ RSpec.describe GemLookup::RubyGems do
         let(:flags)        { ["--#{display_mode}"] }
         let(:passed_gems)  { %w[gem] }
         let(:display_mode) { :json }
+        let(:serializer)   { GemLookup::Serializers::Json }
 
         before do
           %i[help version wordy].each do |type|
@@ -209,7 +208,7 @@ RSpec.describe GemLookup::RubyGems do
           allow(GemLookup::Flags).to receive(:supported?).with(:json, flags: flags).and_return(true)
         end
 
-        it 'calls Gems#process with an display mode of :json' do
+        it 'calls Gems#process with the Json serializer' do
           expect(gems_instance).to receive(:process).once
           instance.find_all
         end
@@ -220,6 +219,7 @@ RSpec.describe GemLookup::RubyGems do
         let(:flags)        { ["--#{display_mode}"] }
         let(:passed_gems)  { %w[gem] }
         let(:display_mode) { :wordy }
+        let(:serializer)   { GemLookup::Serializers::Wordy }
 
         before do
           %i[help json version].each do |type|
@@ -230,7 +230,7 @@ RSpec.describe GemLookup::RubyGems do
                                                                flags: flags).and_return(true)
         end
 
-        it 'calls Gems#process with an display mode of :wordy' do
+        it 'calls Gems#process with the Wordy serializer' do
           expect(gems_instance).to receive(:process).once
           instance.find_all
         end

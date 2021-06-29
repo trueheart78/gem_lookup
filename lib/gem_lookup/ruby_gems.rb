@@ -49,8 +49,6 @@ module GemLookup
     # Creates a new GemLookup::Gems instance and calls #process.
     def process_gems
       Gems.new(@gem_list, serializer: @serializer).process
-    rescue GemLookup::Errors::InvalidDisplayMode => e
-      error message: "Invalid display mode [#{e.message}]"
     end
 
     # Calls the #check_flags method if there are any flag entries.
