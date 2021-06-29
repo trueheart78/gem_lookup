@@ -38,7 +38,7 @@ module GemLookup
           puts "=> 🔎 #{batch.join(", ")}".light_yellow
         end
 
-        # Returns whether the serializer is meant to be used to stream content.
+        # Returns if the serializer is meant to be used to stream content.
         # @return [Boolean] whether the serializer is meant for streaming content.
         def streaming?
           true

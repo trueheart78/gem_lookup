@@ -12,7 +12,7 @@ module GemLookup
           puts JSON.pretty_generate json
         end
 
-        # Returns whether the serializer is meant to be used to stream content.
+        # Returns if the serializer is meant to be used to stream content.
         # @return [Boolean] whether the serializer is meant for streaming content.
         def streaming?
           false
