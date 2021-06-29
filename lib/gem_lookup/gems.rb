@@ -43,25 +43,6 @@ module GemLookup
       @json = Requests.new(batch: batch, json: @json).process
     end
 
-    def display_gem_count
-      return unless streaming?
-
-      gem_count(@gem_list.size) if @gem_list.size > 1
-    end
-
-    def display_batch_details(num, total, batch)
-      return unless streaming?
-
-      batch_iterator(num, total) if batch_mode?
-      querying(batch)
-    end
-
-    def display_results
-      return unless streaming?
-
-      display(json: @json[:gems].shift) while @json[:gems].any?
-    end
-
     def batch_gems
       gems = @gem_list.dup
 
@@ -70,6 +51,25 @@ module GemLookup
 
     def batch_mode?
       @batches.size > 1
+    end
+
+    def display_gem_count
+      return unless streaming?
+
+      gem_count(num: @gem_list.size) if @gem_list.size > 1
+    end
+
+    def display_batch_details(num, total, batch)
+      return unless streaming?
+
+      batch_iterator(num: num, total: total) if batch_mode?
+      querying(batch: batch)
+    end
+
+    def display_results
+      return unless streaming?
+
+      display(json: @json[:gems].shift) while @json[:gems].any?
     end
   end
 end

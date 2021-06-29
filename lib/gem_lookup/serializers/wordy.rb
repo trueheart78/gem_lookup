@@ -20,20 +20,20 @@ module GemLookup
 
       # Outputs the number of gems being queried.
       # @param num [Numeric] the number of gems.
-      def gem_count(num)
+      def gem_count(num:)
         puts "=> Query: #{num} gems".light_cyan
       end
 
       # Outputs the current batch and total number of batches
       # @param num [Numeric] the current batch number.
       # @param total [Numeric] the total number of batches.
-      def batch_iterator(num, total)
+      def batch_iterator(num:, total:)
         puts "=> Batch: #{num} of #{total}".yellow
       end
 
       # Outputs the list of gems being looked up from the batch.
       # @param batch [Array] the array of gems.
-      def querying(batch)
+      def querying(batch:)
         puts "=> Looking up: #{batch.join(", ")}".light_yellow
       end
 

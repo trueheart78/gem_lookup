@@ -175,7 +175,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
 
   describe '.gem_count' do
     subject(:gem_count) do
-      capture_output { described_class.gem_count num }.chomp
+      capture_output { described_class.gem_count num: num }.chomp
     end
 
     let(:num)    { junk :int, min: 1, max: 1_000 }
@@ -188,7 +188,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
 
   describe '.batch_iterator' do
     subject(:batch_iterator) do
-      capture_output { described_class.batch_iterator num, total }.chomp
+      capture_output { described_class.batch_iterator num: num, total: total }.chomp
     end
 
     let(:num)    { junk :int, min: 1, max: 499 }
@@ -202,7 +202,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
 
   describe '.querying' do
     subject(:querying) do
-      capture_output { described_class.querying batch }.chomp
+      capture_output { described_class.querying batch: batch }.chomp
     end
 
     let(:batch)  { [junk, junk, junk, junk] }
