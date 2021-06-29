@@ -10,6 +10,7 @@ module GemLookup
       @gem_list = gems
       @flags = []
       @display_mode = :emoji
+      @serializer = nil
       @continue = true
     end
 
@@ -30,6 +31,7 @@ module GemLookup
     def process_flags
       detect_flags
       handle_flags
+      detect_serializer
     end
 
     # Looks for strings that start with a dash and marks them as flags, and removes them from the
@@ -46,7 +48,7 @@ module GemLookup
 
     # Creates a new GemLookup::Gems instance and calls #process.
     def process_gems
-      Gems.new(@gem_list, display_mode: @display_mode).process
+      Gems.new(@gem_list, serializer: @serializer).process
     rescue GemLookup::Errors::InvalidDisplayMode => e
       error message: "Invalid display mode [#{e.message}]"
     end
@@ -81,6 +83,26 @@ module GemLookup
       end
     end
     # rubocop:enable Metrics/MethodLength
+
+    def detect_serializer
+      @serializer = case @display_mode
+                    when :wordy
+                      Serializers::Wordy
+                    when :json
+                      Serializers::Json
+                    when :emoji
+                      Serializers::Emoji
+                    end
+
+      invalid_display_mode! if @serializer.nil?
+    end
+
+    def invalid_display_mode!
+      @continue = false
+      raise GemLookup::Errors::InvalidDisplayMode, @display_mode
+    rescue GemLookup::Errors::InvalidDisplayMode => e
+      error message: "Invalid display mode [#{e.message}]"
+    end
 
     # If the lookup process should continue.
     # @return [Boolean] whether to continue the lookup process or not.

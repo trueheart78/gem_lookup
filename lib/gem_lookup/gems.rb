@@ -8,16 +8,14 @@ module GemLookup
 
     def_delegators :@serializer, :display, :batch_iterator, :gem_count, :querying, :streaming?
 
-    def initialize(gem_list, display_mode: :emoji)
+    def initialize(gem_list, serializer:)
       @gem_list = gem_list
+      @serializer = serializer
       @batches = []
-      @display_mode = display_mode
       @json = { gems: [] }
-      @serializer = nil
     end
 
     def process
-      detect_serializer
       batch_gems
       process_batches
     end
@@ -62,23 +60,6 @@ module GemLookup
       return unless streaming?
 
       display(json: @json[:gems].shift) while @json[:gems].any?
-    end
-
-    def detect_serializer
-      @serializer = case @display_mode
-                    when :wordy
-                      Serializers::Wordy
-                    when :json
-                      Serializers::Json
-                    when :emoji
-                      Serializers::Emoji
-                    end
-
-      invalid_display_mode! if @serializer.nil?
-    end
-
-    def invalid_display_mode!
-      raise GemLookup::Errors::InvalidDisplayMode, @display_mode
     end
 
     def batch_gems
