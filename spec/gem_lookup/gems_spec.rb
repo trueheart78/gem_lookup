@@ -50,8 +50,8 @@ RSpec.describe GemLookup::Gems do
     end
 
     context 'with one gem' do
-      let(:gem_list) { [junk] }
-      let(:gem_json) { [random_json] }
+      let(:gem_list) { random_gem_list }
+      let(:gem_json) { random_json_array }
 
       context 'with a streamable serializer' do
         let(:streamable) { true }
@@ -83,11 +83,26 @@ RSpec.describe GemLookup::Gems do
     end
 
     context 'with a number of gems less than the rate limit' do
-      before
+      let(:gem_list) { random_gem_list num: rate_limit - 1 }
+      let(:gem_json) { random_json_array num: rate_limit - 1 }
+
       context 'with a streamable serializer' do
         let(:streamable) { true }
 
-        xit 'processes as a stream'
+        it 'does call serializer.display multiple times' do
+          expect(serializer).to receive(:display).exactly(gem_list.size).times
+          instance.process
+        end
+
+        it 'does call serializer.gem_count' do
+          expect(serializer).to receive(:gem_count).once
+          instance.process
+        end
+
+        it 'does not call serializer.batch_iterator' do
+          expect(serializer).not_to receive(:batch_iterator)
+          instance.process
+        end
       end
 
       context 'with a bulk serializer' do
@@ -112,8 +127,20 @@ RSpec.describe GemLookup::Gems do
     end
   end
 
-  def random_json
-    { name: junk, exists: true, timeout: false }
+  def random_gem_list(num: 1)
+    [].tap do |array|
+      num.times do
+        array << junk
+      end
+    end
+  end
+
+  def random_json_array(num: 1)
+    [].tap do |array|
+      num.times do
+        array << { name: junk, exists: true, timeout: false }
+      end
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
