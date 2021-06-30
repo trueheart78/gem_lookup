@@ -36,7 +36,6 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 * Includes an executable, `gems`.
   * You should delete any previous symlinked `gems` script.
 * Renamed repository from `gem-lookup` to `gem_lookup`.
-  * Gems that are found successfully have an `"exists" : true` added to their JSON.
 
 ### Removed
 
