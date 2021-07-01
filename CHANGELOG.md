@@ -34,7 +34,7 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 * Converted to a real gem! :gem:
   * `gem install gem_lookup`
 * Includes an executable, `gems`.
-  * You should delete any previous symlinked `gems` script.
+  * Any previous symlinked `gems` script should be deleted.
 * Renamed repository from `gem-lookup` to `gem_lookup`.
 
 ### Removed
