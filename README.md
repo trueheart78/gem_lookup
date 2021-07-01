@@ -1,7 +1,7 @@
-# GemLookup :detective:
+# GemLookup :detective: ![workflow ci badge][ci badge]
 
 Uses the [`typhoeus` :gem:][typhoeus] to make parallel requests to the public
-RubyGems API.
+[RubyGems API][rubygems api].
 
 ## Installation
 
@@ -21,12 +21,22 @@ gems
 
 This will be made available when the gem is installed.
 
-### Help
+### Flags
+
+#### Help
 
 Pass `-h` or `--help` to get help.
 
 ```sh
-$ gems --help            
+$ gems --help
+```
+
+#### Version
+
+Pass `-v` or `--version` to get the installed version.
+
+```sh
+$ gems --version
 ```
 
 ### Pass It Some Gems
@@ -41,11 +51,13 @@ capitalization or duplicate gems; It's got you covered. :sparkling_heart:
 
 #### Output
 
-You're going to get lots of emojis to identify info, and a small variety of colors depending
+By default, there will be many emojis to identify info, and a small variety of colors depending
 on whether certain criteria are met for the line. It also looks even better with font ligatures
-enabled, so if your font and/or terminal support them, it is recommended to enable them.
+enabled, so if your font and/or terminal support them, it is recommended that they be enabled.
 
 #### The Basics
+
+##### Default Output
 
 Just pass it a gem name.
 
@@ -57,6 +69,82 @@ $ gems pry
 ==> 🏠 http://pry.github.io
 ==> 🔗 https://github.com/pry/pry
 ==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
+```
+
+##### Wordy Output
+
+Use the `-w` or `--wordy` flags for emoji-less output.
+
+```
+$ gems --wordy pry
+=> Looking up: pry
+=> Gem: pry is at 0.14.1
+==> Updated:      April 12, 2021
+==> Homepage:     http://pry.github.io
+==> Source Code:  https://github.com/pry/pry
+==> Changelog:    https://github.com/pry/pry/blob/master/CHANGELOG.md
+==> Mailing List: Unavailable
+```
+
+##### JSON Output
+
+Use the `-j` or `--json` flags for JSON-based output. Two entries are added to each gem queried:
+1. `exists` is whether or not the gem was found.
+2. `timeout` is whether or not the request to the server for the gem timed out.
+
+```
+$ gems --json pry
+{
+  "gems": [
+    {
+      "name": "pry",
+      "downloads": 212107466,
+      "version": "0.14.1",
+      "version_created_at": "2021-04-12T10:37:24.934Z",
+      "version_downloads": 1719287,
+      "platform": "ruby",
+      "authors": "John Mair (banisterfiend), Conrad Irwin, Ryan Fitzgerald, Kyrylo Silin",
+      "info": "Pry is a runtime developer console and IRB alternative with powerful\nintrospection capabilities. Pry aims to be more than an IRB replacement. It is\nan attempt to bring REPL driven programming to the Ruby language.\n",
+      "licenses": [
+        "MIT"
+      ],
+      "metadata": {
+        "changelog_uri": "https://github.com/pry/pry/blob/master/CHANGELOG.md",
+        "bug_tracker_uri": "https://github.com/pry/pry/issues",
+        "source_code_uri": "https://github.com/pry/pry"
+      },
+      "yanked": false,
+      "sha": "99b6df0665875dd5a39d85e0150aa5a12e2bb4fef401b6c4f64d32ee502f8454",
+      "project_uri": "https://rubygems.org/gems/pry",
+      "gem_uri": "https://rubygems.org/gemspry-0.14.1.gem",
+      "homepage_uri": "http://pry.github.io",
+      "wiki_uri": null,
+      "documentation_uri": null,
+      "mailing_list_uri": null,
+      "source_code_uri": "https://github.com/pry/pry",
+      "bug_tracker_uri": "https://github.com/pry/pry/issues",
+      "changelog_uri": "https://github.com/pry/pry/blob/master/CHANGELOG.md",
+      "funding_uri": null,
+      "dependencies": {
+        "development": [
+
+        ],
+        "runtime": [
+          {
+            "name": "coderay",
+            "requirements": "~> 1.1"
+          },
+          {
+            "name": "method_source",
+            "requirements": "~> 1.0"
+          }
+        ]
+      },
+      "exists": true,
+      "timeout": false
+    }
+  ]
+}
 ```
 
 #### Standard Mode
@@ -256,14 +344,14 @@ As of June 10th, 2021: `API and website: 10 requests per second`.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run
 the tests. You can also run `bin/console` for an interactive prompt that will allow you to
 experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new
 version, update the version number in `version.rb`, and then run `bundle exec rake release`, which
-will create a git tag for the version, push git commits and the created tag, and push the `.gem`
-file to [rubygems.org][rubygems site].
+will create a git tag for the version, push git commits and the created tag, and push the 
+`gem_lookup.gem_spec` file to [rubygems.org][rubygems site].
 
 ## Contributing
 
@@ -280,8 +368,10 @@ The gem is available as open source under the terms of the [MIT License][mit].
 Everyone interacting in the GemLookup project's codebases, issue trackers, chat rooms and
 mailing lists is expected to follow the [code of conduct][coc].
 
+[ci badge]: https://github.com/trueheart78/gem_lookup/actions/workflows/tests.yml/badge.svg
 [typhoeus]: https://github.com/typhoeus/typhoeus/
 [rubygems site]: https://rubygems.org/
+[rubygems api]: https://guides.rubygems.org/rubygems-org-api/#gem-methods
 [rate limit]: https://guides.rubygems.org/rubygems-org-rate-limits/
 [git]: https://github.com/trueheart78/gem_lookup/
 [coc]: https://github.com/trueheart78/gem_lookup/blob/master/CODE_OF_CONDUCT.md
