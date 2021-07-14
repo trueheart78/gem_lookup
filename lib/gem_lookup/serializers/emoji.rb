@@ -53,6 +53,7 @@ module GemLookup
           [].tap do |output|
             output.push "=> 💎 #{json[:name]} is at #{json[:version]}".green
             output.push "==> 📅 #{convert_date(date: json[:version_created_at])}"
+            output.push license(licenses: json[:licenses])
             output.push "==> 🧭 #{json[:project_uri]}"
             output.push "==> 🏠 #{json[:homepage_uri]}"
             output.push source_code(source_code_uri: json[:source_code_uri])
@@ -61,6 +62,15 @@ module GemLookup
           end.join "\n"
         end
         # rubocop:enable Metrics/AbcSize
+
+        # Generates the "License(s)" string
+        # @param licenses [Array] the licenses.
+        # @return [String] the assigned license(s) string.
+        def license(licenses:)
+          return '==> 💼 None' unless licenses.any?
+
+          "==> 💼 #{licenses.join(", ")}"
+        end
 
         # Generates the "Source Code" string
         # @param source_code_uri [String] the source code uri.
