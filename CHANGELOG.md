@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][changelog], and this project adheres to 
 [Semantic Versioning][semver].
 
+## [1.0.1] - Unreleased
+
+### Changed
+
+* Zeitwerk ignores specs if `ENV['APP_ENV']` is set to `production`.
+
 ## [1.0.0] - 2021-07-14
 
 ### Added
