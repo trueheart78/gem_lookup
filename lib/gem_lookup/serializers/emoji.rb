@@ -53,6 +53,7 @@ module GemLookup
           [].tap do |output|
             output.push "=> 💎 #{json[:name]} is at #{json[:version]}".green
             output.push "==> 📅 #{convert_date(date: json[:version_created_at])}"
+            output.push "==> 🧭 #{json[:project_uri]}"
             output.push "==> 🏠 #{json[:homepage_uri]}"
             output.push source_code(source_code_uri: json[:source_code_uri])
             output.push changelog(changelog_uri: json[:changelog_uri])
