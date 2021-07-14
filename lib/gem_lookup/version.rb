@@ -2,7 +2,7 @@
 
 module GemLookup
   # @return [String] the current version of the gem.
-  VERSION = '0.8.0'
+  VERSION = '1.0.0'
 
   # @return [String] the name of the gem
   NAME = 'gem_lookup'

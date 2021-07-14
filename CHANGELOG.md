@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][changelog], and this project adheres to 
 [Semantic Versioning][semver].
 
-## [0.8.0] - Unreleased
+## [1.0.0] - 2021-07-14
 
 ### Added
 
@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
   * MRI Ruby 2.6
   * MRI Ruby 2.7
   * MRI Ruby 3.0
-  * MRY Ruby head
+  * MRI Ruby head
 * [Zeitwerk][zeitwerk] autoloader gem.
 * Support for the `ENV['APP_ENV']` variable.
   * Defaults to `development`.
