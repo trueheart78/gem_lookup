@@ -1,0 +1,46 @@
+require: rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+  SuggestExtensions: false
+  Exclude:
+    - 'vendor/**/*'
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+Layout/LineLength:
+  Max: 100
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+Layout/SpaceInsideBlockBraces:
+  SpaceBeforeBlockParameters: false
+Metrics/MethodLength:
+  Max: 12
+Style/Documentation:
+  Enabled: false
+Style/RedundantFetchBlock:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/RaiseArgs:
+  EnforcedStyle: exploded
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+RSpec/DescribeClass:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+RSpec/MultipleExpectations:
+  Max: 3
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+RSpec/NestedGroups:
+  Max: 4

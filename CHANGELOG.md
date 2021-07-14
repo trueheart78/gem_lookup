@@ -1,8 +1,45 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog][changelog], and this project adheres to 
+[Semantic Versioning][semver].
+
+## [1.0.0] - 2021-07-14
+
+### Added
+
+* CI support for multiple Ruby versions:
+  * MRI Ruby 2.4
+  * MRI Ruby 2.5
+  * MRI Ruby 2.6
+  * MRI Ruby 2.7
+  * MRI Ruby 3.0
+  * MRI Ruby head
+* [Zeitwerk][zeitwerk] autoloader gem.
+* Support for the `ENV['APP_ENV']` variable.
+  * Defaults to `development`.
+  * `exe/gems` explicitly sets it to `production`.
+  * `spec/spec_helper.rb` explicitly sets it to `test`.
+* New **Wordy** output mode.
+  * No emojis, only words. :frowning_face:
+  * Enabled by passing `--wordy` or `-w` to the executable.
+* Support for request timeouts.
+  * JSON responses now have an extra `"timeout"` boolean key.
+* Requests now have an `"Accept Encoding" => "gzip"` header.
+* Requests now limit timeouts to 10 seconds.
+
+### Changed
+
+* Converted to a real gem! :gem:
+  * `gem install gem_lookup`
+* Includes an executable, `gems`.
+  * Any previous symlinked `gems` script should be deleted.
+* Renamed repository from `gem-lookup` to `gem_lookup`.
+
+### Removed
+
+* Dropped support for Ruby 2.3 and earlier.
 
 ## [0.7.0] - 2021-06-18
 
@@ -54,5 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Basic version support.
 
+[changelog]: https://keepachangelog.com/en/1.0.0/
+[semver]: https://semver.org/spec/v2.0.0.html
 [ag]: https://github.com/ggreer/the_silver_searcher
 [gems api]: https://guides.rubygems.org/rubygems-org-api/#gem-methods
+[zeitwerk]: https://github.com/fxn/zeitwerk

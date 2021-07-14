@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+ENV['APP_ENV'] = 'production'
+require_relative '../booster_pack'
+
+GemLookup::RubyGems.new(ARGV).find_all
