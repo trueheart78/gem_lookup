@@ -13,6 +13,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
@@ -35,6 +36,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           #{"==> Source Code:  Unavailable".light_red}
@@ -57,6 +59,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           #{"==> Source Code:  Unavailable".light_red}
@@ -79,6 +82,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
@@ -101,6 +105,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
@@ -123,6 +128,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
@@ -145,6 +151,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
         <<~OUTPUT.chomp
           #{"=> Gem: rails is at 6.1.3.2".green}
           ==> Updated:      May 5, 2021
+          ==> License:      MIT
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
