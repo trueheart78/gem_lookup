@@ -13,6 +13,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
@@ -34,6 +35,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           #{"==> 🔗 Unavailable".light_red}
           #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
@@ -55,6 +57,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           #{"==> 🔗 Unavailable".light_red}
           #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
@@ -76,6 +79,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 Unavailable".light_red}
@@ -97,6 +101,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 Unavailable".light_red}
@@ -118,6 +123,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
@@ -139,6 +145,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
         <<~OUTPUT.chomp
           #{"=> 💎 rails is at 6.1.3.2".green}
           ==> 📅 May 5, 2021
+          ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
