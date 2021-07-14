@@ -3,4 +3,4 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.require(:default, ENV['APP_ENV'].to_sym)
+Bundler.require(:default, ENV['APP_ENV'].to_sym) unless ENV['APP_ENV'] == 'production'
