@@ -66,6 +66,7 @@ $ gems pry
 => 🔎 Looking up: pry
 => 💎 pry is at 0.14.1
 ==> 📅 April 12, 2021
+==> 🧭 https://rubygems.org/gems/pry
 ==> 🏠 http://pry.github.io
 ==> 🔗 https://github.com/pry/pry
 ==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
@@ -80,6 +81,7 @@ $ gems --wordy pry
 => Looking up: pry
 => Gem: pry is at 0.14.1
 ==> Updated:      April 12, 2021
+==> Location:     https://rubygems.org/gems/pry
 ==> Homepage:     http://pry.github.io
 ==> Source Code:  https://github.com/pry/pry
 ==> Changelog:    https://github.com/pry/pry/blob/master/CHANGELOG.md
@@ -154,28 +156,36 @@ Since there is a [rate limit](#rate-limit), passing less gems than that will cau
 
 ```sh
 $ gems pry rspec sentry-ruby rails
-=> ✨ Gems: 4
-=> 🔎 Looking up: pry, rspec, sentry-ruby, rails
-=> 💎 rspec is at 3.10.0
-==> 📅 October 30, 2020
-==> 🏠 http://github.com/rspec
-==> 🔗 https://github.com/rspec/rspec
-==> 📑 No changelog
-=> 💎 sentry-ruby is at 4.5.1
-==> 📅 June 4, 2021
-==> 🏠 https://github.com/getsentry/sentry-ruby
-==> 🔗 https://github.com/getsentry/sentry-ruby
-==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+=> 🤔 4 gems
+=> 🔎 pry, rspec, sentry-ruby, rails
 => 💎 pry is at 0.14.1
 ==> 📅 April 12, 2021
+==> 🧭 https://rubygems.org/gems/pry
 ==> 🏠 http://pry.github.io
 ==> 🔗 https://github.com/pry/pry
 ==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
-=> 💎 rails is at 6.1.3.2
-==> 📅 May 5, 2021
+==> 💌 Unavailable
+=> 💎 rspec is at 3.10.0
+==> 📅 October 30, 2020
+==> 🧭 https://rubygems.org/gems/rspec
+==> 🏠 http://github.com/rspec
+==> 🔗 https://github.com/rspec/rspec
+==> 📑 Unavailable
+==> 💌 https://groups.google.com/forum/#!forum/rspec
+=> 💎 rails is at 6.1.4
+==> 📅 June 24, 2021
+==> 🧭 https://rubygems.org/gems/rails
 ==> 🏠 https://rubyonrails.org
-==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
+==> 🔗 https://github.com/rails/rails/tree/v6.1.4
+==> 📑 https://github.com/rails/rails/releases/tag/v6.1.4
+==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk
+=> 💎 sentry-ruby is at 4.6.1
+==> 📅 July 8, 2021
+==> 🧭 https://rubygems.org/gems/sentry-ruby
+==> 🏠 https://github.com/getsentry/sentry-ruby
+==> 🔗 https://github.com/getsentry/sentry-ruby
+==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+==> 💌 Unavailable
 ```
 
 #### Batch Mode
@@ -186,126 +196,181 @@ between batches, so as to respect the rate limit.
 
 ```sh
 $ gems byebug pinglish rspec rubocop rubocop-rspec rubocop-rails sentry-ruby sentry-rails pry byebug typhoeus faraday Faraday rails pagy clowne discard aasm logidze GLOBALIZE lockbox factory_BOT faker site_prism nokogiri simplecov
-=> ✨ Gems: 24
-=> 🧺 Batch: 1 of 3
-=> 🔎 Looking up: byebug, pinglish, rspec, rubocop, rubocop-rspec, rubocop-rails, sentry-ruby, sentry-rails, pry, typhoeus
+=> 🤔 24 gems
+=> 🧺 1 of 3
+=> 🔎 byebug, pinglish, rspec, rubocop, rubocop-rspec, rubocop-rails, sentry-ruby, sentry-rails, pry, typhoeus
 => 💎 pinglish is at 0.2.1
 ==> 📅 November 13, 2014
+==> 🧭 https://rubygems.org/gems/pinglish
 ==> 🏠 https://github.com/jbarnette/pinglish
-==> 📑 No changelog
-=> 💎 sentry-rails is at 4.5.1
-==> 📅 June 4, 2021
-==> 🏠 https://github.com/getsentry/sentry-ruby
-==> 🔗 https://github.com/getsentry/sentry-ruby
-==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
-=> 💎 sentry-ruby is at 4.5.1
-==> 📅 June 4, 2021
-==> 🏠 https://github.com/getsentry/sentry-ruby
-==> 🔗 https://github.com/getsentry/sentry-ruby
-==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
-=> 💎 rubocop-rails is at 2.10.1
-==> 📅 May 5, 2021
+==> 🔗 Unavailable
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 rubocop-rspec is at 2.4.0
+==> 📅 June 9, 2021
+==> 🧭 https://rubygems.org/gems/rubocop-rspec
+==> 🏠 https://github.com/rubocop/rubocop-rspec
+==> 🔗 Unavailable
+==> 📑 https://github.com/rubocop/rubocop-rspec/blob/master/CHANGELOG.md
+==> 💌 Unavailable
+=> 💎 byebug is at 11.1.3
+==> 📅 April 23, 2020
+==> 🧭 https://rubygems.org/gems/byebug
+==> 🏠 https://github.com/deivid-rodriguez/byebug
+==> 🔗 https://github.com/deivid-rodriguez/byebug
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 rspec is at 3.10.0
+==> 📅 October 30, 2020
+==> 🧭 https://rubygems.org/gems/rspec
+==> 🏠 http://github.com/rspec
+==> 🔗 https://github.com/rspec/rspec
+==> 📑 Unavailable
+==> 💌 https://groups.google.com/forum/#!forum/rspec
+=> 💎 rubocop-rails is at 2.11.3
+==> 📅 July 11, 2021
+==> 🧭 https://rubygems.org/gems/rubocop-rails
 ==> 🏠 https://docs.rubocop.org/rubocop-rails/
 ==> 🔗 https://github.com/rubocop/rubocop-rails/
 ==> 📑 https://github.com/rubocop/rubocop-rails/blob/master/CHANGELOG.md
-=> 💎 rspec is at 3.10.0
-==> 📅 October 30, 2020
-==> 🏠 http://github.com/rspec
-==> 🔗 https://github.com/rspec/rspec
-==> 📑 No changelog
-=> 💎 rubocop is at 1.16.1
-==> 📅 June 9, 2021
-==> 🏠 https://rubocop.org/
-==> 🔗 https://github.com/rubocop/rubocop/
-==> 📑 https://github.com/rubocop/rubocop/blob/master/CHANGELOG.md
-=> 💎 rubocop-rspec is at 2.4.0
-==> 📅 June 9, 2021
-==> 🏠 https://github.com/rubocop/rubocop-rspec
-==> 📑 https://github.com/rubocop/rubocop-rspec/blob/master/CHANGELOG.md
+==> 💌 Unavailable
+=> 💎 sentry-ruby is at 4.6.1
+==> 📅 July 8, 2021
+==> 🧭 https://rubygems.org/gems/sentry-ruby
+==> 🏠 https://github.com/getsentry/sentry-ruby
+==> 🔗 https://github.com/getsentry/sentry-ruby
+==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+==> 💌 Unavailable
 => 💎 pry is at 0.14.1
 ==> 📅 April 12, 2021
+==> 🧭 https://rubygems.org/gems/pry
 ==> 🏠 http://pry.github.io
 ==> 🔗 https://github.com/pry/pry
 ==> 📑 https://github.com/pry/pry/blob/master/CHANGELOG.md
+==> 💌 Unavailable
 => 💎 typhoeus is at 1.4.0
 ==> 📅 May 8, 2020
+==> 🧭 https://rubygems.org/gems/typhoeus
 ==> 🏠 https://github.com/typhoeus/typhoeus
 ==> 🔗 https://github.com/typhoeus/typhoeus
-==> 📑 No changelog
-=> 💎 byebug is at 11.1.3
-==> 📅 April 23, 2020
-==> 🏠 https://github.com/deivid-rodriguez/byebug
-==> 🔗 https://github.com/deivid-rodriguez/byebug
-==> 📑 No changelog
-=> 🧺 Batch: 2 of 3
-=> 🔎 Looking up: faraday, rails, pagy, clowne, discard, aasm, logidze, globalize, lockbox, factory_bot
-=> 💎 faraday is at 1.4.2
-==> 📅 May 22, 2021
-==> 🏠 https://lostisland.github.io/faraday
-==> 🔗 https://github.com/lostisland/faraday
-==> 📑 https://github.com/lostisland/faraday/releases/tag/v1.4.2
+==> 📑 Unavailable
+==> 💌 http://groups.google.com/group/typhoeus
+=> 💎 rubocop is at 1.18.3
+==> 📅 July 6, 2021
+==> 🧭 https://rubygems.org/gems/rubocop
+==> 🏠 https://rubocop.org/
+==> 🔗 https://github.com/rubocop/rubocop/
+==> 📑 https://github.com/rubocop/rubocop/blob/master/CHANGELOG.md
+==> 💌 Unavailable
+=> 💎 sentry-rails is at 4.6.1
+==> 📅 July 8, 2021
+==> 🧭 https://rubygems.org/gems/sentry-rails
+==> 🏠 https://github.com/getsentry/sentry-ruby
+==> 🔗 https://github.com/getsentry/sentry-ruby
+==> 📑 https://github.com/getsentry/sentry-ruby/blob/master/CHANGELOG.md
+==> 💌 Unavailable
+=> 🧺 2 of 3
+=> 🔎 faraday, rails, pagy, clowne, discard, aasm, logidze, globalize, lockbox, factory_bot
+=> 💎 discard is at 1.2.0
+==> 📅 February 17, 2020
+==> 🧭 https://rubygems.org/gems/discard
+==> 🏠 https://github.com/jhawthorn/discard
+==> 🔗 Unavailable
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 aasm is at 5.2.0
+==> 📅 May 1, 2021
+==> 🧭 https://rubygems.org/gems/aasm
+==> 🏠 https://github.com/aasm/aasm
+==> 🔗 https://github.com/aasm/aasm
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 lockbox is at 0.6.5
+==> 📅 July 7, 2021
+==> 🧭 https://rubygems.org/gems/lockbox
+==> 🏠 https://github.com/ankane/lockbox
+==> 🔗 Unavailable
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 rails is at 6.1.4
+==> 📅 June 24, 2021
+==> 🧭 https://rubygems.org/gems/rails
+==> 🏠 https://rubyonrails.org
+==> 🔗 https://github.com/rails/rails/tree/v6.1.4
+==> 📑 https://github.com/rails/rails/releases/tag/v6.1.4
+==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk
 => 💎 logidze is at 1.2.0
 ==> 📅 June 11, 2021
+==> 🧭 https://rubygems.org/gems/logidze
 ==> 🏠 http://github.com/palkan/logidze
 ==> 🔗 http://github.com/palkan/logidze
 ==> 📑 https://github.com/palkan/logidze/blob/master/CHANGELOG.md
+==> 💌 Unavailable
 => 💎 clowne is at 1.3.0
 ==> 📅 May 12, 2021
+==> 🧭 https://rubygems.org/gems/clowne
 ==> 🏠 https://clowne.evilmartians.io/
 ==> 🔗 http://github.com/clowne-rb/clowne
 ==> 📑 https://github.com/clowne-rb/clowne/blob/master/CHANGELOG.md
-=> 💎 discard is at 1.2.0
-==> 📅 February 17, 2020
-==> 🏠 https://github.com/jhawthorn/discard
-==> 📑 No changelog
-=> 💎 pagy is at 4.8.0
-==> 📅 June 8, 2021
+==> 💌 Unavailable
+=> 💎 pagy is at 4.10.1
+==> 📅 June 24, 2021
+==> 🧭 https://rubygems.org/gems/pagy
 ==> 🏠 https://github.com/ddnexus/pagy
-==> 📑 No changelog
-=> 💎 globalize is at 6.0.0
-==> 📅 January 11, 2021
+==> 🔗 Unavailable
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 globalize is at 6.0.1
+==> 📅 June 23, 2021
+==> 🧭 https://rubygems.org/gems/globalize
 ==> 🏠 http://github.com/globalize/globalize
-==> 📑 No changelog
+==> 🔗 Unavailable
+==> 📑 Unavailable
+==> 💌 Unavailable
 => 💎 factory_bot is at 6.2.0
 ==> 📅 May 7, 2021
+==> 🧭 https://rubygems.org/gems/factory_bot
 ==> 🏠 https://github.com/thoughtbot/factory_bot
-==> 📑 No changelog
-=> 💎 rails is at 6.1.3.2
-==> 📅 May 5, 2021
-==> 🏠 https://rubyonrails.org
-==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
-=> 💎 lockbox is at 0.6.4
-==> 📅 April 6, 2021
-==> 🏠 https://github.com/ankane/lockbox
-==> 📑 No changelog
-=> 💎 aasm is at 5.2.0
-==> 📅 May 1, 2021
-==> 🏠 https://github.com/aasm/aasm
-==> 🔗 https://github.com/aasm/aasm
-==> 📑 No changelog
-=> 🧺 Batch: 3 of 3
-=> 🔎 Looking up: faker, site_prism, nokogiri, simplecov
-=> 💎 faker is at 2.18.0
-==> 📅 May 15, 2021
-==> 🏠 https://github.com/faker-ruby/faker
-==> 🔗 https://github.com/faker-ruby/faker
-==> 📑 https://github.com/faker-ruby/faker/blob/master/CHANGELOG.md
-=> 💎 site_prism is at 3.7.1
-==> 📅 February 19, 2021
-==> 🏠 https://github.com/site-prism/site_prism
-==> 🔗 https://github.com/site-prism/site_prism
-==> 📑 https://github.com/site-prism/site_prism/blob/main/CHANGELOG.md
-=> 💎 nokogiri is at 1.11.7
-==> 📅 June 3, 2021
-==> 🏠 https://nokogiri.org
-==> 🔗 https://github.com/sparklemotion/nokogiri
-==> 📑 https://nokogiri.org/CHANGELOG.html
+==> 🔗 Unavailable
+==> 📑 Unavailable
+==> 💌 Unavailable
+=> 💎 faraday is at 1.5.1
+==> 📅 July 11, 2021
+==> 🧭 https://rubygems.org/gems/faraday
+==> 🏠 https://lostisland.github.io/faraday
+==> 🔗 https://github.com/lostisland/faraday
+==> 📑 https://github.com/lostisland/faraday/releases/tag/v1.5.1
+==> 💌 Unavailable
+=> 🧺 3 of 3
+=> 🔎 faker, site_prism, nokogiri, simplecov
 => 💎 simplecov is at 0.21.2
 ==> 📅 January 9, 2021
+==> 🧭 https://rubygems.org/gems/simplecov
 ==> 🏠 https://github.com/simplecov-ruby/simplecov
 ==> 🔗 https://github.com/simplecov-ruby/simplecov/tree/v0.21.2
 ==> 📑 https://github.com/simplecov-ruby/simplecov/blob/main/CHANGELOG.md
+==> 💌 https://groups.google.com/forum/#!forum/simplecov
+=> 💎 faker is at 2.18.0
+==> 📅 May 15, 2021
+==> 🧭 https://rubygems.org/gems/faker
+==> 🏠 https://github.com/faker-ruby/faker
+==> 🔗 https://github.com/faker-ruby/faker
+==> 📑 https://github.com/faker-ruby/faker/blob/master/CHANGELOG.md
+==> 💌 Unavailable
+=> 💎 nokogiri is at 1.11.7
+==> 📅 June 3, 2021
+==> 🧭 https://rubygems.org/gems/nokogiri
+==> 🏠 https://nokogiri.org
+==> 🔗 https://github.com/sparklemotion/nokogiri
+==> 📑 https://nokogiri.org/CHANGELOG.html
+==> 💌 Unavailable
+=> 💎 site_prism is at 3.7.1
+==> 📅 February 19, 2021
+==> 🧭 https://rubygems.org/gems/site_prism
+==> 🏠 https://github.com/site-prism/site_prism
+==> 🔗 https://github.com/site-prism/site_prism
+==> 📑 https://github.com/site-prism/site_prism/blob/main/CHANGELOG.md
+==> 💌 Unavailable
 ```
 
 #### Non-Existent Gems
@@ -316,14 +381,16 @@ up.
 
 ```sh
 $ gems non-existent rails
-=> ✨ Gems: 2
-=> 🔎 Looking up: non-existent, rails
+=> 🤔 2 gems
+=> 🔎 non-existent, rails
 => 💎 non-existent not found
-=> 💎 rails is at 6.1.3.2
-==> 📅 May 5, 2021
+=> 💎 rails is at 6.1.4
+==> 📅 June 24, 2021
+==> 🧭 https://rubygems.org/gems/rails
 ==> 🏠 https://rubyonrails.org
-==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2
+==> 🔗 https://github.com/rails/rails/tree/v6.1.4
+==> 📑 https://github.com/rails/rails/releases/tag/v6.1.4
+==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk
 ```
 
 #### Timing Out
