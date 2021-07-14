@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 
 ### Added
 
-* The RubyGems url is now displayed as the :compass: / `Location`
+* The RubyGems url is now displayed as the :compass: / `Location`.
 
 ## [1.0.1] - 2021-07-14
 
