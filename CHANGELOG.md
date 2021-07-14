@@ -5,11 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][changelog], and this project adheres to 
 [Semantic Versioning][semver].
 
-## [1.0.1] - Unreleased
+## [1.0.1] - 2021-07-14
 
-### Changed
+### Fixed
 
+* `Bundler.require` is no longer called when `ENV['APP_ENV']` is set to `production`.
 * Zeitwerk ignores specs if `ENV['APP_ENV']` is set to `production`.
+* Add `GemLookup` module definition in `lib/gem_lookup.rb` for Zeitwerk support.
 
 ## [1.0.0] - 2021-07-14
 
