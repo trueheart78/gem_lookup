@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog][changelog], and this project adheres t
 
 * `Bundler.require` is no longer called when `ENV['APP_ENV']` is set to `production`.
 * Zeitwerk ignores specs if `ENV['APP_ENV']` is set to `production`.
-* Add `require_relative 'gem_lookup/version' to `lib/gem_lookup.rb`.
+* Add `require_relative 'gem_lookup/version'` to `lib/gem_lookup.rb`.
   * Satisfies Zeitwerk's need for the `GemLookup` constant to be defined in the file.
   * Solves a `GemLookup::Help.version` constant check, as this module had not yet been defined.
 
