@@ -22,7 +22,7 @@ module GemLookup
         # Outputs the number of gems being queried.
         # @param num [Numeric] the number of gems.
         def gem_count(num:)
-          puts "=> 🤔 #{num} gems".light_cyan
+          puts "=> 🤔 #{num} gems".light_blue
         end
 
         # Outputs the current batch and total number of batches
@@ -88,7 +88,7 @@ module GemLookup
         # @return [String] the changelog string.
         def changelog(changelog_uri:)
           if changelog_uri && !changelog_uri.empty?
-            "==> 📑 #{changelog_uri}".light_cyan
+            "==> 📑 #{changelog_uri}".light_blue
           else
             '==> 📑 Unavailable'.light_red
           end
@@ -99,7 +99,7 @@ module GemLookup
         # @return [String] the mailing list string.
         def mailing_list(mailing_list_uri:)
           if mailing_list_uri && !mailing_list_uri.empty?
-            "==> 💌 #{mailing_list_uri}".light_cyan
+            "==> 💌 #{mailing_list_uri}".light_blue
           else
             '==> 💌 Unavailable'.light_red
           end

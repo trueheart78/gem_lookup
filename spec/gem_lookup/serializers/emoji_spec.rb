@@ -17,8 +17,8 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
-          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -40,8 +40,8 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           #{"==> 🔗 Unavailable".light_red}
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
-          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -63,8 +63,8 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           #{"==> 🔗 Unavailable".light_red}
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
-          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -87,7 +87,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 Unavailable".light_red}
-          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -110,7 +110,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> 📑 Unavailable".light_red}
-          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> 💌 https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -132,7 +132,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
           #{"==> 💌 Unavailable".light_red}
         OUTPUT
       end
@@ -155,7 +155,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
           ==> 🧭 https://rubygems.org/gems/rails
           ==> 🏠 https://rubyonrails.org
           ==> 🔗 https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
+          #{"==> 📑 https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
           #{"==> 💌 Unavailable".light_red}
         OUTPUT
       end
@@ -193,7 +193,7 @@ RSpec.describe GemLookup::Serializers::Emoji do
     end
 
     let(:num)    { junk :int, min: 1, max: 1_000 }
-    let(:output) { "=> 🤔 #{num} gems".light_cyan }
+    let(:output) { "=> 🤔 #{num} gems".light_blue }
 
     it 'outputs a thinking emoji with the number of gems (light cyan)' do
       expect(gem_count).to eq output

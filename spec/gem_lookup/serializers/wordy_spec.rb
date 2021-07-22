@@ -17,8 +17,8 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
-          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -40,8 +40,8 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           #{"==> Source Code:  Unavailable".light_red}
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
-          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -63,8 +63,8 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           #{"==> Source Code:  Unavailable".light_red}
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
-          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
+          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -87,7 +87,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> Changelog:    Unavailable".light_red}
-          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -110,7 +110,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
           #{"==> Changelog:    Unavailable".light_red}
-          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_cyan}
+          #{"==> Mailing List: https://discuss.rubyonrails.org/c/rubyonrails-talk".light_blue}
         OUTPUT
       end
 
@@ -132,7 +132,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
           #{"==> Mailing List: Unavailable".light_red}
         OUTPUT
       end
@@ -155,7 +155,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
           ==> Location:     https://rubygems.org/gems/rails
           ==> Homepage:     https://rubyonrails.org
           ==> Source Code:  https://github.com/rails/rails/tree/v6.1.3.2
-          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_cyan}
+          #{"==> Changelog:    https://github.com/rails/rails/releases/tag/v6.1.3.2".light_blue}
           #{"==> Mailing List: Unavailable".light_red}
         OUTPUT
       end
@@ -193,7 +193,7 @@ RSpec.describe GemLookup::Serializers::Wordy do
     end
 
     let(:num)    { junk :int, min: 1, max: 1_000 }
-    let(:output) { "=> Query: #{num} gems".light_cyan }
+    let(:output) { "=> Query: #{num} gems".light_blue }
 
     it 'outputs the Query with the number of gems (light cyan)' do
       expect(gem_count).to eq output
