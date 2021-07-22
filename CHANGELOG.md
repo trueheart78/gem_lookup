@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][changelog], and this project adheres to 
 [Semantic Versioning][semver].
 
+## [1.2.1] - 2021-07-22
+
+### Changed
+
+* Replaced colorization of light cyan with light blue.
+
 ## [1.2.0] - 2021-07-14
 
 ### Added
