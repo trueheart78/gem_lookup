@@ -15,7 +15,7 @@ module Support
     def request_content
       path = request_path
 
-      File.open(path, 'rb', &:read)
+      File.binread(path)
     end
 
     def request_json
@@ -25,7 +25,7 @@ module Support
     def serializer_content(file)
       path = serializer_path file
 
-      File.open(path, 'rb', &:read)
+      File.binread(path)
     end
 
     def serializer_json(file)
