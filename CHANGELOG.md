@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][changelog], and this project adheres to 
 [Semantic Versioning][semver].
 
+## [1.3.0] - 2022-05-13
+
+### Added
+
+* Ruby 3.1 support.
+
+### Removed
+
+* Ruby 2.5 support.
+* Ruby 2.4 support.
+
 ## [1.2.1] - 2021-07-22
 
 ### Changed
