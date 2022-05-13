@@ -18,11 +18,12 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
   spec.metadata = {
-    'bug_tracker_uri'   => 'https://github.com/trueheart78/gem_lookup/issues',
-    'changelog_uri'     => 'https://github.com/trueheart78/gem_lookup/blob/main/CHANGELOG.md',
-    'documentation_uri' => spec.homepage,
-    'homepage_uri'      => spec.homepage,
-    'source_code_uri'   => "https://github.com/trueheart78/gem_lookup/tree/v#{GemLookup::VERSION}"
+    'bug_tracker_uri'       => 'https://github.com/trueheart78/gem_lookup/issues',
+    'changelog_uri'         => 'https://github.com/trueheart78/gem_lookup/blob/main/CHANGELOG.md',
+    'documentation_uri'     => spec.homepage,
+    'homepage_uri'          => spec.homepage,
+    'source_code_uri'       => "https://github.com/trueheart78/gem_lookup/tree/v#{GemLookup::VERSION}",
+    'rubygems_mfa_required' => 'true'
   }
 
   # Specify which files should be added to the gem when it is released.
